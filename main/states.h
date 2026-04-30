@@ -1,0 +1,13 @@
+#ifndef STATES_H
+#define STATES_H
+
+enum STATE {
+  INITIALISING,
+  STOPPED,
+  SEARCHING,
+  NAVIGATING,
+  EXTINGUISH,
+  FINISHED
+};
+
+#endif  // STATES_H
