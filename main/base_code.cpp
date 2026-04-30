@@ -147,13 +147,13 @@ STATE initialising() {
     if (!is_battery_voltage_OK()) return STOPPED;
 #endif
 
-    turret_motor.write(pos);
+    // turret_motor.write(pos);
 
-    if (pos == 0) {
-      pos = 45;
-    } else {
-      pos = 0;
-    }
+    // if (pos == 0) {
+    //   pos = 45;
+    // } else {
+    //   pos = 0;
+    // }
   }
 
   return NAVIGATING;
@@ -336,8 +336,10 @@ float HC_SR04_range() {
 
 #ifndef NO_READ_GYRO
 float GetHeading() {
+  static float last_valid_heading = 0.0f;
+
   if (bno08x.wasReset()) {
-    bno08x.enableReport(SH2_GAME_ROTATION_VECTOR);
+    bno08x.enableReport(SH2_GAME_ROTATION_VECTOR, 5000);
   }
 
   if (bno08x.getSensorEvent(&sensorValue)) {
@@ -346,17 +348,13 @@ float GetHeading() {
       float qx = sensorValue.un.gameRotationVector.i;
       float qy = sensorValue.un.gameRotationVector.j;
       float qz = sensorValue.un.gameRotationVector.k;
-      // extract yaw in degrees
       float yaw = atan2(2.0f * (qw * qz + qx * qy),
                         1.0f - 2.0f * (qy * qy + qz * qz));
-      return yaw * (180.0f / M_PI);
-    } else {
-      // SerialCom->println("GetHeading: wrong sensor ID");
+      last_valid_heading = yaw * (180.0f / M_PI);
     }
-  } else {
-    // SerialCom->println("GetHeading: no event");
   }
-  return 0.0f;
+  // SerialCom->println(last_valid_heading);
+  return last_valid_heading;
 }
 #endif
 
@@ -487,10 +485,10 @@ void cw() {
 }
 
 void strafe_left() {
-  left_front_motor.writeMicroseconds(1500 - speed_val);
-  left_rear_motor.writeMicroseconds(1500 + speed_val);
-  right_rear_motor.writeMicroseconds(1500 + speed_val);
-  right_front_motor.writeMicroseconds(1500 - speed_val);
+  left_front_motor.writeMicroseconds(1500 - 200);
+  left_rear_motor.writeMicroseconds(1500 + 200);
+  right_rear_motor.writeMicroseconds(1500 + 200);
+  right_front_motor.writeMicroseconds(1500 - 200);
 }
 
 void strafe_right() {
