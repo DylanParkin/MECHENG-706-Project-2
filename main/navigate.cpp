@@ -1,14 +1,116 @@
 #include "navigate.h"
 
-#include "states.h"
+bool global_heading_ref_set = false;
+float global_heading_ref = 0.0f;
 
 STATE navigating() {
-  return EXTINGUISH;
+  // 1. RotateOnSpot until aligned with the heading found in SEARCHING state (this should be in search.cpp)
+  //
+  // 2. Drive straight until IR/ultrasonic sensor detects an object in front
+  //
+  // 3. If object is fire (if phototransistor reads above/below threshold), return EXTINGUISH
+  //
+  // 4. If object is not fire, initiate strafe until no object in front (e.g. if strafing left, until right IR sensor is fully clear of obstacle in front)
+  //
+  // 5. Record IMU displacement in the "y" direction (perpendicular to the main straight path)
+  //
+  // 6. Drive forward until appropriate rear IR sensor has fully cleared the obstacle
+  //
+  // 7. Placeholder for now...
+
+  while (1) {
+    drive(true);
+  }
+
+  // bool forward = true;  // set to always drive forwards
+  // while (true) {
+  //   bool object_is_fire = drive(forward);
+  //   if (object_is_fire) {
+  //     return EXTINGUISH;
+  //   } else {
+  //     dodge_obstacle();  // involves strafing and driving forwards to clear the obstacle
+
+  //     adjust_heading();  // robot realigns itself so that it faces the fire
+  //   }
+  // }
 }
+
+float heading_error_deg(float target_heading, float current_heading) {
+  float error = target_heading - current_heading;
+  while (error > 180.0f) error -= 360.0f;
+  while (error < -180.0f) error += 360.0f;
+  return error;
+}
+
+/*
+// Drives forward until detecting an object. If the object is fire, returns true, if its just an obstacle, returns false
+bool drive(bool forward) {
+  const float kp_gyro = 80.0f;  // was 60
+  const float ki_gyro = 0.0f;
+  const float kd_gyro = 0.0f;
+
+  const float integralClamp = 200.0f;
+  const float corrClamp = 350.0f;
+  const float readDelayMs = 10.0f;
+  const float stopDist = 10.5f;
+
+  float integralError = 0.0f;
+  float prevError = 0.0f;
+
+  bool object_detected = false;
+
+  if (!global_heading_ref_set) {
+    global_heading_ref = GetHeading();
+    global_heading_ref_set = true;
+  }
+
+  unsigned long prev = millis();
+  // SerialCom->println("driving...");
+
+  while (!object_detected) {
+    unsigned long now = millis();
+    float dt = (now - prev) / 1000.0f;
+    prev = now;
+    if (dt <= 0.0f) dt = readDelayMs / 1000.0f;
+
+    // --- compute gyro heading error ---
+    float error = heading_error_deg(global_heading_ref, GetHeading());
+
+    // SerialCom->print("heading error: ");
+    // SerialCom->println(error);
+    integralError += error * dt;
+    integralError = constrain(integralError,
+                              -integralClamp / max(ki_gyro, 0.001f),
+                              integralClamp / max(ki_gyro, 0.001f));
+    float deriv = (error - prevError) / dt;
+    prevError = error;
+
+    // Gyro-only heading hold for straight-line travel.
+    float correction = kp_gyro * error + ki_gyro * integralError + kd_gyro * deriv;
+    correction = constrain(correction, -corrClamp, corrClamp);
+
+    // +correction (turn too much cw) = command CCW (- - - -)
+    left_front_motor.writeMicroseconds(1500 + (int)speed_val - (int)correction);
+    left_rear_motor.writeMicroseconds(1500 + (int)speed_val - (int)correction);
+    right_rear_motor.writeMicroseconds(1500 - (int)speed_val - (int)correction);
+    right_front_motor.writeMicroseconds(1500 - (int)speed_val - (int)correction);
+
+    // Check if car has reached on obstacle or fire
+    if (some ir condition to detect if object in front) {
+      if (some condition that reads PTs to see if its fire) {
+        return true;  // fire
+      } else {
+        return false;  // obstacle
+      }
+    }
+  }
+}
+
+*/
 
 // drive forward with heading hold
 void drive(bool forward) {
-  const float kp_gyro = 80.0f;  // was 60
+  const float kp_gyro = 30.0f;  // was 60
   const float ki_gyro = 0.0f;
   const float kd_gyro = 0.0f;
 
@@ -41,17 +143,12 @@ void drive(bool forward) {
     prev = now;
     if (dt <= 0.0f) dt = readDelayMs / 1000.0f;
 
-    // --- stop driving condition  ---
-    float ir_dist = (forward) ? (get_front_IR(analogRead(A7))) : (get_back_IR(analogRead(A6)));
-
-    if (ir_dist < stopDist) {
-      stop();
-      // SerialCom->println("Wall reached. Stopping.");
-      return;
-    }
+    float current_heading = GetHeading();
+    float fire_heading = getFlameAngle();
+    // CHECK FOR OBSTACLE
 
     // --- compute gyro heading error ---
-    float error = heading_error_deg(global_heading_ref, GetHeading());
+    float error = fire_heading;  // heading_error_deg(fire_heading, current_heading);
 
     // SerialCom->print("heading error: ");
     // SerialCom->println(error);
@@ -79,19 +176,17 @@ void drive(bool forward) {
 // Configuration
 // ============================================================
 
-// Analog input pins for the four phototransistors
-// Order: outer_left, inner_left, inner_right, outer_right
-constexpr uint8_t PT_PINS[4] = {A0, A1, A2, A3};
+// Analog input pins for PTs {outer_left, inner_left, inner_right, outer_right}
+constexpr uint8_t PT_PINS[4] = {A12, A13, A14, A15};
 
-// Sensor mounting angles in degrees (positive = left, negative = right)
+// sensor mounting angles in degrees (positive = left, negative = right)
 constexpr float SENSOR_ANGLES[4] = {40.0f, 0.0f, 0.0f, -40.0f};
 
-// Calibration values
-float ambient[4] = {22.0f, 25.0f, 23.0f, 24.0f};
+// calibration vals
+float ambient[4] = {30.0f, 30.0f, 30.0f, 30.0f};
 constexpr float DETECTION_THRESHOLD = 150.0f;
 constexpr float BIAS_CORRECTION = 1.0f;  // 1.43f;
 
-// Sentinel value returned when no flame is detected
 constexpr float NO_FLAME = 999.0f;
 
 // ============================================================
@@ -101,13 +196,13 @@ constexpr float NO_FLAME = 999.0f;
 // ============================================================
 
 float getFlameAngle() {
-  // Read all four phototransistors
+  // Read all PTs
   uint16_t readings[4];
   for (uint8_t i = 0; i < 4; i++) {
     readings[i] = analogRead(PT_PINS[i]);
   }
 
-  // Subtract ambient, clamp negatives, sum total
+  // subtract ambient, clamp negatives, sum total
   float r[4];
   float total = 0.0f;
   for (uint8_t i = 0; i < 4; i++) {
@@ -116,16 +211,113 @@ float getFlameAngle() {
     total += r[i];
   }
 
+  SerialCom->print("| LEFT: ");
+  SerialCom->print(r[0]);
+  SerialCom->print(" | LEFT MID: ");
+  SerialCom->print(r[1]);
+  SerialCom->print(" | RIGHT MID: ");
+  SerialCom->print(r[2]);
+  SerialCom->print(" | RIGHT: ");
+  SerialCom->println(r[3]);
+
   // Detection threshold check
   if (total < DETECTION_THRESHOLD) {
     return NO_FLAME;
   }
 
-  // Weighted centroid
+  // weighted centroid
   float numerator = 0.0f;
   for (uint8_t i = 0; i < 4; i++) {
     numerator += r[i] * SENSOR_ANGLES[i];
   }
 
-  return (numerator / total) * BIAS_CORRECTION;
+  float flame_angle = (numerator / total) * BIAS_CORRECTION;
+  // SerialCom->print("Flame angle: ");
+  // SerialCom->println(flame_angle);
+
+  return flame_angle;
+}
+
+void RotateOnSpot(float desiredAngle) {
+  // Convention: CCW +ve (matches IMU)
+  // +90 = rotate 90° CCW (counter-clockwise)
+  // -90 = rotate 90° CW (clockwise)
+  SerialCom->print("Rotating ");
+  SerialCom->print(desiredAngle);
+  SerialCom->println(" degrees");
+
+  float integralError = 0.0;
+  float prevError = desiredAngle;
+  float error;
+
+  const float kp = 5.0;
+  const float ki = 0.001;
+  const float kd = 0.0;
+  float allowableError = 0.5;
+  const float readDelayMs = 10.0;
+  const float integralClamp = 200.0;
+  const float outputClamp = 300.0;
+  const float minOutput = 67.0;
+  const int settleCount = (abs(desiredAngle) > 90) ? 10 : 5;
+  int settledSamples = 0;
+
+  // if (desiredAngle > 160) {
+  //   allowableError = 2.0;
+  // }
+
+  // snapshot heading at start — all errors relative to this
+  float initial_heading = GetHeading();
+
+  unsigned long prev = millis();
+
+  while (true) {
+    unsigned long now = millis();
+    float dt = (now - prev) / 1000.0f;
+    prev = now;
+    if (dt <= 0.0f) dt = readDelayMs / 1000.0f;
+
+    float currAngle = GetHeading() - initial_heading;
+    // wrap to [-180, 180]
+    while (currAngle > 180.0f) currAngle -= 360.0f;
+    while (currAngle < -180.0f) currAngle += 360.0f;
+
+    error = desiredAngle - currAngle;
+    // wrap error to [-180, 180] to take shortest path
+    while (error > 180.0f) error -= 360.0f;
+    while (error < -180.0f) error += 360.0f;
+
+    // SerialCom->print("current angle");
+    // SerialCom->println(currAngle);
+    // SerialCom->print("error");
+    // SerialCom->println(error);
+
+    // settle check
+    if (abs(error) < allowableError) {
+      if (++settledSamples >= settleCount) {
+        SerialCom->println("SETTLED. Stopping.");
+        stop();
+        return;
+      }
+    } else {
+      settledSamples = 0;
+    }
+
+    // PID
+    integralError += error * dt;
+    integralError = constrain(integralError, -integralClamp / ki, integralClamp / ki);
+    float derivative = (error - prevError) / dt;
+    prevError = error;
+    float control_output = kp * error + ki * integralError + kd * derivative;
+    control_output = constrain(control_output, -outputClamp, outputClamp);
+
+    if (abs(control_output) > 0 && abs(control_output) < minOutput)
+      control_output = copysignf(minOutput, control_output);
+
+    left_front_motor.writeMicroseconds(1500 - (int)control_output);
+    left_rear_motor.writeMicroseconds(1500 - (int)control_output);
+    right_front_motor.writeMicroseconds(1500 - (int)control_output);
+    right_rear_motor.writeMicroseconds(1500 - (int)control_output);
+
+    delay(readDelayMs);
+  }
 }
