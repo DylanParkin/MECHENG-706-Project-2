@@ -42,8 +42,11 @@ float heading_error_deg(float target_heading, float current_heading) {
 }
 
 object_state object_detected() {
-    float distance_in_front = TriggerUltrasonic();
-    SerialCom->println("Distance in front: " + String(distance_in_front) + " cm");
+    float left_ir = get_left_IR();
+    float ultrasonic = TriggerUltrasonic();
+    float right_ir = get_right_IR();
+    float distance_in_front = min(left_ir, min(ultrasonic, right_ir));
+    SerialCom->println("L_IR: " + String(left_ir) + " | Ultrasonic: " + String(ultrasonic) + " | R_IR: " + String(right_ir) + " cm");
     float obstacle_threshold = 15.0f;  // in cm
     uint16_t PT_readings[4];
 
@@ -53,6 +56,7 @@ object_state object_detected() {
         for (uint8_t i = 0; i < 4; i++) {
             PT_readings[i] = analogRead(PT_PINS[i]);
         }
+        SerialCom->println(String(PT_readings[0]) + " | " + String(PT_readings[1]) + " | " + String(PT_readings[2]) + " | " + String(PT_readings[3]));
 
         int pt_min = PT_readings[0];
         int pt_sum = 0;

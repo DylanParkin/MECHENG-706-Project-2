@@ -37,3 +37,18 @@ Assuming fire and obstacle can have no gap
 131, 260, 945, 976
 110, 265, 478, 991
 106, 213, 657, 983
+
+
+
+Fire in front of the robot (V2, in the dark)
+989, 989
+991, 991
+986, 986
+992, 370
+992, 982
+988, 988
+976, 1000
+
+Assuming fire and obstacle can have no gap (V2 in dark)
+985, 984
+
