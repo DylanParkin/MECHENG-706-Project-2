@@ -3,6 +3,15 @@
 bool global_heading_ref_set = false;
 float global_heading_ref = 0.0f;
 
+enum object_state {
+    NO_OBJECT,
+    OBSTACLE,
+    FIRE
+};
+
+// Analog input pins for PTs {outer_left, inner_left, inner_right, outer_right}
+constexpr uint8_t PT_PINS[4] = {A12, A13, A14, A15};
+
 STATE navigating() {
   // 1. RotateOnSpot until aligned with the heading found in SEARCHING state (this should be in search.cpp)
   //
@@ -20,21 +29,8 @@ STATE navigating() {
 
   while (1) {
     drive(true);
-
-    // float a = getFlameAngle();
+    return;
   }
-
-  // bool forward = true;  // set to always drive forwards
-  // while (true) {
-  //   bool object_is_fire = drive(forward);
-  //   if (object_is_fire) {
-  //     return EXTINGUISH;
-  //   } else {
-  //     dodge_obstacle();  // involves strafing and driving forwards to clear the obstacle
-
-  //     adjust_heading();  // robot realigns itself so that it faces the fire
-  //   }
-  // }
 }
 
 float heading_error_deg(float target_heading, float current_heading) {
@@ -44,71 +40,33 @@ float heading_error_deg(float target_heading, float current_heading) {
   return error;
 }
 
-/*
-// Drives forward until detecting an object. If the object is fire, returns true, if its just an obstacle, returns false
-bool drive(bool forward) {
-  const float kp_gyro = 80.0f;  // was 60
-  const float ki_gyro = 0.0f;
-  const float kd_gyro = 0.0f;
+object_state object_detected() {
+    float distance_in_front = TriggerUltrasonic();
+    SerialCom->println("Distance in front: " + String(distance_in_front) + " cm");
+    float obstacle_threshold = 15.0f;  // in cm
+    uint16_t PT_readings[4];
 
-  const float integralClamp = 200.0f;
-  const float corrClamp = 350.0f;
-  const float readDelayMs = 10.0f;
-  const float stopDist = 10.5f;
+    if (distance_in_front > obstacle_threshold) {
+        return NO_OBJECT;
+    } else {
+        for (uint8_t i = 0; i < 4; i++) {
+            PT_readings[i] = analogRead(PT_PINS[i]);
+        }
 
-  float integralError = 0.0f;
-  float prevError = 0.0f;
+        int pt_min = PT_readings[0];
+        int pt_sum = 0;
+        for (uint8_t i = 0; i < 4; i++) {
+            pt_sum += PT_readings[i];
+            if (PT_readings[i] < pt_min) pt_min = PT_readings[i];
+        }
 
-  bool object_detected = false;
-
-  if (!global_heading_ref_set) {
-    global_heading_ref = GetHeading();
-    global_heading_ref_set = true;
-  }
-
-  unsigned long prev = millis();
-  // SerialCom->println("driving...");
-
-  while (!object_detected) {
-    unsigned long now = millis();
-    float dt = (now - prev) / 1000.0f;
-    prev = now;
-    if (dt <= 0.0f) dt = readDelayMs / 1000.0f;
-
-    // --- compute gyro heading error ---
-    float error = heading_error_deg(global_heading_ref, GetHeading());
-
-    // SerialCom->print("heading error: ");
-    // SerialCom->println(error);
-    integralError += error * dt;
-    integralError = constrain(integralError,
-                              -integralClamp / max(ki_gyro, 0.001f),
-                              integralClamp / max(ki_gyro, 0.001f));
-    float deriv = (error - prevError) / dt;
-    prevError = error;
-
-    // Gyro-only heading hold for straight-line travel.
-    float correction = kp_gyro * error + ki_gyro * integralError + kd_gyro * deriv;
-    correction = constrain(correction, -corrClamp, corrClamp);
-
-    // +correction (turn too much cw) = command CCW (- - - -)
-    left_front_motor.writeMicroseconds(1500 + (int)speed_val - (int)correction);
-    left_rear_motor.writeMicroseconds(1500 + (int)speed_val - (int)correction);
-    right_rear_motor.writeMicroseconds(1500 - (int)speed_val - (int)correction);
-    right_front_motor.writeMicroseconds(1500 - (int)speed_val - (int)correction);
-
-    // Check if car has reached on obstacle or fire
-    if (some ir condition to detect if object in front) {
-      if (some condition that reads PTs to see if its fire) {
-        return true;  // fire
-      } else {
-        return false;  // obstacle
-      }
+        if (pt_min < 80 && pt_sum < 2200) {
+            return OBSTACLE;
+        } else {
+            return FIRE;
+        }
     }
-  }
 }
-
-*/
 
 // drive forward with heading hold
 void drive(bool forward) {
@@ -147,7 +105,18 @@ void drive(bool forward) {
 
     float current_heading = GetHeading();
     float fire_heading = getFlameAngle();
+
     // CHECK FOR OBSTACLE
+    object_state detected = object_detected();
+    if (detected == FIRE) {
+      SerialCom->println("FIRE DETECTED! STOPPING.");
+      stop();
+      return;
+    } else if (detected == OBSTACLE) {
+      SerialCom->println("OBSTACLE DETECTED! STOPPING.");
+      stop();
+      return;
+    }
 
     // --- compute gyro heading error ---
     float error = fire_heading;  // heading_error_deg(fire_heading, current_heading);
@@ -177,9 +146,6 @@ void drive(bool forward) {
 // ============================================================
 // Configuration
 // ============================================================
-
-// Analog input pins for PTs {outer_left, inner_left, inner_right, outer_right}
-constexpr uint8_t PT_PINS[4] = {A12, A13, A14, A15};
 
 // sensor mounting angles in degrees (positive = left, negative = right)
 constexpr float SENSOR_ANGLES[4] = {40.0f, 0.0f, 0.0f, -40.0f};
@@ -270,7 +236,7 @@ void RotateOnSpot(float desiredAngle) {
 
   unsigned long prev = millis();
 
-  while (true) {
+  while (!object_detected) {
     unsigned long now = millis();
     float dt = (now - prev) / 1000.0f;
     prev = now;
@@ -321,3 +287,4 @@ void RotateOnSpot(float desiredAngle) {
     delay(readDelayMs);
   }
 }
+

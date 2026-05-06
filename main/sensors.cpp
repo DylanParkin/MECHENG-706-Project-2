@@ -64,6 +64,8 @@ void UltrasonicReturn() {  // ISR
 }
 
 float TriggerUltrasonic() {
+  static float last_valid = 999.0f;  // default to large distance (no object)
+
   noInterrupts();
   checkStart = 0;
   checkEnd = 0;
@@ -71,8 +73,8 @@ float TriggerUltrasonic() {
   t_UltraEchoEnd = 0;
   interrupts();
 
-  int echo_time_out_ms = 10;  // specified 30
-  int cycle_delay_ms = 15;    // specified 60
+  int echo_time_out_ms = 10;
+  int cycle_delay_ms = 15;
 
   digitalWrite(5, LOW);
   delayMicroseconds(2);
@@ -83,14 +85,13 @@ float TriggerUltrasonic() {
   unsigned long timeoutStart = millis();
   while (!checkEnd && (millis() - timeoutStart) < echo_time_out_ms);
 
-  float dist = -1.0f;
   if (checkEnd) {
     noInterrupts();
     unsigned long time = t_UltraEchoEnd - t_UltraEchoStart;
     interrupts();
-    dist = time / 58.0f;
+    last_valid = time / 58.0f;
   }
 
   delay(cycle_delay_ms);
-  return dist;
+  return last_valid;
 }
