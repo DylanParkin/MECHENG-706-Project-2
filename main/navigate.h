@@ -9,8 +9,14 @@
 
 STATE navigating();
 
+enum object_state {
+    NO_OBJECT,
+    OBSTACLE,
+    FIRE
+};
+
 float getFlameAngle();
-void drive(bool);
+object_state drive(bool);
 void RotateOnSpot(float desiredAngle);
 void Avoid();
 

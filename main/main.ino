@@ -71,6 +71,7 @@ void loop(void)  // main loop
       break;
     case FINISHED:
       machine_state = FINISHED;
+      stop();
       // idles indefinitely
   };
 }

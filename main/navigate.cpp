@@ -3,12 +3,6 @@
 bool global_heading_ref_set = false;
 float global_heading_ref = 0.0f;
 
-enum object_state {
-    NO_OBJECT,
-    OBSTACLE,
-    FIRE
-};
-
 // Analog input pins for PTs {outer_left, inner_left, inner_right, outer_right}
 constexpr uint8_t PT_PINS[4] = {A12, A13, A14, A15};
 
@@ -31,8 +25,12 @@ STATE navigating() {
 
   // Avoid();
   while (1) {
-    drive(true);
-    return;
+    object_state object = drive(true);
+    if (object == FIRE) {
+      return FINISHED;
+    } else if (object == OBSTACLE) {
+      Avoid();
+    }
   }
 }
 
@@ -72,7 +70,7 @@ object_state object_detected() {
 }
 
 // drive forward with heading hold
-void drive(bool forward) {
+object_state drive(bool forward) {
   const float kp_gyro = 30.0f;  // was 60
   const float ki_gyro = 0.0f;
   const float kd_gyro = 0.0f;
@@ -114,11 +112,11 @@ void drive(bool forward) {
     if (detected == FIRE) {
       SerialCom->println("FIRE DETECTED! STOPPING.");
       stop();
-      return;
+      return FIRE;
     } else if (detected == OBSTACLE) {
       SerialCom->println("OBSTACLE DETECTED! STOPPING.");
       stop();
-      return;
+      return OBSTACLE;
     }
 
     // --- compute gyro heading error ---
@@ -291,7 +289,6 @@ void RotateOnSpot(float desiredAngle) {
   }
 }
 
-
 void Avoid() {
   int dir;
   bool strafe_right = false;
@@ -309,7 +306,7 @@ void Avoid() {
   // delay(500);
 
   float ultra_left = TriggerUltrasonic();
-  float IR_left = get_right_IR();
+  float IR_left = get_left_IR();
 
   float left_sum = ultra_left + IR_left;
 
