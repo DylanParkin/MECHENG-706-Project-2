@@ -20,6 +20,8 @@ STATE navigating() {
 
   while (1) {
     drive(true);
+
+    // float a = getFlameAngle();
   }
 
   // bool forward = true;  // set to always drive forwards
@@ -195,47 +197,45 @@ constexpr float NO_FLAME = 999.0f;
 // Returns NO_FLAME (999.0f) if no flame detected
 // ============================================================
 
+constexpr float K = 25.6f;  // calibration constant
+
 float getFlameAngle() {
-  // Read all PTs
   uint16_t readings[4];
   for (uint8_t i = 0; i < 4; i++) {
     readings[i] = analogRead(PT_PINS[i]);
   }
 
-  // subtract ambient, clamp negatives, sum total
+  // Subtract ambient
   float r[4];
-  float total = 0.0f;
   for (uint8_t i = 0; i < 4; i++) {
     float corrected = (float)readings[i] - ambient[i];
     r[i] = (corrected > 0.0f) ? corrected : 0.0f;
-    total += r[i];
   }
 
-  SerialCom->print("| LEFT: ");
-  SerialCom->print(r[0]);
-  SerialCom->print(" | LEFT MID: ");
-  SerialCom->print(r[1]);
-  SerialCom->print(" | RIGHT MID: ");
-  SerialCom->print(r[2]);
-  SerialCom->print(" | RIGHT: ");
-  SerialCom->println(r[3]);
+  // SerialCom->print("| LEFT: ");
+  // SerialCom->print(r[0]);
+  // SerialCom->print(" | LEFT MID: ");
+  // SerialCom->print(r[1]);
+  // SerialCom->print(" | RIGHT MID: ");
+  // SerialCom->print(r[2]);
+  // SerialCom->print(" | RIGHT: ");
+  // SerialCom->println(r[3]);
 
-  // Detection threshold check
+  // Group by side: indices 0,1 are left; indices 2,3 are right
+  float left_signal = r[0] + r[1];
+  float right_signal = r[2] + r[3];
+  float total = left_signal + right_signal;
+
+  // Detection threshold
   if (total < DETECTION_THRESHOLD) {
     return NO_FLAME;
   }
 
-  // weighted centroid
-  float numerator = 0.0f;
-  for (uint8_t i = 0; i < 4; i++) {
-    numerator += r[i] * SENSOR_ANGLES[i];
-  }
+  // Normalized asymmetry → bearing
+  float asymmetry = (left_signal - right_signal) / total;
 
-  float flame_angle = (numerator / total) * BIAS_CORRECTION;
-  // SerialCom->print("Flame angle: ");
-  // SerialCom->println(flame_angle);
-
-  return flame_angle;
+  SerialCom->println(K * asymmetry);
+  return K * asymmetry;
 }
 
 void RotateOnSpot(float desiredAngle) {
