@@ -14,9 +14,11 @@ constexpr uint8_t PT_PINS[4] = {A12, A13, A14, A15};
 
 STATE navigating() {
   // 1. RotateOnSpot until aligned with the heading found in SEARCHING state (this should be in search.cpp)
-  //
+
+  // RotateOnSpot(searched_angle);
+
   // 2. Drive straight until IR/ultrasonic sensor detects an object in front
-  //
+
   // 3. If object is fire (if phototransistor reads above/below threshold), return EXTINGUISH
   //
   // 4. If object is not fire, initiate strafe until no object in front (e.g. if strafing left, until right IR sensor is fully clear of obstacle in front)
@@ -27,6 +29,7 @@ STATE navigating() {
   //
   // 7. Placeholder for now...
 
+  // Avoid();
   while (1) {
     drive(true);
     return;
@@ -288,3 +291,58 @@ void RotateOnSpot(float desiredAngle) {
   }
 }
 
+
+void Avoid() {
+  int dir;
+  bool strafe_right = false;
+  // point servo to right and check right ir
+
+  // ultraServo.writeMicroseconds(550);
+  // delay(500);
+
+  float ultra_right = TriggerUltrasonic();
+  float IR_right = get_right_IR();
+
+  float right_sum = ultra_right + IR_right;
+
+  // ultraServo.writeMicroseconds(2500);
+  // delay(500);
+
+  float ultra_left = TriggerUltrasonic();
+  float IR_left = get_right_IR();
+
+  float left_sum = ultra_left + IR_left;
+
+  // ultraServo.write(90);
+  // delay(300);
+
+  if (right_sum > left_sum) {
+    strafe_right = true;
+  }
+
+  dir = (strafe_right) ? -1 : 1;
+
+  // dir +ve strafe left
+
+  left_front_motor.writeMicroseconds(1500 - dir * strafe_speed);
+  left_rear_motor.writeMicroseconds(1500 + dir * strafe_speed);
+  right_rear_motor.writeMicroseconds(1500 + dir * strafe_speed);
+  right_front_motor.writeMicroseconds(1500 - dir * strafe_speed);
+
+  delay(1000);  // strafe for a bit before checking
+
+  while (true) {
+    float clearance_IR = (strafe_right) ? get_front_left_IR() : get_front_right_IR();
+
+    // check left front has cleared
+    if (clearance_IR > 10.0f) {
+      stop();
+      return;
+    }
+
+    left_front_motor.writeMicroseconds(1500 - dir * strafe_speed);
+    left_rear_motor.writeMicroseconds(1500 + dir * strafe_speed);
+    right_rear_motor.writeMicroseconds(1500 + dir * strafe_speed);
+    right_front_motor.writeMicroseconds(1500 - dir * strafe_speed);
+  }
+}

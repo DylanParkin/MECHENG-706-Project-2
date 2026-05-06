@@ -12,5 +12,6 @@ STATE navigating();
 float getFlameAngle();
 void drive(bool);
 void RotateOnSpot(float desiredAngle);
+void Avoid();
 
 #endif  // NAVIGATE_H
