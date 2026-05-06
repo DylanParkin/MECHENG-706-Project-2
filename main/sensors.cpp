@@ -21,7 +21,9 @@ volatile unsigned long t_UltraEchoEnd;
 volatile int checkStart = 0;
 volatile int checkEnd = 0;
 
-float get_left_IR(int ADC_val) {  // VALS OK
+float get_left_IR() {  // VALS OK
+
+  int ADC_val = analogRead(A4);
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
@@ -29,7 +31,10 @@ float get_left_IR(int ADC_val) {  // VALS OK
   return smooth_ir(reading, filtered, initialized);
 }
 
-float get_right_IR(int ADC_val) {  // UPDATED
+float get_right_IR() {  // UPDATED
+
+  int ADC_val = analogRead(A6);
+
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
@@ -37,7 +42,8 @@ float get_right_IR(int ADC_val) {  // UPDATED
   return smooth_ir(reading, filtered, initialized);
 }
 
-float get_front_IR(int ADC_val) {
+float get_front_left_IR() {
+  int ADC_val = analogRead(A5);
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
@@ -45,7 +51,8 @@ float get_front_IR(int ADC_val) {
   return smooth_ir(reading, filtered, initialized);
 }
 
-float get_back_IR(int ADC_val) {
+float get_front_right_IR() {
+  int ADC_val = analogRead(A7);
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
