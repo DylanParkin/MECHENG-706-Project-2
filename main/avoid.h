@@ -7,4 +7,6 @@
 
 STATE avoiding();
 
+void Avoid();
+
 #endif  // AVOID_H
