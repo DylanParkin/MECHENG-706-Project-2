@@ -4,31 +4,37 @@ bool global_heading_ref_set = false;
 float global_heading_ref = 0.0f;
 
 STATE navigating() {
-    // 1. RotateOnSpot until aligned with the heading found in SEARCHING state (this should be in search.cpp)
-    //
-    // 2. Drive straight until IR/ultrasonic sensor detects an object in front
-    //
-    // 3. If object is fire (if phototransistor reads above/below threshold), return EXTINGUISH
-    //
-    // 4. If object is not fire, initiate strafe until no object in front (e.g. if strafing left, until right IR sensor is fully clear of obstacle in front)
-    //
-    // 5. Record IMU displacement in the "y" direction (perpendicular to the main straight path)
-    //
-    // 6. Drive forward until appropriate rear IR sensor has fully cleared the obstacle
-    //
-    // 7. Placeholder for now...
+  // 1. RotateOnSpot until aligned with the heading found in SEARCHING state (this should be in search.cpp)
+  //
+  // 2. Drive straight until IR/ultrasonic sensor detects an object in front
+  //
+  // 3. If object is fire (if phototransistor reads above/below threshold), return EXTINGUISH
+  //
+  // 4. If object is not fire, initiate strafe until no object in front (e.g. if strafing left, until right IR sensor is fully clear of obstacle in front)
+  //
+  // 5. Record IMU displacement in the "y" direction (perpendicular to the main straight path)
+  //
+  // 6. Drive forward until appropriate rear IR sensor has fully cleared the obstacle
+  //
+  // 7. Placeholder for now...
 
-    bool forward = true; // set to always drive forwards
-    while (true) {
-        bool object_is_fire = drive(forward);
-        if (object_is_fire) {
-            return EXTINGUISH;
-        } else {
-            dodge_obstacle(); // involves strafing and driving forwards to clear the obstacle
+  while (1) {
+    drive(true);
 
-            adjust_heading(); // robot realigns itself so that it faces the fire
-        }
-    }
+    // float a = getFlameAngle();
+  }
+
+  // bool forward = true;  // set to always drive forwards
+  // while (true) {
+  //   bool object_is_fire = drive(forward);
+  //   if (object_is_fire) {
+  //     return EXTINGUISH;
+  //   } else {
+  //     dodge_obstacle();  // involves strafing and driving forwards to clear the obstacle
+
+  //     adjust_heading();  // robot realigns itself so that it faces the fire
+  //   }
+  // }
 }
 
 float heading_error_deg(float target_heading, float current_heading) {
@@ -38,6 +44,7 @@ float heading_error_deg(float target_heading, float current_heading) {
   return error;
 }
 
+/*
 // Drives forward until detecting an object. If the object is fire, returns true, if its just an obstacle, returns false
 bool drive(bool forward) {
   const float kp_gyro = 80.0f;  // was 60
@@ -93,10 +100,224 @@ bool drive(bool forward) {
     // Check if car has reached on obstacle or fire
     if (some ir condition to detect if object in front) {
       if (some condition that reads PTs to see if its fire) {
-        return true; // fire
+        return true;  // fire
       } else {
-        return false; // obstacle
+        return false;  // obstacle
       }
     }
+  }
+}
+
+*/
+
+// drive forward with heading hold
+void drive(bool forward) {
+  const float kp_gyro = 30.0f;  // was 60
+  const float ki_gyro = 0.0f;
+  const float kd_gyro = 0.0f;
+
+  const float integralClamp = 200.0f;
+  const float corrClamp = 350.0f;
+  const float readDelayMs = 10.0f;
+  const float stopDist = 10.5f;
+
+  float integralError = 0.0f;
+  float prevError = 0.0f;
+
+  int dir = forward ? 1 : -1;
+
+  SerialCom->print("Driving ");
+  SerialCom->println(forward ? "forward" : "reverse");
+
+  // Use one heading reference across the full tilling pass to avoid
+  // segment-to-segment yaw bias accumulation.
+  if (!global_heading_ref_set) {
+    global_heading_ref = GetHeading();
+    global_heading_ref_set = true;
+  }
+
+  unsigned long prev = millis();
+  // SerialCom->println("driving...");
+
+  while (true) {
+    unsigned long now = millis();
+    float dt = (now - prev) / 1000.0f;
+    prev = now;
+    if (dt <= 0.0f) dt = readDelayMs / 1000.0f;
+
+    float current_heading = GetHeading();
+    float fire_heading = getFlameAngle();
+    // CHECK FOR OBSTACLE
+
+    // --- compute gyro heading error ---
+    float error = fire_heading;  // heading_error_deg(fire_heading, current_heading);
+
+    // SerialCom->print("heading error: ");
+    // SerialCom->println(error);
+    integralError += error * dt;
+    integralError = constrain(integralError,
+                              -integralClamp / max(ki_gyro, 0.001f),
+                              integralClamp / max(ki_gyro, 0.001f));
+    float deriv = (error - prevError) / dt;
+    prevError = error;
+
+    // Gyro-only heading hold for straight-line travel.
+    float correction = kp_gyro * error + ki_gyro * integralError + kd_gyro * deriv;
+
+    correction = constrain(correction, -corrClamp, corrClamp);
+
+    // +correction (turn too much cw) = command CCW (- - - -)
+    left_front_motor.writeMicroseconds(1500 + dir * (int)speed_val - (int)correction);
+    left_rear_motor.writeMicroseconds(1500 + dir * (int)speed_val - (int)correction);
+    right_rear_motor.writeMicroseconds(1500 - dir * (int)speed_val - (int)correction);
+    right_front_motor.writeMicroseconds(1500 - dir * (int)speed_val - (int)correction);
+  }
+}
+
+// ============================================================
+// Configuration
+// ============================================================
+
+// Analog input pins for PTs {outer_left, inner_left, inner_right, outer_right}
+constexpr uint8_t PT_PINS[4] = {A12, A13, A14, A15};
+
+// sensor mounting angles in degrees (positive = left, negative = right)
+constexpr float SENSOR_ANGLES[4] = {40.0f, 0.0f, 0.0f, -40.0f};
+
+// calibration vals
+float ambient[4] = {30.0f, 30.0f, 30.0f, 30.0f};
+constexpr float DETECTION_THRESHOLD = 150.0f;
+constexpr float BIAS_CORRECTION = 1.0f;  // 1.43f;
+
+constexpr float NO_FLAME = 999.0f;
+
+// ============================================================
+// Main function: returns angle to flame in degrees
+// Positive = flame is to the left, negative = flame is to the right
+// Returns NO_FLAME (999.0f) if no flame detected
+// ============================================================
+
+constexpr float K = 25.6f;  // calibration constant
+
+float getFlameAngle() {
+  uint16_t readings[4];
+  for (uint8_t i = 0; i < 4; i++) {
+    readings[i] = analogRead(PT_PINS[i]);
+  }
+
+  // Subtract ambient
+  float r[4];
+  for (uint8_t i = 0; i < 4; i++) {
+    float corrected = (float)readings[i] - ambient[i];
+    r[i] = (corrected > 0.0f) ? corrected : 0.0f;
+  }
+
+  // SerialCom->print("| LEFT: ");
+  // SerialCom->print(r[0]);
+  // SerialCom->print(" | LEFT MID: ");
+  // SerialCom->print(r[1]);
+  // SerialCom->print(" | RIGHT MID: ");
+  // SerialCom->print(r[2]);
+  // SerialCom->print(" | RIGHT: ");
+  // SerialCom->println(r[3]);
+
+  // Group by side: indices 0,1 are left; indices 2,3 are right
+  float left_signal = r[0] + r[1];
+  float right_signal = r[2] + r[3];
+  float total = left_signal + right_signal;
+
+  // Detection threshold
+  if (total < DETECTION_THRESHOLD) {
+    return NO_FLAME;
+  }
+
+  // Normalized asymmetry → bearing
+  float asymmetry = (left_signal - right_signal) / total;
+
+  SerialCom->println(K * asymmetry);
+  return K * asymmetry;
+}
+
+void RotateOnSpot(float desiredAngle) {
+  // Convention: CCW +ve (matches IMU)
+  // +90 = rotate 90° CCW (counter-clockwise)
+  // -90 = rotate 90° CW (clockwise)
+  SerialCom->print("Rotating ");
+  SerialCom->print(desiredAngle);
+  SerialCom->println(" degrees");
+
+  float integralError = 0.0;
+  float prevError = desiredAngle;
+  float error;
+
+  const float kp = 5.0;
+  const float ki = 0.001;
+  const float kd = 0.0;
+  float allowableError = 0.5;
+  const float readDelayMs = 10.0;
+  const float integralClamp = 200.0;
+  const float outputClamp = 300.0;
+  const float minOutput = 67.0;
+  const int settleCount = (abs(desiredAngle) > 90) ? 10 : 5;
+  int settledSamples = 0;
+
+  // if (desiredAngle > 160) {
+  //   allowableError = 2.0;
+  // }
+
+  // snapshot heading at start — all errors relative to this
+  float initial_heading = GetHeading();
+
+  unsigned long prev = millis();
+
+  while (true) {
+    unsigned long now = millis();
+    float dt = (now - prev) / 1000.0f;
+    prev = now;
+    if (dt <= 0.0f) dt = readDelayMs / 1000.0f;
+
+    float currAngle = GetHeading() - initial_heading;
+    // wrap to [-180, 180]
+    while (currAngle > 180.0f) currAngle -= 360.0f;
+    while (currAngle < -180.0f) currAngle += 360.0f;
+
+    error = desiredAngle - currAngle;
+    // wrap error to [-180, 180] to take shortest path
+    while (error > 180.0f) error -= 360.0f;
+    while (error < -180.0f) error += 360.0f;
+
+    // SerialCom->print("current angle");
+    // SerialCom->println(currAngle);
+    // SerialCom->print("error");
+    // SerialCom->println(error);
+
+    // settle check
+    if (abs(error) < allowableError) {
+      if (++settledSamples >= settleCount) {
+        SerialCom->println("SETTLED. Stopping.");
+        stop();
+        return;
+      }
+    } else {
+      settledSamples = 0;
+    }
+
+    // PID
+    integralError += error * dt;
+    integralError = constrain(integralError, -integralClamp / ki, integralClamp / ki);
+    float derivative = (error - prevError) / dt;
+    prevError = error;
+    float control_output = kp * error + ki * integralError + kd * derivative;
+    control_output = constrain(control_output, -outputClamp, outputClamp);
+
+    if (abs(control_output) > 0 && abs(control_output) < minOutput)
+      control_output = copysignf(minOutput, control_output);
+
+    left_front_motor.writeMicroseconds(1500 - (int)control_output);
+    left_rear_motor.writeMicroseconds(1500 - (int)control_output);
+    right_front_motor.writeMicroseconds(1500 - (int)control_output);
+    right_rear_motor.writeMicroseconds(1500 - (int)control_output);
+
+    delay(readDelayMs);
   }
 }

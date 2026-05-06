@@ -1,11 +1,11 @@
 #include <SoftwareSerial.h>
 
-#include "states.h"
 #include "base_code.h"
-#include "navigate.h"
-#include "sensors.h"
 #include "extinguish.h"
+#include "navigate.h"
 #include "search.h"
+#include "sensors.h"
+#include "states.h"
 
 // Serial Data input pin
 #define BLUETOOTH_RX 10
