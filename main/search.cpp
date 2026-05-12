@@ -8,7 +8,7 @@ STATE searching(){
   // initialise
   float fire_angle = -1.0f;
 
-  fire_angle = SpinAndFindFire(180.0);   
+  fire_angle = SpinAndFindFire(360.0);   
   Serial.print("fire_angle: "); 
   Serial.println(fire_angle);    
   delay(100);
@@ -22,11 +22,11 @@ STATE searching(){
 }
 
 
-const int resolution = 5;
-const int numSteps = 180 / resolution;
+// const int resolution = 5;
+// const int numSteps = 180 / resolution;
 
 const float threshold = 300.0;     
-const float correction_gain = 20.0;
+// const float correction_gain = 20.0;
 
 
 void SpinAndFindFire(float target_spin_angle) {
@@ -154,9 +154,9 @@ void SpinAndFindFire(float target_spin_angle) {
   // float wall1_bearing = angles_deg[wall1_i];
   // if (wall1_bearing > 180.0f) wall1_bearing -= 360.0f;
   // g_closest_wall_bearing_deg = wall1_bearing;
-  if (fire_behind){
-    fire_angle += 180;
-  }
+  // if (fire_behind){
+  //   fire_angle += 180;
+  // }
 
   return;
 }

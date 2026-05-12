@@ -27,7 +27,7 @@ const int photo_L2_pin = A12;
 
 
 //----variables----
-bool fire_behind = false;
+// bool fire_behind = false;
 extern float fire_angle;
 
 #endif // SEARCH_H
