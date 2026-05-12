@@ -6,6 +6,7 @@
 #include "sensors.h"
 #include "extinguish.h"
 #include "search.h"
+#include "findFire.h"
 
 // Serial Data input pin
 #define BLUETOOTH_RX 10
@@ -19,6 +20,7 @@ Servo ultraServo;
 bool start_forward = true;
 
 void setup(void) {
+  Serial.begin(9600);
   pinMode(LED_BUILTIN, OUTPUT);
 
   // The Trigger pin will tell the sensor to range find
@@ -42,9 +44,12 @@ void setup(void) {
 
   // Setup the Serial port and pointer, the pointer allows switching the debug
   // info through the USB port(Serial) or Bluetooth port(Serial1) with ease.
+
+
   SerialCom = &Serial1;
   SerialCom->begin(115200);
   SerialCom->println("Setup....");
+  Serial.begin(9600); // for laptop serial
 
   // delay(1000);  // settling time but no really needed
 }
@@ -62,6 +67,7 @@ void loop(void)  // main loop
       break;
     case SEARCHING:
       machine_state = searching();
+     
       break;
     case NAVIGATING:
       machine_state = navigating();
@@ -74,3 +80,5 @@ void loop(void)  // main loop
       // idles indefinitely
   };
 }
+
+
