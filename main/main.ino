@@ -42,7 +42,7 @@ void setup(void) {
 
   // Setup the Serial port and pointer, the pointer allows switching the debug
   // info through the USB port(Serial) or Bluetooth port(Serial1) with ease.
-  SerialCom = &Serial1;
+  SerialCom = &Serial;
   SerialCom->begin(115200);
   SerialCom->println("Setup....");
 

@@ -4,5 +4,7 @@
 #include "base_code.h"
 
 STATE extinguishing();
+bool fire_extinguished();
+
 
 #endif  // EXTINGUISH_H
