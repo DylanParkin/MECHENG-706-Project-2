@@ -8,13 +8,13 @@ STATE searching(){
   // initialise
   float fire_angle = -1.0f;
 
-  fire_angle = SpinAndFindFire(360.0);   
+  fire_angle = Spin360AndFindFire();   
   Serial.print("fire_angle: "); 
   Serial.println(fire_angle);    
   delay(100);
 
   if (fire_angle < 0) {
-    fire_behind = true;
+    // fire_behind = true;
     return SEARCHING;
   }
 
@@ -22,14 +22,144 @@ STATE searching(){
 }
 
 
-// const int resolution = 5;
-// const int numSteps = 180 / resolution;
 
-const float threshold = 300.0;     
+const float threshold = 20.0;     
 // const float correction_gain = 20.0;
 
 
-void SpinAndFindFire(float target_spin_angle) {
+float Spin360AndFindFire() {
+  const int max_samples = 220;
+  const int turn_cmd = 220;  // 140
+  const unsigned long timeout_ms = 18000;
+  const unsigned long sample_delay_ms = 20;
+  // const float min_valid_dist = 3.0f;
+  // const float max_valid_dist = 350.0f;
+
+  // float angles_deg[max_samples];
+  // float dists_cm[max_samples];
+  // int count = 0;
+
+  // ultraServo.write(90);
+  // delay(250);
+
+  float prev_heading = GetHeading();
+  float accumulated_angle = 0.0f;
+  unsigned long start_time = millis();
+
+  // reset
+  float best_strength = 0;
+  float fire_angle = -1;
+ 
+
+  while (accumulated_angle < 360) {
+    if (millis() - start_time > timeout_ms) {
+      SerialCom->println("fire scan timeout.");
+      break;
+    }
+
+    left_front_motor.writeMicroseconds(1500 - turn_cmd);
+    left_rear_motor.writeMicroseconds(1500 - turn_cmd);
+    right_front_motor.writeMicroseconds(1500 - turn_cmd);
+    right_rear_motor.writeMicroseconds(1500 - turn_cmd);
+
+    float curr_heading = GetHeading();
+    float delta = curr_heading - prev_heading;
+    while (delta > 180.0f) delta -= 360.0f;
+    while (delta < -180.0f) delta += 360.0f;
+    prev_heading = curr_heading;
+
+    if (delta > 0.0f) accumulated_angle += delta;
+
+    /// -------------- fire detection-----------------------------
+    float right = analogRead(photo_R1_pin); // prev r1
+    // float r2 = analogRead(photo_R2_pin); 
+    float left = analogRead(photo_L1_pin); 
+    // float l2 = analogRead(photo_L2_pin); 
+
+    // // weighted sensing
+    // float right = (1.0 * r1) + (0.7 * r2);
+    // float left  = (1.0 * l1) + (0.7 * l2);
+    float total = right + left;
+
+    // if (total > threshold) {
+
+      // // direction correction
+      // float error = (right - left) / total;
+      // float fire_angle = servo_angle + error * correction_gain;
+
+      // clamp
+      if (accumulated_angle < 0) accumulated_angle = 0;
+      if (accumulated_angle > 360) accumulated_angle = 360;
+
+      // --- keep strongest (fire location)---
+      if (total > best_strength) {
+
+        best_strength = total;
+        fire_angle = accumulated_angle;
+
+      }
+    // }
+
+    // float f = TriggerUltrasonic();
+    // if (d >= min_valid_dist && d <= max_valid_dist && count < max_samples) {
+    //   float a = accumulated_angle;
+    //   while (a >= 360.0f) a -= 360.0f;
+    //   angles_deg[count] = a;
+    //   dists_cm[count] = d;
+    //   count++;
+    // }
+
+    delay(sample_delay_ms);
+  }
+
+  stop();
+
+  // if (count < 8) {
+  //   SerialCom->println("Insufficient scan samples, fallback.");
+  //   g_closest_wall_bearing_deg = 0.0f;
+  //   g_corner_bearing_deg = 0.0f;
+  //   return 0.0f;
+  // }
+
+  // // 5-point circular moving average
+  // float smooth[max_samples];
+  // for (int i = 0; i < count; i++) {
+  //   int i0 = (i - 2 + count) % count;
+  //   int i1 = (i - 1 + count) % count;
+  //   int i3 = (i + 1) % count;
+  //   int i4 = (i + 2) % count;
+  //   smooth[i] = (dists_cm[i0] + dists_cm[i1] + dists_cm[i] + dists_cm[i3] + dists_cm[i4]) / 5.0f;
+  // }
+   
+
+  // --- Output ---
+  Serial.println("Detected fires:");
+
+  if (fire_angle >= 0) {
+    Serial.print("Fire: ");
+    Serial.println(fire_angle);
+  }
+
+  if (fire_angle < 0 ) {
+    Serial.println("No fire detected.");
+   }
+
+  // // --- Step 1: absolute maximum = closest fire ---
+  // int wall1_i = 0;
+  // for (int i = 1; i < count; i++) {
+  //   if (smooth[i] < smooth[wall1_i]) wall1_i = i;
+  // }
+  // float wall1_bearing = angles_deg[wall1_i];
+  // if (wall1_bearing > 180.0f) wall1_bearing -= 360.0f;
+  // g_closest_wall_bearing_deg = wall1_bearing;
+  // if (fire_behind){
+  //   fire_angle += 180;
+  // }
+
+  return fire_angle;
+}
+
+float SpinAndFindFire(float target_spin_angle) {
   const int max_samples = 220;
   const int turn_cmd = 220;  // 140
   const unsigned long timeout_ms = 18000;
@@ -158,7 +288,7 @@ void SpinAndFindFire(float target_spin_angle) {
   //   fire_angle += 180;
   // }
 
-  return;
+  return fire_angle;
 }
 
 void RotateOnSpot(float desiredAngle) {
@@ -245,69 +375,61 @@ void RotateOnSpot(float desiredAngle) {
   }
 }
 
-// int scanForFire(int &angle_1, int &angle_2) { // variables to 'return' by passing them in as references... also include an angle range to scan?
+float scanFireAngle(int scan_angle) { 
 
-//   // reset
-//   float bestStrength1 = 0;
-//   float bestStrength2 = 0;
-//   float bestAngle1 = -1;
-//   float bestAngle2 = -1;
+  // reset
+  float bestStrength = 0;
+  float bestAngle = -1;
 
-//   for (int i = 0; i < numSteps; i++) {
-//     int angle = i * resolution;
-//     ultraServo.write(angle);
-//     delay(150); //////// maybe decrease??
+  
+  const int resolution = 5;
+  const int numSteps = scan_angle / resolution;
+  float correction_gain = 0.02; // TUNE for angle resolution maybe
 
-//     float r1 = analogRead(photo_R1_pin); 
-//     float r2 = analogRead(photo_R2_pin); 
-//     float l1 = analogRead(photo_L1_pin); 
-//     float l2 = analogRead(photo_L2_pin); 
+  for (int i = 0; i < numSteps; i++) {
+    int servo_angle = i * resolution;
+    ultraServo.write(servo_angle);
+    delay(150); //////// maybe decrease??
 
-//     // weighted sensing
-//     float right = (1.0 * r1) + (0.7 * r2);
-//     float left  = (1.0 * l1) + (0.7 * l2);
-//     float total = right + left;
+    float r1 = analogRead(photo_R1_pin); 
+    float r2 = analogRead(photo_R2_pin); 
+    float l1 = analogRead(photo_L1_pin); 
+    float l2 = analogRead(photo_L2_pin); 
 
-//     if (total > threshold) {
+    // weighted sensing
+    float right = (1.0 * r1) + (0.7 * r2);
+    float left  = (1.0 * l1) + (0.7 * l2);
+    float total = right + left;
 
-//       // direction correction
-//       float error = (right - left) / total;
-//       float fire_angle = servo_angle + error * correction_gain;
+    if (total > threshold) {
 
-//       // clamp
-//       if (fire_angle < 0) fire_angle = 0;
-//       if (fire_angle > 180) fire_angle = 180;
+      // direction correction
+      float error = (right - left) / total;
+      float fire_angle = servo_angle + error * correction_gain;
 
-//       // --- keep top 2 strongest ---
-//       if (total > bestStrength1) {
-//         // shift 1 → 2
-//         bestStrength2 = bestStrength1;
-//         bestAngle2 = bestAngle1;
+      // clamp
+      if (fire_angle < 0) fire_angle = 0;
+      if (fire_angle > 180) fire_angle = 180;
 
-//         bestStrength1 = total;
-//         bestAngle1 = fire_angle;
+      // --- keep strongest ---
+      if (total > bestStrength) {
+       
+        bestStrength = total;
+        bestAngle = fire_angle;
 
-//       } else if (total > bestStrength2) {
-//         bestStrength2 = total;
-//         bestAngle2 = fire_angle;
-//       }
-//     }
-//   }
+      } 
+    }
+  }
 
-//   // --- Output ---
-//   Serial.println("Detected fires:");
+  // --- Output ---
+  Serial.println("Detected fire:");
 
-//   if (bestAngle1 >= 0) {
-//     Serial.print("Fire 1: ");
-//     Serial.println(bestAngle1);
-//   }
+  if (bestAngle >= 0) {
+    Serial.print("Fire: ");
+    Serial.println(bestAngle);
+  }
 
-//   if (bestAngle2 >= 0) {
-//     Serial.print("Fire 2: ");
-//     Serial.println(bestAngle2);
-//   }
-
-//   if (bestAngle1 < 0 && bestAngle2 < 0) {
-//     Serial.println("No fire detected.");
-//   }
-// }
+  if (bestAngle < 0) {
+    Serial.println("No fire detected.");
+  }
+}

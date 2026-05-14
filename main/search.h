@@ -16,8 +16,10 @@ extern float raw_dists[];
 
 // ---- Functions ----
 float SpinAndFindFire(float target_spin_angle);
+float Spin360AndFindFire();
 void RotateOnSpot(float desiredAngle);
-int scanForFire(int &num_fires, int &angle_1, int &angle_2);
+// int scanForFire(int &num_fires, int &angle_1, int &angle_2);
+float scanFireAngle(int scan_angle);
 
 // ---- Pin Config ----
 const int photo_R1_pin = A14;
