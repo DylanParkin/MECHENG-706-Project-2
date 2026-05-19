@@ -9,6 +9,7 @@ STATE searching(){
   float fire_angle = -1.0f;
 
   fire_angle = Spin360AndFindFire();   
+  // scanFireAngle(180);
   Serial.print("fire_angle: "); 
   Serial.println(fire_angle);    
   delay(100);
@@ -35,12 +36,11 @@ float Spin360AndFindFire() {
   // const float min_valid_dist = 3.0f;
   // const float max_valid_dist = 350.0f;
 
-  // float angles_deg[max_samples];
-  // float dists_cm[max_samples];
-  // int count = 0;
+  float angles_deg[max_samples];
+  float fire_total[max_samples];
+  float fire_angle[10];
+  int count = 0;
 
-  // ultraServo.write(90);
-  // delay(250);
 
   float prev_heading = GetHeading();
   float accumulated_angle = 0.0f;
@@ -48,7 +48,8 @@ float Spin360AndFindFire() {
 
   // reset
   float best_strength = 0;
-  float fire_angle = -1;
+  fire_angle[0] = -1;
+  int max_fire_i = 0;
  
 
   while (accumulated_angle < 360) {
@@ -95,19 +96,26 @@ float Spin360AndFindFire() {
       if (total > best_strength) {
 
         best_strength = total;
-        fire_angle = accumulated_angle;
+        fire_angle[max_fire_i] = accumulated_angle;
+        max_fire_i = 0;
+      }
 
+      if (total == best_strength){
+        max_fire_i ++;
+        fire_angle[max_fire_i] = accumulated_angle;
+        
       }
     // }
 
-    // float f = TriggerUltrasonic();
-    // if (d >= min_valid_dist && d <= max_valid_dist && count < max_samples) {
-    //   float a = accumulated_angle;
-    //   while (a >= 360.0f) a -= 360.0f;
-    //   angles_deg[count] = a;
-    //   dists_cm[count] = d;
-    //   count++;
-    // }
+  /// --------------for storing the values in an array ---------------
+    
+    if (count < max_samples) { // consider also implementing a maximum and minimum reading for total (fire strength)
+      float a = accumulated_angle;
+      while (a >= 360.0f) a -= 360.0f;
+      angles_deg[count] = a;
+      fire_total[count] = total;
+      count++;
+    }
 
     delay(sample_delay_ms);
   }
@@ -121,15 +129,30 @@ float Spin360AndFindFire() {
   //   return 0.0f;
   // }
 
-  // // 5-point circular moving average
-  // float smooth[max_samples];
-  // for (int i = 0; i < count; i++) {
-  //   int i0 = (i - 2 + count) % count;
-  //   int i1 = (i - 1 + count) % count;
-  //   int i3 = (i + 1) % count;
-  //   int i4 = (i + 2) % count;
-  //   smooth[i] = (dists_cm[i0] + dists_cm[i1] + dists_cm[i] + dists_cm[i3] + dists_cm[i4]) / 5.0f;
-  // }
+  // 5-point circular moving average
+  float smooth[count];
+  for (int i = 0; i < count; i++) {
+    int i0 = (i - 2 + count) % count;
+    int i1 = (i - 1 + count) % count;
+    int i3 = (i + 1) % count;
+    int i4 = (i + 2) % count;
+    smooth[i] = (fire_total[i0] + fire_total[i1] + fire_total[i] + fire_total[i3] + fire_total[i4]) / 5.0f;
+  }
+
+  // gradient?? - get minimum gradient when not = 0?
+  int fire_threshold = 10;
+  int min_gradient = 100; // arbitrary large number
+  float min_grad_angle = -1;// angle of minimum gradient
+  for (int i = 0; i < count; i++) {
+    if (smooth[i] > fire_threshold){
+      int gradient = smooth[i] - smooth[(i - 1 + count) % count];
+      if (abs(gradient) < min_gradient){
+        min_gradient = abs(gradient);
+        min_grad_angle = angles_deg[i];
+      }
+    }
+  }
+
    
 
   // --- Output ---
@@ -137,7 +160,7 @@ float Spin360AndFindFire() {
 
   if (fire_angle >= 0) {
     Serial.print("Fire: ");
-    Serial.println(fire_angle);
+    Serial.println(fire_angle[0]);
   }
 
   if (fire_angle < 0 ) {
@@ -156,7 +179,13 @@ float Spin360AndFindFire() {
   //   fire_angle += 180;
   // }
 
-  return fire_angle;
+  // ---------- CHOOSE ONE OR THE OTHER TO OUTPUT ------------------
+  
+  // float return_fire_angle = fire_angle[0];
+  // ------------ or use median? ---------------
+  return_fire_angle = fire_angle[(max_fire_i+1)/2]; // rounds down to nearest int as they're integers
+
+  return return_fire_angle; 
 }
 
 float SpinAndFindFire(float target_spin_angle) {
