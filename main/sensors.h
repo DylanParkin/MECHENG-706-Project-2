@@ -30,11 +30,6 @@ float get_right_IR();
 float get_front_left_IR();
 float get_front_right_IR();
 
-float shortRangeModelLeft();
-float shortRangeModelRight();
-float shortRangeModelRightFront();
-float shortRangeModelLeftFront();
-
 // ─── Ultrasonic ───────────────────────────────────────────────────────────────
 float TriggerUltrasonic();
 
