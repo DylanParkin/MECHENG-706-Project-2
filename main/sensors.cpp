@@ -21,36 +21,91 @@ volatile unsigned long t_UltraEchoEnd;
 volatile int checkStart = 0;
 volatile int checkEnd = 0;
 
-float get_left_IR(int ADC_val) {  // VALS OK
+float shortRangeModelLeft(){
+  int ADC_val = analogRead(A4);
+  static float filtered = 0.0f;
+  static bool initialized = false;
+  float reading = 13613.0f * pow(ADC_val, -1.163f);
+  if(reading > 40.0f){
+    return 40.0f;
+  } else{
+    return smooth_ir(reading, filtered, initialized);
+  }
+}
+
+float get_left_IR() {  // VALS OK
+  int ADC_val = analogRead(A4);
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
-  float reading = 14307.0f * pow(ADC_val, -1.168f);
+  float reading = 16215.0f * pow(ADC_val, -1.194f);
   return smooth_ir(reading, filtered, initialized);
 }
 
-float get_right_IR(int ADC_val) {  // UPDATED
+
+
+float get_right_IR() {  // UPDATED
+  int ADC_val = analogRead(A6);
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
-  float reading = 12802.0f * pow(ADC_val, -1.151f);
+  float reading = 12697.0f * pow(ADC_val, -1.167f) + 0.5f;
+  // float reading = 12802.0f * pow(ADC_val, -1.151f); //Old Vers
   return smooth_ir(reading, filtered, initialized);
 }
 
-float get_front_IR(int ADC_val) {
+float shortRangeModelRight(){
+  int ADC_val = analogRead(A6);
   static float filtered = 0.0f;
   static bool initialized = false;
-  ADC_val = max(1, ADC_val);
-  float reading = 2790.8 * pow(ADC_val, -1.03);
-  return smooth_ir(reading, filtered, initialized);
+  float reading = 10558.0f * pow(ADC_val, -1.134f);
+  if(reading > 40.0f){
+    return 40.0f;
+  } else{
+    return smooth_ir(reading, filtered, initialized);
+  }
 }
 
-float get_back_IR(int ADC_val) {
+float get_front_left_IR() {
+  int ADC_val = analogRead(A5);
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
-  float reading = 1880.5 * pow(ADC_val, -0.957);
+  float reading = 3616.9f * pow(ADC_val, -1.089f) + 2.0f;
+  //float reading = 2790.8 * pow(ADC_val, -1.03); // Old Vers. Compare between them
   return smooth_ir(reading, filtered, initialized);
+}
+float shortRangeModelLeftFront(){
+  int ADC_val = analogRead(A5);
+  static float filtered = 0.0f;
+  static bool initialized = false;
+  float reading = 5419.5f * pow(ADC_val, -1.15f);
+  if(reading > 15.0f){
+    return 15.0f;
+  } else{
+    return smooth_ir(reading, filtered, initialized);
+  }
+}
+
+float get_front_right_IR() {
+  int ADC_val = analogRead(A7);
+  static float filtered = 0.0f;
+  static bool initialized = false;
+  ADC_val = max(1, ADC_val);
+  float reading = 1631.2f * pow(ADC_val, -0.942f) + 1.0f;
+  //float reading = 1880.5f * pow(ADC_val, -0.957f);
+  return smooth_ir(reading, filtered, initialized);
+}
+float shortRangeModelRightFront(){
+  int ADC_val = analogRead(A7);
+  static float filtered = 0.0f;
+  static bool initialized = false;
+  float reading = 2972.4f * pow(ADC_val, -1.048f);
+  if(reading > 14.0f){
+    return 14.0f;
+  } else{
+    return smooth_ir(reading, filtered, initialized);
+  }
 }
 
 void UltrasonicReturn() {  // ISR
@@ -64,6 +119,8 @@ void UltrasonicReturn() {  // ISR
 }
 
 float TriggerUltrasonic() {
+  static float last_valid = 999.0f;  // default to large distance (no object)
+
   noInterrupts();
   checkStart = 0;
   checkEnd = 0;
@@ -71,8 +128,8 @@ float TriggerUltrasonic() {
   t_UltraEchoEnd = 0;
   interrupts();
 
-  int echo_time_out_ms = 10;  // specified 30
-  int cycle_delay_ms = 15;    // specified 60
+  int echo_time_out_ms = 10;
+  int cycle_delay_ms = 15;
 
   digitalWrite(5, LOW);
   delayMicroseconds(2);
@@ -83,14 +140,13 @@ float TriggerUltrasonic() {
   unsigned long timeoutStart = millis();
   while (!checkEnd && (millis() - timeoutStart) < echo_time_out_ms);
 
-  float dist = -1.0f;
   if (checkEnd) {
     noInterrupts();
     unsigned long time = t_UltraEchoEnd - t_UltraEchoStart;
     interrupts();
-    dist = time / 58.0f;
+    last_valid = time / 58.0f;
   }
 
   delay(cycle_delay_ms);
-  return dist;
+  return last_valid;
 }

@@ -25,10 +25,15 @@ extern volatile int checkStart;
 extern volatile int checkEnd;
 
 // ─── Infrared ─────────────────────────────────────────────────────────────────
-float get_left_IR(int ADC_val);
-float get_right_IR(int ADC_val);
-float get_front_IR(int ADC_val);
-float get_back_IR(int ADC_val);
+float get_left_IR();
+float get_right_IR();
+float get_front_left_IR();
+float get_front_right_IR();
+
+float shortRangeModelLeft();
+float shortRangeModelRight();
+float shortRangeModelRightFront();
+float shortRangeModelLeftFront();
 
 // ─── Ultrasonic ───────────────────────────────────────────────────────────────
 float TriggerUltrasonic();
