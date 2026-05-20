@@ -47,9 +47,9 @@ object_state object_detected() {
 
 // drive forward with fire tracking
 object_state drive(bool forward) {
-  const float kp_gyro = 30.0f;  // was 60
-  const float ki_gyro = 0.0f;
-  const float kd_gyro = 0.0f;
+  const float kp_fire = 30.0f;  // was 60
+  const float ki_fire = 0.0f;
+  const float kd_fire = 0.0f;
 
   const float integralClamp = 200.0f;
   const float corrClamp = 350.0f;
@@ -101,13 +101,13 @@ object_state drive(bool forward) {
     // SerialCom->println(error);
     integralError += error * dt;
     integralError = constrain(integralError,
-                              -integralClamp / max(ki_gyro, 0.001f),
-                              integralClamp / max(ki_gyro, 0.001f));
+                              -integralClamp / max(ki_fire, 0.001f),
+                              integralClamp / max(ki_fire, 0.001f));
     float deriv = (error - prevError) / dt;
     prevError = error;
 
     // Gyro-only heading hold for straight-line travel.
-    float correction = kp_gyro * error + ki_gyro * integralError + kd_gyro * deriv;
+    float correction = kp_fire * error + ki_fire * integralError + kd_fire * deriv;
 
     correction = constrain(correction, -corrClamp, corrClamp);
 
@@ -127,8 +127,8 @@ object_state drive(bool forward) {
 constexpr float SENSOR_ANGLES[4] = {40.0f, 0.0f, 0.0f, -40.0f};
 
 // calibration vals
-float ambient[4] = {30.0f, 30.0f, 30.0f, 30.0f};
-constexpr float DETECTION_THRESHOLD = 150.0f;
+float ambient[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+constexpr float DETECTION_THRESHOLD = 0.0f;
 constexpr float NO_FLAME = 999.0f;
 
 // ============================================================
@@ -167,7 +167,7 @@ float getFlameAngle() {
   float total = left_signal + right_signal;
 
   // Detection threshold
-  if (total < DETECTION_THRESHOLD) {
+  if (total <= DETECTION_THRESHOLD) {
     return NO_FLAME;
   }
 
