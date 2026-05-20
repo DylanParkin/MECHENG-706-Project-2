@@ -1,5 +1,4 @@
 #include "sensors.h"
-
 #include <math.h>
 
 constexpr float kIrFilterAlpha = 0.25f;
@@ -22,23 +21,20 @@ volatile int checkStart = 0;
 volatile int checkEnd = 0;
 
 float get_left_IR() {  // VALS OK
-
   int ADC_val = analogRead(A4);
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
-  float reading = 14307.0f * pow(ADC_val, -1.168f);
+  float reading = 16215.0f * pow(ADC_val, -1.194f);
   return smooth_ir(reading, filtered, initialized);
 }
 
 float get_right_IR() {  // UPDATED
-
   int ADC_val = analogRead(A6);
-
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
-  float reading = 12802.0f * pow(ADC_val, -1.151f);
+  float reading = 12697.0f * pow(ADC_val, -1.167f) + 0.5f;
   return smooth_ir(reading, filtered, initialized);
 }
 
@@ -47,7 +43,7 @@ float get_front_left_IR() {
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
-  float reading = 2790.8 * pow(ADC_val, -1.03);
+  float reading = 3616.9f * pow(ADC_val, -1.089f) + 2.0f;
   return smooth_ir(reading, filtered, initialized);
 }
 
@@ -56,7 +52,7 @@ float get_front_right_IR() {
   static float filtered = 0.0f;
   static bool initialized = false;
   ADC_val = max(1, ADC_val);
-  float reading = 1880.5 * pow(ADC_val, -0.957);
+  float reading = 1631.2f * pow(ADC_val, -0.942f) + 1.0f;
   return smooth_ir(reading, filtered, initialized);
 }
 
