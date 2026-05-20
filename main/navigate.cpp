@@ -18,31 +18,39 @@ STATE navigating() {
 }
 
 object_state object_detected() {
-  float distance_in_front = TriggerUltrasonic();
-  SerialCom->println("Distance in front: " + String(distance_in_front) + " cm");
-  float obstacle_threshold = 15.0f;  // in cm
-  uint16_t PT_readings[4];
+    float left_ir = get_front_left_IR();
+    float ultrasonic = TriggerUltrasonic();
+    float right_ir = get_front_right_IR();
+    float distance_in_front = min(left_ir, min(ultrasonic, right_ir));
+    SerialCom->println("L_IR: " + String(left_ir) + " | Ultrasonic: " + String(ultrasonic) + " | R_IR: " + String(right_ir) + " cm");
+    float obstacle_threshold = 15.0f;
+    uint16_t PT_readings[4];
 
-  if (distance_in_front > obstacle_threshold) {
-    return NO_OBJECT;
-  } else {
-    for (uint8_t i = 0; i < 4; i++) {
-      PT_readings[i] = analogRead(PT_PINS[i]);
-    }
-
-    int pt_min = PT_readings[0];
-    int pt_sum = 0;
-    for (uint8_t i = 0; i < 4; i++) {
-      pt_sum += PT_readings[i];
-      if (PT_readings[i] < pt_min) pt_min = PT_readings[i];
-    }
-
-    if (pt_min < 80 && pt_sum < 2200) {
-      return OBSTACLE;
+    if (distance_in_front > obstacle_threshold) {
+        return NO_OBJECT;
     } else {
-      return FIRE;
+        for (uint8_t i = 0; i < 4; i++) {
+            PT_readings[i] = analogRead(PT_PINS[i]);
+        }
+        SerialCom->println(String(PT_readings[0]) + " | " + String(PT_readings[1]) + " | " + String(PT_readings[2]) + " | " + String(PT_readings[3]));
+
+        uint32_t pt_sum = 0;
+        uint16_t pt_max = 0;
+        for (uint8_t i = 0; i < 4; i++) {
+            pt_sum += PT_readings[i];
+            if (PT_readings[i] > pt_max) pt_max = PT_readings[i];
+        }
+
+        if (pt_sum < 50) {
+            return OBSTACLE;
+        } else if (PT_readings[0] == pt_max || PT_readings[3] == pt_max) {
+            return OBSTACLE;
+        } else if (PT_readings[0] + PT_readings[3] < 25) {
+            return OBSTACLE;
+        } else {
+            return FIRE;
+        }
     }
-  }
 }
 
 // drive forward with fire tracking
