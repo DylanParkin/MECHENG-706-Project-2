@@ -12,53 +12,52 @@ STATE navigating() {
     if (object == FIRE) {
       return FINISHED;
     } else if (object == OBSTACLE) {
-      Avoid();
-      SerialCom->println("finishes avoid function");
+      return AVOID;
     }
   }
 }
 
 object_state object_detected() {
-    float left_ir = get_front_left_IR();
-    float ultrasonic = TriggerUltrasonic();
-    float right_ir = get_front_right_IR();
-    float distance_in_front = min(left_ir, min(ultrasonic, right_ir));
-    SerialCom->println("L_IR: " + String(left_ir) + " | Ultrasonic: " + String(ultrasonic) + " | R_IR: " + String(right_ir) + " cm");
-    float obstacle_threshold = 15.0f;
-    uint16_t PT_readings[4];
+  float left_ir = get_front_left_IR();
+  float ultrasonic = TriggerUltrasonic();
+  float right_ir = get_front_right_IR();
+  float distance_in_front = min(left_ir, min(ultrasonic, right_ir));
+  SerialCom->println("L_IR: " + String(left_ir) + " | Ultrasonic: " + String(ultrasonic) + " | R_IR: " + String(right_ir) + " cm");
+  float obstacle_threshold = 15.0f;
+  uint16_t PT_readings[4];
 
-    if (distance_in_front > obstacle_threshold) {
-        return NO_OBJECT;
-    } else {
-        for (uint8_t i = 0; i < 4; i++) {
-            PT_readings[i] = analogRead(PT_PINS[i]);
-        }
-        SerialCom->println(String(PT_readings[0]) + " | " + String(PT_readings[1]) + " | " + String(PT_readings[2]) + " | " + String(PT_readings[3]));
-
-        uint32_t pt_sum = 0;
-        uint16_t pt_max = 0;
-        for (uint8_t i = 0; i < 4; i++) {
-            pt_sum += PT_readings[i];
-            if (PT_readings[i] > pt_max) pt_max = PT_readings[i];
-        }
-
-        if (pt_sum < 50) {
-            return OBSTACLE;
-        } else if (PT_readings[0] == pt_max || PT_readings[3] == pt_max) {
-            return OBSTACLE;
-        } else if (PT_readings[0] + PT_readings[3] < 25) {
-            return OBSTACLE;
-        } else {
-            return FIRE;
-        }
+  if (distance_in_front > obstacle_threshold) {
+    return NO_OBJECT;
+  } else {
+    for (uint8_t i = 0; i < 4; i++) {
+      PT_readings[i] = analogRead(PT_PINS[i]);
     }
+    SerialCom->println(String(PT_readings[0]) + " | " + String(PT_readings[1]) + " | " + String(PT_readings[2]) + " | " + String(PT_readings[3]));
+
+    uint32_t pt_sum = 0;
+    uint16_t pt_max = 0;
+    for (uint8_t i = 0; i < 4; i++) {
+      pt_sum += PT_readings[i];
+      if (PT_readings[i] > pt_max) pt_max = PT_readings[i];
+    }
+
+    if (pt_sum < 50) {
+      return OBSTACLE;
+    } else if (PT_readings[0] == pt_max || PT_readings[3] == pt_max) {
+      return OBSTACLE;
+    } else if (PT_readings[0] + PT_readings[3] < 25) {
+      return OBSTACLE;
+    } else {
+      return FIRE;
+    }
+  }
 }
 
 // drive forward with fire tracking
 object_state drive(bool forward) {
-  const float kp_gyro = 30.0f;  // was 60
-  const float ki_gyro = 0.0f;
-  const float kd_gyro = 0.0f;
+  const float kp_fire = 30.0f;  // was 60
+  const float ki_fire = 0.0f;
+  const float kd_fire = 0.0f;
 
   const float integralClamp = 200.0f;
   const float corrClamp = 350.0f;
@@ -110,13 +109,13 @@ object_state drive(bool forward) {
     // SerialCom->println(error);
     integralError += error * dt;
     integralError = constrain(integralError,
-                              -integralClamp / max(ki_gyro, 0.001f),
-                              integralClamp / max(ki_gyro, 0.001f));
+                              -integralClamp / max(ki_fire, 0.001f),
+                              integralClamp / max(ki_fire, 0.001f));
     float deriv = (error - prevError) / dt;
     prevError = error;
 
     // Gyro-only heading hold for straight-line travel.
-    float correction = kp_gyro * error + ki_gyro * integralError + kd_gyro * deriv;
+    float correction = kp_fire * error + ki_fire * integralError + kd_fire * deriv;
 
     correction = constrain(correction, -corrClamp, corrClamp);
 
@@ -136,8 +135,8 @@ object_state drive(bool forward) {
 constexpr float SENSOR_ANGLES[4] = {40.0f, 0.0f, 0.0f, -40.0f};
 
 // calibration vals
-float ambient[4] = {30.0f, 30.0f, 30.0f, 30.0f};
-constexpr float DETECTION_THRESHOLD = 150.0f;
+float ambient[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+constexpr float DETECTION_THRESHOLD = 0.0f;
 constexpr float NO_FLAME = 999.0f;
 
 // ============================================================
@@ -161,22 +160,13 @@ float getFlameAngle() {
     r[i] = (corrected > 0.0f) ? corrected : 0.0f;
   }
 
-  // SerialCom->print("| LEFT: ");
-  // SerialCom->print(r[0]);
-  // SerialCom->print(" | LEFT MID: ");
-  // SerialCom->print(r[1]);
-  // SerialCom->print(" | RIGHT MID: ");
-  // SerialCom->print(r[2]);
-  // SerialCom->print(" | RIGHT: ");
-  // SerialCom->println(r[3]);
-
   // Group by side: indices 0,1 are left; indices 2,3 are right
   float left_signal = r[0] + r[1];
   float right_signal = r[2] + r[3];
   float total = left_signal + right_signal;
 
   // Detection threshold
-  if (total < DETECTION_THRESHOLD) {
+  if (total <= DETECTION_THRESHOLD) {
     return NO_FLAME;
   }
 

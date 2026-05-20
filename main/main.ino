@@ -1,5 +1,6 @@
 #include <SoftwareSerial.h>
 
+#include "avoid.h"
 #include "base_code.h"
 #include "extinguish.h"
 #include "navigate.h"
@@ -70,6 +71,9 @@ void loop(void)  // main loop
       break;
     case NAVIGATING:
       machine_state = navigating();
+      break;
+    case AVOID:
+      machine_state = avoiding();
       break;
     case EXTINGUISH:
       machine_state = extinguishing();
