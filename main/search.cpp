@@ -8,10 +8,17 @@ STATE searching() {
   float fire_angle = -1.0f;
 
   fire_angle = Spin360AndFindFire();
+  // scanFireAngle(180);
   SerialCom->print("fire_angle: ");
   SerialCom->println(fire_angle);
-  RotateOnSpot(fire_angle);
+  delay(100);
 
+  if (fire_angle < 0) {
+    // fire_behind = true;
+    return SEARCHING;
+  }
+
+  RotateOnSpot(fire_angle);
   return NAVIGATING;
 }
 

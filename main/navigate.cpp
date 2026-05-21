@@ -10,7 +10,7 @@ STATE navigating() {
   while (1) {
     object_state object = drive(true);
     if (object == FIRE) {
-      return FINISHED;
+      return EXTINGUISH;
     } else if (object == OBSTACLE) {
       return AVOID;
     }
