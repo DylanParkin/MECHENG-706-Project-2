@@ -1,5 +1,7 @@
 #include "avoid.h"
 
+#include "navigate.h"
+
 STATE avoiding() {
   Avoid();
 
@@ -15,6 +17,10 @@ void Avoid() {
 
   // ultraServo.writeMicroseconds(550);
   // delay(500);
+
+  const float kp_fire = 30.0f;  // was 60
+  const float corrClamp = 350.0f;
+  const float readDelayMs = 10.0f;
 
   float ultra_right = TriggerUltrasonic();
   float IR_right = get_right_IR();
@@ -43,20 +49,28 @@ void Avoid() {
 
   // strafe stage
   while (true) {
+    float fire_heading = getFlameAngle();
+
     float front_clearance_IR = (strafe_right) ? get_front_left_IR() : get_front_right_IR();
 
     // clear object when strafing
     if (front_clearance_IR <= low_clearance_threshold) {
       front_clearance_was_low = true;
     } else if (front_clearance_was_low && front_clearance_IR >= high_clearance_threshold) {
+      delay(300);  // strafe a little extra to properly clear obstacle
       stop();
       break;
     }
 
-    left_front_motor.writeMicroseconds(1500 - dir * strafe_speed);
-    left_rear_motor.writeMicroseconds(1500 + dir * strafe_speed);
-    right_rear_motor.writeMicroseconds(1500 + dir * strafe_speed);
-    right_front_motor.writeMicroseconds(1500 - dir * strafe_speed);
+    float correction = kp_fire * fire_heading;
+    correction = constrain(correction, -corrClamp, corrClamp);
+
+    left_front_motor.writeMicroseconds(1500 - dir * strafe_speed - correction);
+    left_rear_motor.writeMicroseconds(1500 + dir * strafe_speed - correction);
+    right_rear_motor.writeMicroseconds(1500 + dir * strafe_speed - correction);
+    right_front_motor.writeMicroseconds(1500 - dir * strafe_speed - correction);
+
+    delay(readDelayMs);
   }
 
   // drive forward stage
