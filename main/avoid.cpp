@@ -18,7 +18,7 @@ void Avoid() {
   // ultraServo.writeMicroseconds(550);
   // delay(500);
 
-  const float kp_fire = 30.0f;  // was 60
+  const float kp_fire = 20.0f;  // was 30
   const float corrClamp = 350.0f;
   const float readDelayMs = 10.0f;
 
@@ -48,13 +48,25 @@ void Avoid() {
     SerialCom->println("strafing left. reading right front");
   }
 
-  dir = (strafe_right) ? -1 : 1;  // dir +ve strafe left
-
   bool front_clearance_was_low = false;  // low meaning object in frnt of IR
   bool side_clearance_was_low = false;   // low meaning object in frnt of IR
 
   // strafe stage
+
+  float side_IR = 0.0f;
+
   while (true) {
+    IR_right = get_right_IR();
+    IR_left = get_left_IR();
+
+    side_IR = (strafe_right) ? (IR_right) : (IR_left);
+
+    if (side_IR < 15.0f) {
+      strafe_right = !strafe_right;
+    }
+
+    dir = (strafe_right) ? -1 : 1;  // dir +ve strafe left
+
     float fire_heading = getFlameAngle();
 
     float front_clearance_IR = (strafe_right) ? get_front_left_IR() : get_front_right_IR();
