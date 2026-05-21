@@ -1,31 +1,22 @@
 #include "search.h"
 // #include "findFire.h"
 
-STATE searching(){
+STATE searching() {
   SerialCom->println("Searching...");
 
   // initialise
   float fire_angle = -1.0f;
 
-  fire_angle = Spin360AndFindFire();   
-  // scanFireAngle(180);
-  SerialCom->print("fire_angle: "); 
-  SerialCom->println(fire_angle);    
-  delay(100);
-
-  if (fire_angle < 0) {
-    // fire_behind = true;
-    return SEARCHING;
-  }
+  fire_angle = Spin360AndFindFire();
+  SerialCom->print("fire_angle: ");
+  SerialCom->println(fire_angle);
+  RotateOnSpot(fire_angle);
 
   return NAVIGATING;
 }
 
-
-
-const float threshold = 20.0;     
+const float threshold = 20.0;
 // const float correction_gain = 20.0;
-
 
 float Spin360AndFindFire() {
   const int max_samples = 220;
@@ -40,7 +31,6 @@ float Spin360AndFindFire() {
   float fire_angle[10];
   int count = 0;
 
-
   float prev_heading = GetHeading();
   float accumulated_angle = 0.0f;
   unsigned long start_time = millis();
@@ -49,7 +39,6 @@ float Spin360AndFindFire() {
   float best_strength = 0;
   fire_angle[0] = -1;
   int max_fire_i = 0;
- 
 
   while (accumulated_angle < 360) {
     if (millis() - start_time > timeout_ms) {
@@ -73,10 +62,10 @@ float Spin360AndFindFire() {
     if (delta > 0.0f) accumulated_angle += delta;
 
     /// -------------- fire detection-----------------------------
-    float right = analogRead(photo_R1_pin); // prev r1
-    // float r2 = analogRead(photo_R2_pin); 
-    float left = analogRead(photo_L1_pin); 
-    // float l2 = analogRead(photo_L2_pin); 
+    float right = analogRead(photo_R1_pin);  // prev r1
+    // float r2 = analogRead(photo_R2_pin);
+    float left = analogRead(photo_L1_pin);
+    // float l2 = analogRead(photo_L2_pin);
 
     // // weighted sensing
     // float right = (1.0 * r1) + (0.7 * r2);
@@ -85,32 +74,30 @@ float Spin360AndFindFire() {
 
     // if (total > threshold) {
 
-      // // direction correction
-      // float error = (right - left) / total;
-      // float fire_angle = servo_angle + error * correction_gain;
+    // // direction correction
+    // float error = (right - left) / total;
+    // float fire_angle = servo_angle + error * correction_gain;
 
-      // clamp
-      if (accumulated_angle < 0) accumulated_angle = 0;
-      if (accumulated_angle > 360) accumulated_angle = 360;
+    // clamp
+    if (accumulated_angle < 0) accumulated_angle = 0;
+    if (accumulated_angle > 360) accumulated_angle = 360;
 
-      // --- keep strongest (fire location)---
-      if (total > best_strength) {
+    // --- keep strongest (fire location)---
+    if (total > best_strength) {
+      best_strength = total;
+      fire_angle[max_fire_i] = accumulated_angle;
+      max_fire_i = 0;
+    }
 
-        best_strength = total;
-        fire_angle[max_fire_i] = accumulated_angle;
-        max_fire_i = 0;
-      }
-
-      if (total == best_strength){
-        max_fire_i ++;
-        fire_angle[max_fire_i] = accumulated_angle;
-        
-      }
+    if (total == best_strength) {
+      max_fire_i++;
+      fire_angle[max_fire_i] = accumulated_angle;
+    }
     // }
 
-  /// --------------for storing the values in an array ---------------
-    
-    if (count < max_samples) { // consider also implementing a maximum and minimum reading for total (fire strength)
+    /// --------------for storing the values in an array ---------------
+
+    if (count < max_samples) {  // consider also implementing a maximum and minimum reading for total (fire strength)
       float a = accumulated_angle;
       while (a >= 360.0f) a -= 360.0f;
       angles_deg[count] = a;
@@ -142,19 +129,17 @@ float Spin360AndFindFire() {
 
   // gradient?? - get minimum gradient when not = 0?
   int fire_threshold = 10;
-  int min_gradient = 100; // arbitrary large number
-  float min_grad_angle = -1;// angle of minimum gradient
+  int min_gradient = 100;     // arbitrary large number
+  float min_grad_angle = -1;  // angle of minimum gradient
   for (int i = 0; i < count; i++) {
-    if (smooth[i] > fire_threshold){
+    if (smooth[i] > fire_threshold) {
       int gradient = smooth[i] - smooth[(i - 1 + count) % count];
-      if (abs(gradient) < min_gradient){
+      if (abs(gradient) < min_gradient) {
         min_gradient = abs(gradient);
         min_grad_angle = angles_deg[i];
       }
     }
   }
-
-   
 
   // --- Output ---
   SerialCom->println("Detected fires:");
@@ -164,9 +149,9 @@ float Spin360AndFindFire() {
     SerialCom->println(fire_angle[0]);
   }
 
-  if (fire_angle < 0 ) {
+  if (fire_angle < 0) {
     SerialCom->println("No fire detected.");
-   }
+  }
 
   // // --- Step 1: absolute maximum = closest fire ---
   // int wall1_i = 0;
@@ -181,12 +166,12 @@ float Spin360AndFindFire() {
   // }
 
   // ---------- CHOOSE ONE OR THE OTHER TO OUTPUT ------------------
-  
+
   // float return_fire_angle = fire_angle[0];
   // ------------ or use median? ---------------
-  float return_fire_angle = fire_angle[(max_fire_i+1)/2]; // rounds down to nearest int as they're integers
+  float return_fire_angle = fire_angle[(max_fire_i + 1) / 2];  // rounds down to nearest int as they're integers
 
-  return return_fire_angle; 
+  return return_fire_angle;
 }
 
 float SpinAndFindFire(float target_spin_angle) {
@@ -211,7 +196,6 @@ float SpinAndFindFire(float target_spin_angle) {
   // reset
   float best_strength = 0;
   float fire_angle = -1;
- 
 
   while (accumulated_angle < target_spin_angle) {
     if (millis() - start_time > timeout_ms) {
@@ -233,10 +217,10 @@ float SpinAndFindFire(float target_spin_angle) {
     if (delta > 0.0f) accumulated_angle += delta;
 
     /// -------------- fire detection-----------------------------
-    float right = analogRead(photo_R1_pin); // prev r1
-    // float r2 = analogRead(photo_R2_pin); 
-    float left = analogRead(photo_L1_pin); 
-    // float l2 = analogRead(photo_L2_pin); 
+    float right = analogRead(photo_R1_pin);  // prev r1
+    // float r2 = analogRead(photo_R2_pin);
+    float left = analogRead(photo_L1_pin);
+    // float l2 = analogRead(photo_L2_pin);
 
     // // weighted sensing
     // float right = (1.0 * r1) + (0.7 * r2);
@@ -244,7 +228,6 @@ float SpinAndFindFire(float target_spin_angle) {
     float total = right + left;
 
     if (total > threshold) {
-
       // // direction correction
       // float error = (right - left) / total;
       // float fire_angle = servo_angle + error * correction_gain;
@@ -255,10 +238,8 @@ float SpinAndFindFire(float target_spin_angle) {
 
       // --- keep strongest (fire location)---
       if (total > best_strength) {
-
         best_strength = total;
         fire_angle = accumulated_angle;
-
       }
     }
 
@@ -292,7 +273,6 @@ float SpinAndFindFire(float target_spin_angle) {
   //   int i4 = (i + 2) % count;
   //   smooth[i] = (dists_cm[i0] + dists_cm[i1] + dists_cm[i] + dists_cm[i3] + dists_cm[i4]) / 5.0f;
   // }
-   
 
   // --- Output ---
   SerialCom->println("Detected fires:");
@@ -302,9 +282,9 @@ float SpinAndFindFire(float target_spin_angle) {
     SerialCom->println(fire_angle);
   }
 
-  if (fire_angle < 0 ) {
+  if (fire_angle < 0) {
     SerialCom->println("No fire detected.");
-   }
+  }
 
   // // --- Step 1: absolute maximum = closest fire ---
   // int wall1_i = 0;
@@ -405,34 +385,31 @@ void RotateOnSpot(float desiredAngle) {
   }
 }
 
-float scanFireAngle(int scan_angle) { 
-
+float scanFireAngle(int scan_angle) {
   // reset
   float bestStrength = 0;
   float bestAngle = -1;
 
-  
   const int resolution = 5;
   const int numSteps = scan_angle / resolution;
-  float correction_gain = 0.02; // TUNE for angle resolution maybe
+  float correction_gain = 0.02;  // TUNE for angle resolution maybe
 
   for (int i = 0; i < numSteps; i++) {
     int servo_angle = i * resolution;
     ultraServo.write(servo_angle);
-    delay(150); //////// maybe decrease??
+    delay(150);  //////// maybe decrease??
 
-    float r1 = analogRead(photo_R1_pin); 
-    float r2 = analogRead(photo_R2_pin); 
-    float l1 = analogRead(photo_L1_pin); 
-    float l2 = analogRead(photo_L2_pin); 
+    float r1 = analogRead(photo_R1_pin);
+    float r2 = analogRead(photo_R2_pin);
+    float l1 = analogRead(photo_L1_pin);
+    float l2 = analogRead(photo_L2_pin);
 
     // weighted sensing
     float right = (1.0 * r1) + (0.7 * r2);
-    float left  = (1.0 * l1) + (0.7 * l2);
+    float left = (1.0 * l1) + (0.7 * l2);
     float total = right + left;
 
     if (total > threshold) {
-
       // direction correction
       float error = (right - left) / total;
       float fire_angle = servo_angle + error * correction_gain;
@@ -443,11 +420,9 @@ float scanFireAngle(int scan_angle) {
 
       // --- keep strongest ---
       if (total > bestStrength) {
-       
         bestStrength = total;
         bestAngle = fire_angle;
-
-      } 
+      }
     }
   }
 
