@@ -1,17 +1,16 @@
 #include "search.h"
-#include "states.h"
 // #include "findFire.h"
 
 STATE searching(){
-  Serial.println("Searching...");
+  SerialCom->println("Searching...");
 
   // initialise
   float fire_angle = -1.0f;
 
   fire_angle = Spin360AndFindFire();   
   // scanFireAngle(180);
-  Serial.print("fire_angle: "); 
-  Serial.println(fire_angle);    
+  SerialCom->print("fire_angle: "); 
+  SerialCom->println(fire_angle);    
   delay(100);
 
   if (fire_angle < 0) {
@@ -64,6 +63,8 @@ float Spin360AndFindFire() {
     right_rear_motor.writeMicroseconds(1500 - turn_cmd);
 
     float curr_heading = GetHeading();
+    SerialCom->print("current heading: ");
+    SerialCom->println(curr_heading);
     float delta = curr_heading - prev_heading;
     while (delta > 180.0f) delta -= 360.0f;
     while (delta < -180.0f) delta += 360.0f;
@@ -156,15 +157,15 @@ float Spin360AndFindFire() {
    
 
   // --- Output ---
-  Serial.println("Detected fires:");
+  SerialCom->println("Detected fires:");
 
   if (fire_angle >= 0) {
-    Serial.print("Fire: ");
-    Serial.println(fire_angle[0]);
+    SerialCom->print("Fire: ");
+    SerialCom->println(fire_angle[0]);
   }
 
   if (fire_angle < 0 ) {
-    Serial.println("No fire detected.");
+    SerialCom->println("No fire detected.");
    }
 
   // // --- Step 1: absolute maximum = closest fire ---
@@ -183,7 +184,7 @@ float Spin360AndFindFire() {
   
   // float return_fire_angle = fire_angle[0];
   // ------------ or use median? ---------------
-  return_fire_angle = fire_angle[(max_fire_i+1)/2]; // rounds down to nearest int as they're integers
+  float return_fire_angle = fire_angle[(max_fire_i+1)/2]; // rounds down to nearest int as they're integers
 
   return return_fire_angle; 
 }
@@ -294,15 +295,15 @@ float SpinAndFindFire(float target_spin_angle) {
    
 
   // --- Output ---
-  Serial.println("Detected fires:");
+  SerialCom->println("Detected fires:");
 
   if (fire_angle >= 0) {
-    Serial.print("Fire: ");
-    Serial.println(fire_angle);
+    SerialCom->print("Fire: ");
+    SerialCom->println(fire_angle);
   }
 
   if (fire_angle < 0 ) {
-    Serial.println("No fire detected.");
+    SerialCom->println("No fire detected.");
    }
 
   // // --- Step 1: absolute maximum = closest fire ---
@@ -451,14 +452,14 @@ float scanFireAngle(int scan_angle) {
   }
 
   // --- Output ---
-  Serial.println("Detected fire:");
+  SerialCom->println("Detected fire:");
 
   if (bestAngle >= 0) {
-    Serial.print("Fire: ");
-    Serial.println(bestAngle);
+    SerialCom->print("Fire: ");
+    SerialCom->println(bestAngle);
   }
 
   if (bestAngle < 0) {
-    Serial.println("No fire detected.");
+    SerialCom->println("No fire detected.");
   }
 }

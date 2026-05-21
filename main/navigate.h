@@ -12,6 +12,7 @@ STATE navigating();
 enum object_state {
     NO_OBJECT,
     OBSTACLE,
+    WALL,
     FIRE
 };
 
