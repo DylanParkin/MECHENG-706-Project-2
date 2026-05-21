@@ -18,6 +18,7 @@ STATE searching(){
     return SEARCHING;
   }
 
+  RotateOnSpot(fire_angle);
   return NAVIGATING;
 }
 
