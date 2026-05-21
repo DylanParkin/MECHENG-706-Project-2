@@ -12,8 +12,7 @@ STATE navigating() {
     if (object == FIRE) {
       return FINISHED;
     } else if (object == OBSTACLE) {
-      Avoid();
-      SerialCom->println("finishes avoid function");
+      return AVOID;
     }
   }
 }
