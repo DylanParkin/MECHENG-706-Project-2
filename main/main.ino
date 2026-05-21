@@ -43,11 +43,18 @@ void setup(void) {
 
   // Setup the Serial port and pointer, the pointer allows switching the debug
   // info through the USB port(Serial) or Bluetooth port(Serial1) with ease.
+<<<<<<< HEAD
 
 
   SerialCom = &Serial1;
+=======
+  SerialCom = &Serial;
+>>>>>>> origin/sujans_branch
   SerialCom->begin(115200);
   SerialCom->println("Setup....");
+  pinMode(11, OUTPUT);   // Connect 'Echo' pin here
+
+digitalWrite(11, LOW);
 
   // delay(1000);  // settling time but no really needed
 }

@@ -1,4 +1,5 @@
 #include "navigate.h"
+<<<<<<< HEAD
 
 bool global_heading_ref_set = false;
 float global_heading_ref = 0.0f;
@@ -176,3 +177,15 @@ float getFlameAngle() {
   SerialCom->println(K * asymmetry);
   return K * asymmetry;
 }
+=======
+#include "states.h"
+#include "Arduino.h"
+
+#define SWITCH_PIN 11
+#define EXTINGUISHED 1
+STATE navigating() {
+
+
+return EXTINGUISH;
+}
+>>>>>>> origin/sujans_branch
