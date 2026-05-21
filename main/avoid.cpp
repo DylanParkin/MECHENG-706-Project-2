@@ -61,7 +61,7 @@ void Avoid() {
 
     side_IR = (strafe_right) ? (IR_right) : (IR_left);
 
-    if (side_IR < 15.0f) {
+    if (side_IR < 10.0f) {
       strafe_right = !strafe_right;
     }
 
@@ -75,7 +75,7 @@ void Avoid() {
     SerialCom->print(front_clearance_IR);
     SerialCom->println(" cm");
 
-    // clear object when strafing
+    // clear object when strafing CHECK FOR RISING EDGE
     if (front_clearance_IR <= low_clearance_threshold) {
       front_clearance_was_low = true;
     } else if (front_clearance_was_low && front_clearance_IR >= high_clearance_threshold) {
