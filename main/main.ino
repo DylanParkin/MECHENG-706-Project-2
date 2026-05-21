@@ -45,6 +45,9 @@ void setup(void) {
   SerialCom = &Serial;
   SerialCom->begin(115200);
   SerialCom->println("Setup....");
+  pinMode(11, OUTPUT);   // Connect 'Echo' pin here
+
+digitalWrite(11, LOW);
 
   // delay(1000);  // settling time but no really needed
 }
