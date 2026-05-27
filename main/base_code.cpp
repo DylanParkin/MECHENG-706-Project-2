@@ -88,8 +88,8 @@ Servo right_front_motor;  // create servo object to control Vex Motor Controller
 Servo turret_motor;
 
 // MAX VAL TO SEND TO WHEELS = 700!
-int speed_val = 350;  // 350;
-int strafe_speed = 200;
+int speed_val = 330;     // 350;
+int strafe_speed = 150;  // 200;
 int speed_change;
 
 // Serial Pointer
@@ -110,7 +110,7 @@ STATE initialising() {
 #ifndef NO_READ_GYRO
   SerialCom->println("Enabling Gyroscope...");
   if (!bno08x.begin_I2C() ||
-    !bno08x.enableReport(SH2_GAME_ROTATION_VECTOR, 5000)) {
+      !bno08x.enableReport(SH2_GAME_ROTATION_VECTOR, 5000)) {
     while (1) {
       SerialCom->println("IMU failed");
       delay(100);
@@ -339,14 +339,11 @@ float GetHeading() {
   static float last_valid_heading = 0.0f;
 
   if (bno08x.wasReset()) {
-    SerialCom->println("1");
     bno08x.enableReport(SH2_GAME_ROTATION_VECTOR, 5000);
   }
 
   if (bno08x.getSensorEvent(&sensorValue)) {
-    SerialCom->println("2");
     if (sensorValue.sensorId == SH2_GAME_ROTATION_VECTOR) {
-      SerialCom->println("3");
       float qw = sensorValue.un.gameRotationVector.real;
       float qx = sensorValue.un.gameRotationVector.i;
       float qy = sensorValue.un.gameRotationVector.j;
@@ -356,8 +353,6 @@ float GetHeading() {
       last_valid_heading = yaw * (180.0f / M_PI);
     }
   }
-  // SerialCom->println(last_valid_heading);
-  SerialCom->println("4");
   return last_valid_heading;
 }
 #endif

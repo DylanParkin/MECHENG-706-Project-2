@@ -59,8 +59,8 @@ float Spin360AndFindFire() {
     right_rear_motor.writeMicroseconds(1500 - turn_cmd);
 
     float curr_heading = GetHeading();
-    SerialCom->print("current heading: ");
-    SerialCom->println(curr_heading);
+    // SerialCom->print("current heading: ");
+    // SerialCom->println(curr_heading);
     float delta = curr_heading - prev_heading;
     while (delta > 180.0f) delta -= 360.0f;
     while (delta < -180.0f) delta += 360.0f;

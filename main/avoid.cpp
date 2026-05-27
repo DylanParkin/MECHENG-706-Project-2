@@ -18,7 +18,7 @@ void Avoid() {
   // ultraServo.writeMicroseconds(550);
   // delay(500);
 
-  const float kp_fire = 20.0f;  // was 30
+  const float kp_fire = 0.0f;  // was 30
   const float corrClamp = 350.0f;
   const float readDelayMs = 10.0f;
 
@@ -55,6 +55,7 @@ void Avoid() {
 
   float side_IR = 0.0f;
 
+  SerialCom->println("AVOIDANCE STRAFE STAGE");
   while (true) {
     IR_right = get_right_IR();
     IR_left = get_left_IR();
@@ -79,7 +80,7 @@ void Avoid() {
     if (front_clearance_IR <= low_clearance_threshold) {
       front_clearance_was_low = true;
     } else if (front_clearance_was_low && front_clearance_IR >= high_clearance_threshold) {
-      delay(300);  // strafe a little extra to properly clear obstacle
+      delay(200);  // strafe a little extra to properly clear obstacle
       stop();
       break;
     }
@@ -96,16 +97,19 @@ void Avoid() {
   }
 
   // drive forward stage
-  // while (true) {
-  //   float side_clearance_IR = (strafe_right) ? get_left_IR() : get_right_IR();
-  //   // clear object when driving forwards
+  SerialCom->println("AVOIDANCE DRIVE FORWARD STAGE");
+  while (true) {
+    float side_clearance_IR = (strafe_right) ? get_left_IR() : get_right_IR();
+    // clear object when driving forwards
 
-  //   if (side_clearance_IR <= low_clearance_threshold) {
-  //     side_clearance_was_low = true;
-  //   } else if (side_clearance_was_low && side_clearance_IR >= high_clearance_threshold) {
-  //     stop();
-  //     return;
-  //   }
-  //   forward();
-  // }
+    if (side_clearance_IR <= low_clearance_threshold) {
+      side_clearance_was_low = true;
+    } else if (side_clearance_was_low && side_clearance_IR >= high_clearance_threshold) {
+      stop();
+      break;
+    }
+    forward();
+  }
+
+  TrackFlameOnSpot();
 }

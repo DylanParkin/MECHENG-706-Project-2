@@ -14,8 +14,16 @@ bool first_fire = true;
 
 STATE extinguishing() {
   SerialCom->print("EXTINGUISH");
+
+  if (first_fire) {
+    SerialCom->println("fire 1");
+  }
+  if (!first_fire) {
+    SerialCom->println("fire 2");
+  }
   float start_time = millis();
 
+  extinguished_count = 0;
   // while (millis() - start_time < 10000 || !fire_extinguished()) {
   while (millis() - start_time < 10000 && extinguished_count < 4) {
     digitalWrite(SWITCH_PIN, HIGH);
