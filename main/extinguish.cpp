@@ -11,6 +11,7 @@ constexpr uint8_t PT_PINS[4] = {A12, A13, A14, A15};
 int extinguished_count = 0;
 
 bool first_fire = true;
+int reverse_speed = 100;
 
 STATE extinguishing() {
   SerialCom->print("EXTINGUISH");
@@ -41,6 +42,16 @@ STATE extinguishing() {
 
   if (first_fire) {
     first_fire = false;
+
+    // Quick, fixed reverse operation to add some clearance from the fire
+    float reverse_start = millis();
+    while (millis() - reverse_start < 500) {
+        left_front_motor.writeMicroseconds(1500 - reverse_speed);
+        left_rear_motor.writeMicroseconds(1500 - reverse_speed);
+        right_rear_motor.writeMicroseconds(1500 + reverse_speed);
+        right_front_motor.writeMicroseconds(1500 + reverse_speed);
+    }
+
     return SEARCHING;
   } else {
     return FINISHED;
