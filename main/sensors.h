@@ -4,6 +4,8 @@
 #include <Arduino.h>
 #include <Servo.h>
 
+#include "base_code.h"
+
 // ─── Pins ─────────────────────────────────────────────────────────────────────
 // 2 - Echo pin on ultrasonic sensor
 // 5 - Trigger pin on ultrasonic sensor
@@ -35,5 +37,8 @@ float TriggerUltrasonic();
 
 // ─── ISR ──────────────────────────────────────────────────────────────────────
 void UltrasonicReturn();
+
+// Spam sensors to let filters stabilise and to clear faulty readings. Blocks for fraction of a second
+void SettleSensors(int iterations);
 
 #endif  // SENSORS_H

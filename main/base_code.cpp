@@ -156,7 +156,7 @@ STATE initialising() {
     // }
   }
 
-  return SEARCHING;
+  return NAVIGATING;
 }
 
 // Stop of Lipo Battery voltage is too low, to protect Battery

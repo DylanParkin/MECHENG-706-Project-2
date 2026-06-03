@@ -60,24 +60,31 @@ void loop(void)  // main loop
   // Finite-state machine Code
   switch (machine_state) {
     case INITIALISING:
+      SerialCom->println("ENTERING INITIALISING STATE");
       machine_state = initialising();
       break;
     case STOPPED:  // Stop if Battery voltage is too low, to protect it
+      SerialCom->println("ENTERING STOPPED STATE");
       machine_state = stopped();
       break;
     case SEARCHING:
+      SerialCom->println("ENTERING SEARCHING STATE");
       machine_state = searching();
       break;
     case NAVIGATING:
+      SerialCom->println("ENTERING NAVIGATING STATE");
       machine_state = navigating();
       break;
     case AVOID:
+      SerialCom->println("ENTERING AVOID STATE");
       machine_state = avoiding();
       break;
     case EXTINGUISH:
+      SerialCom->println("ENTERING EXTINGUISH STATE");
       machine_state = extinguishing();
       break;
     case FINISHED:
+      SerialCom->println("ENTERING FINISHED STATE");
       machine_state = FINISHED;
       stop();
       // idles indefinitely

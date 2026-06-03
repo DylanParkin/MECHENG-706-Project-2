@@ -1,7 +1,7 @@
 #include "sensors.h"
 #include <math.h>
 
-constexpr float kIrFilterAlpha = 0.25f;
+constexpr float kIrFilterAlpha = 0.5f;
 
 float smooth_ir(float reading, float& filtered, bool& initialized) {
   if (!initialized) {
@@ -97,4 +97,17 @@ float TriggerUltrasonic() {
 
   delay(cycle_delay_ms);
   return last_valid;
+}
+
+// Commands the sensors many times to let the filtered values stabilise before proceeding
+void SettleSensors(int iterations) {
+  SerialCom->println("Settling sensors...");
+  for (int i = 0; i < iterations; i++) {
+    get_left_IR();
+    get_right_IR();
+    get_front_left_IR();
+    get_front_right_IR();
+    TriggerUltrasonic();
+    SerialCom->println("left IR: " + String(get_left_IR()) + " | front left IR: " + String(get_front_left_IR()) + " | ultrasonic: " + String(TriggerUltrasonic()) + " | front right IR: " + String(get_front_right_IR()) + " | right IR: " + String(get_right_IR()));
+  }
 }

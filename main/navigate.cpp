@@ -59,31 +59,33 @@ object_state object_detected() {
 
 // drive forward with fire tracking
 object_state drive(bool forward) {
-  const float kp_fire = 30.0f;  // was 60
+  const float kp_fire = 30.0f;
   const float ki_fire = 0.0f;
   const float kd_fire = 0.0f;
 
   const float integralClamp = 200.0f;
   const float corrClamp = 350.0f;
   const float readDelayMs = 10.0f;
-  const float stopDist = 10.5f;
 
   float integralError = 0.0f;
   float prevError = 0.0f;
 
   int dir = forward ? 1 : -1;
 
+  // Let sensors settle before starting movement to avoid reacting to spurious/old readings
+  SettleSensors(30);
+
   SerialCom->print("Driving ");
   SerialCom->println(forward ? "forward" : "reverse");
 
-  // Use one heading reference across the full tilling pass to avoid
-  // segment-to-segment yaw bias accumulation.
   if (!global_heading_ref_set) {
     global_heading_ref = GetHeading();
     global_heading_ref_set = true;
   }
 
   unsigned long prev = millis();
+  unsigned long drive_start = millis();
+  const unsigned long ramp_duration_ms = 1000UL;  // ramp lasts 1 second
 
   while (true) {
     unsigned long now = millis();
@@ -91,10 +93,9 @@ object_state drive(bool forward) {
     prev = now;
     if (dt <= 0.0f) dt = readDelayMs / 1000.0f;
 
-    float current_heading = GetHeading();
     float fire_heading = getFlameAngle();
 
-    // CHECK FOR OBSTACLE
+    // CHECK FOR OBSTACLE — active even during ramp
     object_state detected = object_detected();
     if (detected == FIRE) {
       SerialCom->println("FIRE DETECTED! STOPPING.");
@@ -106,28 +107,36 @@ object_state drive(bool forward) {
       return OBSTACLE;
     }
 
-    // --- compute gyro heading error ---
-    float error = fire_heading;  // heading_error_deg(fire_heading, current_heading);
+    unsigned long elapsed = now - drive_start;
 
-    // SerialCom->print("heading error: ");
-    // SerialCom->println(error);
-    integralError += error * dt;
-    integralError = constrain(integralError,
-                              -integralClamp / max(ki_fire, 0.001f),
-                              integralClamp / max(ki_fire, 0.001f));
-    float deriv = (error - prevError) / dt;
-    prevError = error;
+    if (elapsed < ramp_duration_ms) {
+      // --- RAMP PHASE: straight, no correction, speed 0.2 -> 1.0 over 1 second ---
+      float ramp_frac = 0.2f + 0.8f * ((float)elapsed / (float)ramp_duration_ms);
+      int ramp_speed_val = (float)speed_val * ramp_frac;
 
-    // Gyro-only heading hold for straight-line travel.
-    float correction = kp_fire * error + ki_fire * integralError + kd_fire * deriv;
+      left_front_motor.writeMicroseconds(1500 + dir * ramp_speed_val);
+      left_rear_motor.writeMicroseconds(1500 + dir * ramp_speed_val);
+      right_rear_motor.writeMicroseconds(1500 - dir * ramp_speed_val);
+      right_front_motor.writeMicroseconds(1500 - dir * ramp_speed_val);
+    } else {
+      // --- NORMAL PHASE: full speed with fire-tracking correction ---
+      float error = fire_heading;
 
-    correction = constrain(correction, -corrClamp, corrClamp);
+      integralError += error * dt;
+      integralError = constrain(integralError,
+                                -integralClamp / max(ki_fire, 0.001f),
+                                integralClamp / max(ki_fire, 0.001f));
+      float deriv = (error - prevError) / dt;
+      prevError = error;
 
-    // +correction (turn too much cw) = command CCW (- - - -)
-    left_front_motor.writeMicroseconds(1500 + dir * (int)speed_val - (int)correction);
-    left_rear_motor.writeMicroseconds(1500 + dir * (int)speed_val - (int)correction);
-    right_rear_motor.writeMicroseconds(1500 - dir * (int)speed_val - (int)correction);
-    right_front_motor.writeMicroseconds(1500 - dir * (int)speed_val - (int)correction);
+      float correction = kp_fire * error + ki_fire * integralError + kd_fire * deriv;
+      correction = constrain(correction, -corrClamp, corrClamp);
+
+      left_front_motor.writeMicroseconds(1500 + dir * (int)speed_val - (int)correction);
+      left_rear_motor.writeMicroseconds(1500 + dir * (int)speed_val - (int)correction);
+      right_rear_motor.writeMicroseconds(1500 - dir * (int)speed_val - (int)correction);
+      right_front_motor.writeMicroseconds(1500 - dir * (int)speed_val - (int)correction);
+    }
   }
 }
 
