@@ -2,6 +2,7 @@
 // #include "findFire.h"
 
 STATE searching() {
+  return NAVIGATING;  // SKIP TO NAVIGATING
   SerialCom->println("Searching...");
 
   // initialise

@@ -10,6 +10,14 @@ bool fire_close = false;
 
 STATE navigating() {
   while (1) {
+    // float flame_angle = getFlameAngle();
+    // SerialCom->print("FLAME ANGLE: ");
+    // SerialCom->println(flame_angle);
+    TrackFlameOnSpot();
+    delay(5000);
+  }
+
+  while (1) {
     object_state object = drive(true);
     if (object == FIRE) {
       return EXTINGUISH;
@@ -17,6 +25,56 @@ STATE navigating() {
       return AVOID;
     }
   }
+}
+
+// ============================================================
+// Configuration
+// ============================================================
+
+// sensor mounting angles in degrees (positive = left, negative = right)
+constexpr float SENSOR_ANGLES[4] = {40.0f, 0.0f, 0.0f, -40.0f};
+
+// calibration vals
+float ambient[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+constexpr float DETECTION_THRESHOLD = 0.0f;
+constexpr float NO_FLAME = 999.0f;
+
+// ============================================================
+// Main function: returns angle to flame in degrees
+// Positive = flame is to the left, negative = flame is to the right
+// Returns NO_FLAME (999.0f) if no flame detected
+// ============================================================
+
+constexpr float K = 25.6f;  // calibration constant
+
+float getFlameAngle() {
+  uint16_t readings[4];
+  for (uint8_t i = 0; i < 4; i++) {
+    readings[i] = analogRead(PT_PINS[i]);
+  }
+
+  // Subtract ambient
+  float r[4];
+  for (uint8_t i = 0; i < 4; i++) {
+    float corrected = (float)readings[i] - ambient[i];
+    r[i] = (corrected > 0.0f) ? corrected : 0.0f;
+  }
+
+  // Group by side: indices 0,1 are left; indices 2,3 are right
+  float left_signal = r[0] + r[1];
+  float right_signal = r[2] + r[3];
+  float total = left_signal + right_signal;
+
+  // Detection threshold
+  if (total <= DETECTION_THRESHOLD) {
+    return NO_FLAME;
+  }
+
+  // Normalized asymmetry → bearing
+  float asymmetry = (left_signal - right_signal) / total;
+
+  // SerialCom->println(K * asymmetry);
+  return K * asymmetry;
 }
 
 object_state object_detected() {
@@ -106,7 +164,6 @@ object_state drive(bool forward) {
       return OBSTACLE;
     }
 
-    // --- compute gyro heading error ---
     float error = fire_heading;  // heading_error_deg(fire_heading, current_heading);
 
     // SerialCom->print("heading error: ");
@@ -118,7 +175,6 @@ object_state drive(bool forward) {
     float deriv = (error - prevError) / dt;
     prevError = error;
 
-    // Gyro-only heading hold for straight-line travel.
     float correction = kp_fire * error + ki_fire * integralError + kd_fire * deriv;
 
     correction = constrain(correction, -corrClamp, corrClamp);
@@ -131,116 +187,117 @@ object_state drive(bool forward) {
   }
 }
 
+// void TrackFlameOnSpot() {
+//   SerialCom->println("AVOIDANCE TrackFLameOnSpot");
+//   const float kp_fire = 10.0f;
+//   const float ki_fire = 0.0f;
+//   const float kd_fire = 0.0f;
+
+//   const float integralClamp = 200.0f;
+//   const float corrClamp = 350.0f;
+//   const float minOutput = 67.0;
+//   const float readDelayMs = 10.0f;
+
+//   float integralError = 0.0f;
+//   float prevError = 0.0f;
+
+//   unsigned long prev = millis();
+
+//   while (1) {
+//     unsigned long now = millis();
+//     float dt = (now - prev) / 1000.0f;
+//     prev = now;
+//     if (dt <= 0.0f) dt = readDelayMs / 1000.0f;
+
+//     float fire_heading = getFlameAngle();
+//     // --- compute fire heading error ---
+//     float error = fire_heading;
+
+//     uint16_t PT_readings[4];
+//     SerialCom->print("pts: ");
+//     for (uint8_t i = 0; i < 4; i++) {
+//       PT_readings[i] = analogRead(PT_PINS[i]);
+//     }
+//     SerialCom->println(String(PT_readings[0]) + " | " + String(PT_readings[1]) + " | " + String(PT_readings[2]) + " | " + String(PT_readings[3]));
+
+//     if (abs(error) < 5.0f) {
+//       SerialCom->println("AVOIDANCE rotation end");
+//       stop();
+//       return;
+//     }
+
+//     integralError += error * dt;
+//     integralError = constrain(integralError,
+//                               -integralClamp / max(ki_fire, 0.001f),
+//                               integralClamp / max(ki_fire, 0.001f));
+//     float deriv = (error - prevError) / dt;
+//     prevError = error;
+
+//     float correction = kp_fire * error + ki_fire * integralError + kd_fire * deriv;
+
+//     correction = constrain(correction, -corrClamp, corrClamp);
+
+//     if (abs(correction) > 0 && abs(correction) < minOutput)
+//       correction = copysignf(minOutput, correction);
+
+//     // +correction (turn too much cw) = command CCW (- - - -)
+//     left_front_motor.writeMicroseconds(1500 - (int)correction);
+//     left_rear_motor.writeMicroseconds(1500 - (int)correction);
+//     right_rear_motor.writeMicroseconds(1500 - (int)correction);
+//     right_front_motor.writeMicroseconds(1500 - (int)correction);
+
+//     delay(readDelayMs);
+//   }
+// }
+
 void TrackFlameOnSpot() {
-  SerialCom->println("AVOIDANCE TrackFLameOnSpot");
-  const float kp_fire = 10.0f;
-  const float ki_fire = 0.0f;
-  const float kd_fire = 0.0f;
+  SerialCom->println("TrackFlameOnSpot");
 
-  const float integralClamp = 200.0f;
+  const float kp = 10.0f;
   const float corrClamp = 350.0f;
-  const float minOutput = 67.0;
-  const float readDelayMs = 10.0f;
+  const float minOutput = 67.0f;
+  const float deadband = 5.0f;  // pseudo-angle units from getFlameAngle()
+  const int settleNeeded = 5;   // consecutive readings inside deadband to confirm centred
+  const unsigned long timeoutMs = 3000;
 
-  float integralError = 0.0f;
-  float prevError = 0.0f;
+  int settled = 0;
+  unsigned long start = millis();
 
-  unsigned long prev = millis();
+  while (millis() - start < timeoutMs) {
+    float angle = getFlameAngle();
 
-  while (1) {
-    unsigned long now = millis();
-    float dt = (now - prev) / 1000.0f;
-    prev = now;
-    if (dt <= 0.0f) dt = readDelayMs / 1000.0f;
-
-    float fire_heading = getFlameAngle();
-    // --- compute gyro heading error ---
-    float error = fire_heading;  // heading_error_deg(fire_heading, current_heading);
-
-    uint16_t PT_readings[4];
-    SerialCom->print("pts: ");
-    for (uint8_t i = 0; i < 4; i++) {
-      PT_readings[i] = analogRead(PT_PINS[i]);
+    // Don't use NO_FLAME as an error signal
+    if (angle == NO_FLAME) {
+      stop();
+      delay(10);
+      continue;
     }
-    SerialCom->println(String(PT_readings[0]) + " | " + String(PT_readings[1]) + " | " + String(PT_readings[2]) + " | " + String(PT_readings[3]));
 
-    if (abs(error) < 5.0f) {
-      SerialCom->println("AVOIDANCE rotation end");
-      return;
+    SerialCom->println("angle: " + String(angle));
+
+    if (fabsf(angle) < deadband) {
+      if (++settled >= settleNeeded) {
+        stop();
+        SerialCom->println("Flame centred");
+        return;
+      }
+    } else {
+      settled = 0;  // reset if we drift back out
     }
-    // SerialCom->print("heading error: ");
-    // SerialCom->println(error);
-    integralError += error * dt;
-    integralError = constrain(integralError,
-                              -integralClamp / max(ki_fire, 0.001f),
-                              integralClamp / max(ki_fire, 0.001f));
-    float deriv = (error - prevError) / dt;
-    prevError = error;
 
-    // Gyro-only heading hold for straight-line travel.
-    float correction = kp_fire * error + ki_fire * integralError + kd_fire * deriv;
+    float correction = constrain(kp * angle, -corrClamp, corrClamp);
 
-    correction = constrain(correction, -corrClamp, corrClamp);
-
-    if (abs(correction) > 0 && abs(correction) < minOutput)
+    if (fabsf(correction) > 0.0f && fabsf(correction) < minOutput)
       correction = copysignf(minOutput, correction);
 
-    // +correction (turn too much cw) = command CCW (- - - -)
     left_front_motor.writeMicroseconds(1500 - (int)correction);
     left_rear_motor.writeMicroseconds(1500 - (int)correction);
     right_rear_motor.writeMicroseconds(1500 - (int)correction);
     right_front_motor.writeMicroseconds(1500 - (int)correction);
 
-    delay(readDelayMs);
-  }
-}
-
-// ============================================================
-// Configuration
-// ============================================================
-
-// sensor mounting angles in degrees (positive = left, negative = right)
-constexpr float SENSOR_ANGLES[4] = {40.0f, 0.0f, 0.0f, -40.0f};
-
-// calibration vals
-float ambient[4] = {0.0f, 0.0f, 0.0f, 0.0f};
-constexpr float DETECTION_THRESHOLD = 0.0f;
-constexpr float NO_FLAME = 999.0f;
-
-// ============================================================
-// Main function: returns angle to flame in degrees
-// Positive = flame is to the left, negative = flame is to the right
-// Returns NO_FLAME (999.0f) if no flame detected
-// ============================================================
-
-constexpr float K = 25.6f;  // calibration constant
-
-float getFlameAngle() {
-  uint16_t readings[4];
-  for (uint8_t i = 0; i < 4; i++) {
-    readings[i] = analogRead(PT_PINS[i]);
+    delay(10);
   }
 
-  // Subtract ambient
-  float r[4];
-  for (uint8_t i = 0; i < 4; i++) {
-    float corrected = (float)readings[i] - ambient[i];
-    r[i] = (corrected > 0.0f) ? corrected : 0.0f;
-  }
-
-  // Group by side: indices 0,1 are left; indices 2,3 are right
-  float left_signal = r[0] + r[1];
-  float right_signal = r[2] + r[3];
-  float total = left_signal + right_signal;
-
-  // Detection threshold
-  if (total <= DETECTION_THRESHOLD) {
-    return NO_FLAME;
-  }
-
-  // Normalized asymmetry → bearing
-  float asymmetry = (left_signal - right_signal) / total;
-
-  // SerialCom->println(K * asymmetry);
-  return K * asymmetry;
+  stop();
+  SerialCom->println("TrackFlameOnSpot timeout");
 }
