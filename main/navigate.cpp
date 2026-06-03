@@ -9,13 +9,13 @@ constexpr uint8_t PT_PINS[4] = {A12, A13, A14, A15};
 bool fire_close = false;
 
 STATE navigating() {
-  while (1) {
-    // float flame_angle = getFlameAngle();
-    // SerialCom->print("FLAME ANGLE: ");
-    // SerialCom->println(flame_angle);
-    TrackFlameOnSpot();
-    delay(5000);
-  }
+  //while (1) {
+  //   //float flame_angle = getFlameAngle();
+  //   // SerialCom->print("FLAME ANGLE: ");
+  //   // SerialCom->println(flame_angle);
+  //   
+  //   delay(5000);
+  // }
 
   while (1) {
     object_state object = drive(true);
@@ -132,6 +132,8 @@ object_state drive(bool forward) {
 
   // Let sensors settle before starting movement to avoid reacting to spurious/old readings
   SettleSensors(30);
+
+  TrackFlameOnSpot(); // Temp
 
   SerialCom->print("Driving ");
   SerialCom->println(forward ? "forward" : "reverse");
