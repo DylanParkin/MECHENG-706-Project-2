@@ -13,34 +13,38 @@ void Avoid() {
   bool strafe_right = false;
   constexpr float low_clearance_threshold = 11.0f;
   constexpr float high_clearance_threshold = 15.0f;
-  // point servo to right and check right ir
-
-  // ultraServo.writeMicroseconds(550);
-  // delay(500);
-
   const float kp_fire = 0.0f;  // was 30
   const float corrClamp = 350.0f;
   const float readDelayMs = 10.0f;
 
-  float ultra_right = TriggerUltrasonic();
   float IR_right = get_right_IR();
-
-  float right_sum = ultra_right + IR_right;
-
-  // ultraServo.writeMicroseconds(2500);
-  // delay(500);
-
-  float ultra_left = TriggerUltrasonic();
   float IR_left = get_left_IR();
+  float IR_front_right = get_front_right_IR();
+  float IR_front_left = get_front_left_IR();
 
-  float left_sum = ultra_left + IR_left;
 
-  // ultraServo.write(90);
-  // delay(300);
-
-  if (right_sum > left_sum) {
+  // If the bot is towards one side of the obstacle, continue going around that way
+  // Could include a check for the middle range to incorporate going the way the flame is.
+   if (IR_front_left < IR_front_right) { 
+    SerialCom->print("Determined that it shuld strafe right by front sensors FL: ");
+    SerialCom->print(IR_front_left);
+    SerialCom->print("   FR: ");
+    SerialCom->println(IR_front_right);
     strafe_right = true;
+    }
+    else if(IR_right < 50.0f || IR_left < 50.0f){
+//   // Overiding this behaviour is that it should not strafe into something if it is to the left or right of the bot
+//   if (IR_right > IR_left) {
+//     SerialCom->Println("Determined that it should strafe right by side sensors");
+//     strafe_right = true;
+//   }
+    SerialCom->println("Should redetermine strafe direction via side sensors. within range to hit something   L: ");
+    SerialCom->print(IR_left);
+    SerialCom->print("   R: ");
+    SerialCom->println(IR_right);
   }
+    
+  
 
   if (strafe_right) {
     SerialCom->println("strafing right. reading left front");
