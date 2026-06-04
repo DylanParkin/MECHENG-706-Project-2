@@ -3,6 +3,7 @@
 #include <math.h>
 
 constexpr float kIrFilterAlpha = 0.5f;
+extern float obstacle_threshold;
 
 float smooth_ir(float reading, float& filtered, bool& initialized) {
   if (!initialized) {
@@ -57,8 +58,8 @@ float get_front_right_IR() {
   return smooth_ir(reading, filtered, initialized);
 }
 
-void UltrasonicReturn() {  // ISR
-  if (digitalRead(2) == HIGH) {
+void UltrasonicReturn() {
+  if (digitalRead(ECHO_PIN) == HIGH) {  // ← was digitalRead()
     t_UltraEchoStart = micros();
     checkStart = 1;
   } else {
@@ -92,8 +93,11 @@ float TriggerUltrasonic() {
     interrupts();
 
     float dist = time / 58.0f;
-    if (dist >= 2.0f && dist <= 400.0f) {
-      last_valid = dist;
+
+    if (dist < obstacle_threshold && last_valid >= obstacle_threshold) {
+      // first reading below threshold — don't trust it yet
+    } else {
+      last_valid = dist;hjj` vcxfdszas     vcxdcx                                                        b v.   
     }
   }
 

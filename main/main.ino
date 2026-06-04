@@ -33,8 +33,8 @@ void setup(void) {
   pinMode(A7, INPUT);  // front
 
   // HOMING
-  pinMode(2, INPUT);   // Connect 'Echo' pin here
-  pinMode(5, OUTPUT);  // Connect 'Trig' pin here
+  pinMode(ECHO_PIN, INPUT);   // Connect 'Echo' pin here
+  pinMode(TRIG_PIN, OUTPUT);  // Connect 'Trig' pin here
   attachInterrupt(
       digitalPinToInterrupt(2), UltrasonicReturn,
       CHANGE);                      // Interrupt that returns time taken ror ultrasonic echo

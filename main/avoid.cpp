@@ -118,7 +118,7 @@ void Avoid() {
   int dir;
   bool strafe_right = false;
   constexpr float low_clearance_threshold = 15.0f;
-  constexpr float high_clearance_threshold = 20.0f;
+  constexpr float high_clearance_threshold = 30.0f;
   const float kp_fire = 0.0f;  // was 30
   const float corrClamp = 350.0f;
   const float readDelayMs = 10.0f;

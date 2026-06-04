@@ -36,6 +36,8 @@ float ambient[4] = {0.0f, 0.0f, 0.0f, 0.0f};
 constexpr float DETECTION_THRESHOLD = 0.0f;
 constexpr float NO_FLAME = 999.0f;
 
+float obstacle_threshold = 15.0f;
+
 // ============================================================
 // Main function: returns angle to flame in degrees
 // Positive = flame is to the left, negative = flame is to the right
@@ -111,7 +113,6 @@ object_state object_detected() {
 
   float distance_in_front = min(left_ir, min(ultrasonic, right_ir));
   SerialCom->println("L_IR: " + String(left_ir) + " | Ultrasonic: " + String(ultrasonic) + " | R_IR: " + String(right_ir) + " cm");
-  float obstacle_threshold = 15.0f;
   uint16_t PT_readings[4];
 
   if (distance_in_front > obstacle_threshold) {

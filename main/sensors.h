@@ -5,6 +5,11 @@
 #include <Servo.h>
 
 #include "base_code.h"
+#include "navigate.h"
+
+// sensors.h
+#define ECHO_PIN 2
+#define TRIG_PIN 5
 
 // ─── Pins ─────────────────────────────────────────────────────────────────────
 // 2 - Echo pin on ultrasonic sensor
