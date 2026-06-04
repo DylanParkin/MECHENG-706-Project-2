@@ -70,6 +70,7 @@ void UltrasonicReturn() {
 
 float TriggerUltrasonic() {
   static float last_valid = 999.0f;
+  static bool prev_below_threshold = false;
 
   noInterrupts();
   checkStart = 0;
@@ -94,14 +95,22 @@ float TriggerUltrasonic() {
 
     float dist = time / 58.0f;
 
-    if (dist < obstacle_threshold && last_valid >= obstacle_threshold) {
-      // first reading below threshold — don't trust it yet
+    if (dist < obstacle_threshold) {
+      if (prev_below_threshold) {
+        // second consecutive reading below threshold — now trust it
+        last_valid = dist;
+      } else {
+        // first reading below threshold — wait for confirmation
+        SerialCom->println("first below threshold reading: " + String(dist) + " cm, waiting for confirmation");
+      }
+      prev_below_threshold = true;
     } else {
-      last_valid = dist;hjj` vcxfdszas     vcxdcx                                                        b v.   
+      // reading is above threshold, update normally and reset flag
+      last_valid = dist;
+      prev_below_threshold = false;
     }
   }
-
-  delay(50);
+  delay(20);
   return last_valid;
 }
 

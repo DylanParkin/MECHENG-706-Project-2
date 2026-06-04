@@ -1,126 +1,3031 @@
-Fire in front of the robot
-1007, 979, 440, 45
-996, 594, 640, 100
-434, 992, 543, 120
-979, 1002, 630, 120
-168, 984, 990, 128
-112, 607, 1004, 308
-117, 555, 996, 288
-120, 960, 992, 993
-64, 512, 722, 1002
+Setup....
+ENTERING INITIALISING STATE
+INITIALISING....
+Enabling Motors...
+Enabling Gyroscope...
+ENTERING SEARCHING STATE
+Searching...
+Detected fires:
+Fire: -1.00
+fire_angle: 125.73
+Rotating 125.73 degrees
+SETTLED. Stopping.
+ENTERING NAVIGATING STATE
+Settling sensors...
+left IR: 109.12 | front left IR: 862.09 | ultrasonic: 32.28 | front right IR: 21.82 | right IR: 21.33
+left IR: 105.25 | front left IR: 892.18 | ultrasonic: 32.28 | front right IR: 21.70 | right IR: 20.99
+left IR: 103.83 | front left IR: 528.59 | ultrasonic: 32.21 | front right IR: 21.26 | right IR: 20.78
+left IR: 103.52 | front left IR: 837.02 | ultrasonic: 32.28 | front right IR: 19.98 | right IR: 21.56
+left IR: 95.92 | front left IR: 914.13 | ultrasonic: 32.28 | front right IR: 20.70 | right IR: 21.56
+left IR: 100.33 | front left IR: 933.41 | ultrasonic: 32.28 | front right IR: 21.10 | right IR: 21.56
+left IR: 103.05 | front left IR: 512.37 | ultrasonic: 32.28 | front right IR: 20.49 | right IR: 20.90
+left IR: 103.73 | front left IR: 832.97 | ultrasonic: 32.69 | front right IR: 21.14 | right IR: 20.47
+left IR: 86.18 | front left IR: 803.78 | ultrasonic: 32.28 | front right IR: 21.88 | right IR: 20.03
+left IR: 100.89 | front left IR: 1181.06 | ultrasonic: 32.55 | front right IR: 22.35 | right IR: 20.68
+Driving forward
+L_IR: 904.95 | Ultrasonic: 32.14 | R_IR: 29.47 cm
+L_IR: 1000.14 | Ultrasonic: 32.90 | R_IR: 26.09 cm
+L_IR: 1047.74 | Ultrasonic: 32.14 | R_IR: 24.84 cm
+L_IR: 1071.53 | Ultrasonic: 32.90 | R_IR: 24.10 cm
+L_IR: 936.40 | Ultrasonic: 32.34 | R_IR: 23.62 cm
+L_IR: 1015.87 | Ultrasonic: 32.00 | R_IR: 23.49 cm
+L_IR: 908.57 | Ultrasonic: 32.83 | R_IR: 23.65 cm
+L_IR: 1001.95 | Ultrasonic: 38.00 | R_IR: 23.40 cm
+L_IR: 901.61 | Ultrasonic: 80.34 | R_IR: 23.96 cm
+L_IR: 851.44 | Ultrasonic: 79.93 | R_IR: 23.66 cm
+L_IR: 973.38 | Ultrasonic: 79.72 | R_IR: 23.51 cm
+L_IR: 887.33 | Ultrasonic: 27.45 | R_IR: 23.55 cm
+L_IR: 844.30 | Ultrasonic: 25.79 | R_IR: 23.45 cm
+L_IR: 822.78 | Ultrasonic: 25.45 | R_IR: 23.30 cm
+L_IR: 959.06 | Ultrasonic: 75.66 | R_IR: 22.90 cm
+L_IR: 880.16 | Ultrasonic: 73.72 | R_IR: 22.81 cm
+L_IR: 840.72 | Ultrasonic: 20.69 | R_IR: 20.95 cm
+L_IR: 820.99 | Ultrasonic: 70.90 | R_IR: 20.47 cm
+L_IR: 811.13 | Ultrasonic: 17.24 | R_IR: 20.31 cm
+L_IR: 719.99 | Ultrasonic: 16.14 | R_IR: 19.10 cm
+L_IR: 617.97 | Ultrasonic: 13.72 | R_IR: 18.25 cm
+1 | 52 | 65 | 2
+OBSTACLE DETECTED! STOPPING.
+ENTERING AVOID STATE
+Should redetermine strafe direction via side sensors. within range to hit something   L:
+95.78   R: 26.32
+strafing left. reading right front
+AVOIDANCE STRAFE STAGE
+front clearance IR distance: 22.26 cm
+AVOIDANCE DRIVE FORWARD STAGE
+side clearance IR: 41.64
+TrackFlameOnSpot
+angle: 0.95
+angle: 1.09
+angle: -0.80
+Flame centred
+ENTERING NAVIGATING STATE
+Settling sensors...
+left IR: 86.52 | front left IR: 540.55 | ultrasonic: 9.79 | front right IR: 17.75 | right IR: 48.44
+left IR: 74.21 | front left IR: 440.68 | ultrasonic: 9.24 | front right IR: 11.12 | right IR: 47.44
+left IR: 76.93 | front left IR: 303.16 | ultrasonic: 9.31 | front right IR: 8.25 | right IR: 46.20
+left IR: 76.51 | front left IR: 229.34 | ultrasonic: 9.31 | front right IR: 6.95 | right IR: 41.19
+left IR: 82.87 | front left IR: 240.80 | ultrasonic: 10.97 | front right IR: 6.58 | right IR: 36.44
+left IR: 79.90 | front left IR: 250.37 | ultrasonic: 10.97 | front right IR: 6.48 | right IR: 34.27
+left IR: 80.41 | front left IR: 218.97 | ultrasonic: 10.97 | front right IR: 6.46 | right IR: 32.91
+left IR: 80.53 | front left IR: 166.76 | ultrasonic: 11.38 | front right IR: 6.46 | right IR: 35.61
+left IR: 81.14 | front left IR: 231.86 | ultrasonic: 11.38 | front right IR: 6.38 | right IR: 35.78
+left IR: 81.00 | front left IR: 248.14 | ultrasonic: 11.38 | front right IR: 6.43 | right IR: 36.27
+Driving forward
+L_IR: 272.40 | Ultrasonic: 11.45 | R_IR: 6.45 cm
+2 | 37 | 68 | 3
+OBSTACLE DETECTED! STOPPING.
+ENTERING AVOID STATE
+Should redetermine strafe direction via side sensors. within range to hit something   L:
+70.44   R: 33.90
+strafing left. reading right front
+AVOIDANCE STRAFE STAGE
+front clearance IR distance: 6.63 cm
+front clearance IR distance: 6.60 cm
+front clearance IR distance: 6.34 cm
+front clearance IR distance: 6.20 cm
+front clearance IR distance: 6.61 cm
+front clearance IR distance: 6.28 cm
+front clearance IR distance: 6.60 cm
+front clearance IR distance: 6.47 cm
+front clearance IR distance: 6.40 cm
+front clearance IR distance: 6.37 cm
+front clearance IR distance: 6.03 cm
+front clearance IR distance: 6.30 cm
+front clearance IR distance: 5.97 cm
+front clearance IR distance: 6.18 cm
+front clearance IR distance: 6.06 cm
+front clearance IR distance: 5.95 cm
+front clearance IR distance: 5.90 cm
+front clearance IR distance: 5.86 cm
+front clearance IR distance: 5.61 cm
+front clearance IR distance: 5.71 cm
+front clearance IR distance: 5.48 cm
+front clearance IR distance: 5.66 cm
+front clearance IR distance: 5.56 cm
+front clearance IR distance: 5.50 cm
+front clearance IR distance: 5.47 cm
+front clearance IR distance: 5.31 cm
+front clearance IR distance: 5.48 cm
+front clearance IR distance: 5.26 cm
+front clearance IR distance: 5.33 cm
+front clearance IR distance: 5.29 cm
+front clearance IR distance: 5.28 cm
+front clearance IR distance: 5.28 cm
+front clearance IR distance: 5.29 cm
+front clearance IR distance: 5.18 cm
+front clearance IR distance: 5.40 cm
+front clearance IR distance: 5.25 cm
+front clearance IR distance: 5.46 cm
+front clearance IR distance: 5.45 cm
+front clearance IR distance: 5.50 cm
+front clearance IR distance: 5.53 cm
+front clearance IR distance: 5.44 cm
+front clearance IR distance: 5.55 cm
+front clearance IR distance: 5.81 cm
+front clearance IR distance: 5.73 cm
+front clearance IR distance: 5.97 cm
+front clearance IR distance: 6.05 cm
+front clearance IR distance: 6.09 cm
+front clearance IR distance: 6.21 cm
+front clearance IR distance: 6.18 cm
+front clearance IR distance: 6.66 cm
+front clearance IR distance: 6.48 cm
+front clearance IR distance: 6.76 cm
+front clearance IR distance: 7.32 cm
+front clearance IR distance: 7.48 cm
+front clearance IR distance: 7.57 cm
+front clearance IR distance: 7.88 cm
+front clearance IR distance: 8.25 cm
+front clearance IR distance: 10.39 cm
+front clearance IR distance: 10.10 cm
+front clearance IR distance: 11.94 cm
+front clearance IR distance: 11.72 cm
+front clearance IR distance: 11.78 cm
+front clearance IR distance: 11.83 cm
+front clearance IR distance: 10.84 cm
+front clearance IR distance: 10.91 cm
+front clearance IR distance: 10.94 cm
+front clearance IR distance: 10.85 cm
+front clearance IR distance: 12.32 cm
+front clearance IR distance: 12.00 cm
+front clearance IR distance: 11.92 cm
+front clearance IR distance: 11.90 cm
+front clearance IR distance: 10.86 cm
+front clearance IR distance: 11.18 cm
+front clearance IR distance: 11.34 cm
+front clearance IR distance: 11.44 cm
+front clearance IR distance: 12.76 cm
+front clearance IR distance: 12.40 cm
+front clearance IR distance: 12.24 cm
+front clearance IR distance: 12.17 cm
+front clearance IR distance: 10.90 cm
+front clearance IR distance: 11.95 cm
+front clearance IR distance: 10.90 cm
+front clearance IR distance: 11.50 cm
+front clearance IR distance: 13.43 cm
+front clearance IR distance: 13.18 cm
+front clearance IR distance: 13.09 cm
+front clearance IR distance: 11.91 cm
+front clearance IR distance: 12.45 cm
+front clearance IR distance: 12.72 cm
+front clearance IR distance: 12.46 cm
+front clearance IR distance: 14.93 cm
+front clearance IR distance: 14.50 cm
+front clearance IR distance: 14.44 cm
+front clearance IR distance: 14.44 cm
+front clearance IR distance: 13.37 cm
+front clearance IR distance: 14.03 cm
+front clearance IR distance: 14.36 cm
+front clearance IR distance: 16.38 cm
+front clearance IR distance: 28.78 cm
+front clearance IR distance: 29.80 cm
+front clearance IR distance: 39.52 cm
+front clearance IR distance: 44.38 cm
+front clearance IR distance: 31.95 cm
+front clearance IR distance: 30.62 cm
+front clearance IR distance: 25.15 cm
+front clearance IR distance: 28.83 cm
+front clearance IR distance: 61.26 cm
+front clearance IR distance: 49.84 cm
+front clearance IR distance: 38.26 cm
+front clearance IR distance: 32.05 cm
+front clearance IR distance: 32.06 cm
+front clearance IR distance: 31.44 cm
+front clearance IR distance: 46.49 cm
+front clearance IR distance: 39.50 cm
+front clearance IR distance: 93.05 cm
+front clearance IR distance: 71.15 cm
+front clearance IR distance: 59.16 cm
+front clearance IR distance: 40.07 cm
+front clearance IR distance: 34.51 cm
+front clearance IR distance: 32.66 cm
+front clearance IR distance: 29.11 cm
+front clearance IR distance: 61.39 cm
+front clearance IR distance: 50.23 cm
+front clearance IR distance: 44.33 cm
+front clearance IR distance: 41.70 cm
+front clearance IR distance: 31.43 cm
+front clearance IR distance: 33.45 cm
+front clearance IR distance: 31.37 cm
+front clearance IR distance: 32.65 cm
+front clearance IR distance: 80.45 cm
+front clearance IR distance: 64.84 cm
+front clearance IR distance: 57.04 cm
+front clearance IR distance: 53.14 cm
+front clearance IR distance: 37.43 cm
+front clearance IR distance: 34.75 cm
+front clearance IR distance: 31.18 cm
+front clearance IR distance: 33.60 cm
+front clearance IR distance: 56.62 cm
+front clearance IR distance: 52.93 cm
+front clearance IR distance: 51.64 cm
+front clearance IR distance: 36.97 cm
+front clearance IR distance: 34.97 cm
+front clearance IR distance: 32.69 cm
+front clearance IR distance: 28.99 cm
+front clearance IR distance: 68.58 cm
+front clearance IR distance: 50.32 cm
+front clearance IR distance: 44.70 cm
+front clearance IR distance: 41.56 cm
+front clearance IR distance: 31.83 cm
+front clearance IR distance: 30.39 cm
+front clearance IR distance: 31.01 cm
+front clearance IR distance: 30.34 cm
+front clearance IR distance: 88.47 cm
+front clearance IR distance: 66.87 cm
+front clearance IR distance: 58.06 cm
+front clearance IR distance: 48.56 cm
+front clearance IR distance: 33.75 cm
+front clearance IR distance: 32.09 cm
+front clearance IR distance: 27.61 cm
+front clearance IR distance: 28.28 cm
+front clearance IR distance: 87.44 cm
+front clearance IR distance: 66.36 cm
+front clearance IR distance: 55.82 cm
+front clearance IR distance: 37.75 cm
+front clearance IR distance: 32.37 cm
+front clearance IR distance: 195.49 cm
+front clearance IR distance: 355.72 cm
+front clearance IR distance: 273.60 cm
+front clearance IR distance: 239.94 cm
+front clearance IR distance: 148.28 cm
+front clearance IR distance: 127.19 cm
+front clearance IR distance: 116.64 cm
+front clearance IR distance: 111.37 cm
+front clearance IR distance: 370.11 cm
+front clearance IR distance: 263.73 cm
+front clearance IR distance: 210.55 cm
+front clearance IR distance: 134.24 cm
+front clearance IR distance: 120.17 cm
+front clearance IR distance: 113.13 cm
+front clearance IR distance: 120.00 cm
+front clearance IR distance: 460.63 cm
+front clearance IR distance: 309.00 cm
+front clearance IR distance: 180.49 cm
+front clearance IR distance: 115.21 cm
+front clearance IR distance: 97.47 cm
+front clearance IR distance: 99.69 cm
+front clearance IR distance: 113.27 cm
+front clearance IR distance: 457.27 cm
+front clearance IR distance: 331.77 cm
+front clearance IR distance: 194.85 cm
+front clearance IR distance: 126.39 cm
+front clearance IR distance: 112.20 cm
+front clearance IR distance: 116.58 cm
+front clearance IR distance: 109.24 cm
+front clearance IR distance: 455.26 cm
+front clearance IR distance: 330.76 cm
+front clearance IR distance: 193.70 cm
+front clearance IR distance: 124.54 cm
+front clearance IR distance: 125.70 cm
+front clearance IR distance: 126.28 cm
+front clearance IR distance: 114.09 cm
+front clearance IR distance: 457.68 cm
+front clearance IR distance: 362.65 cm
+front clearance IR distance: 211.67 cm
+front clearance IR distance: 136.19 cm
+front clearance IR distance: 151.76 cm
+front clearance IR distance: 131.20 cm
+front clearance IR distance: 116.55 cm
+front clearance IR distance: 372.70 cm
+front clearance IR distance: 289.48 cm
+front clearance IR distance: 278.55 cm
+front clearance IR distance: 273.09 cm
+front clearance IR distance: 167.64 cm
+front clearance IR distance: 110.35 cm
+front clearance IR distance: 188.99 cm
+front clearance IR distance: 495.13 cm
+front clearance IR distance: 343.31 cm
+front clearance IR distance: 305.46 cm
+front clearance IR distance: 286.54 cm
+front clearance IR distance: 166.84 cm
+front clearance IR distance: 167.09 cm
+front clearance IR distance: 217.35 cm
+front clearance IR distance: 187.36 cm
+front clearance IR distance: 196.81 cm
+front clearance IR distance: 287.27 cm
+front clearance IR distance: 239.38 cm
+front clearance IR distance: 145.68 cm
+front clearance IR distance: 151.52 cm
+front clearance IR distance: 476.39 cm
+front clearance IR distance: 341.33 cm
+front clearance IR distance: 485.09 cm
+front clearance IR distance: 376.35 cm
+front clearance IR distance: 336.51 cm
+front clearance IR distance: 192.27 cm
+front clearance IR distance: 207.86 cm
+front clearance IR distance: 178.17 cm
+front clearance IR distance: 192.22 cm
+front clearance IR distance: 643.77 cm
+front clearance IR distance: 510.75 cm
+front clearance IR distance: 444.24 cm
+front clearance IR distance: 243.32 cm
+front clearance IR distance: 217.40 cm
+front clearance IR distance: 169.18 cm
+front clearance IR distance: 180.33 cm
+front clearance IR distance: 490.80 cm
+front clearance IR distance: 434.26 cm
+front clearance IR distance: 383.38 cm
+front clearance IR distance: 214.41 cm
+front clearance IR distance: 218.93 cm
+front clearance IR distance: 160.41 cm
+front clearance IR distance: 183.34 cm
+front clearance IR distance: 492.31 cm
+front clearance IR distance: 435.02 cm
+front clearance IR distance: 475.49 cm
+front clearance IR distance: 261.76 cm
+front clearance IR distance: 197.56 cm
+front clearance IR distance: 151.83 cm
+front clearance IR distance: 224.25 cm
+front clearance IR distance: 659.79 cm
+front clearance IR distance: 548.16 cm
+front clearance IR distance: 462.94 cm
+front clearance IR distance: 259.79 cm
+front clearance IR distance: 241.61 cm
+front clearance IR distance: 184.24 cm
+front clearance IR distance: 225.93 cm
+front clearance IR distance: 660.63 cm
+front clearance IR distance: 730.95 cm
+front clearance IR distance: 766.11 cm
+front clearance IR distance: 417.52 cm
+front clearance IR distance: 342.57 cm
+front clearance IR distance: 234.72 cm
+front clearance IR distance: 220.49 cm
+front clearance IR distance: 657.91 cm
+front clearance IR distance: 729.59 cm
+front clearance IR distance: 765.43 cm
+front clearance IR distance: 411.03 cm
+front clearance IR distance: 353.85 cm
+front clearance IR distance: 232.24 cm
+front clearance IR distance: 227.84 cm
+front clearance IR distance: 428.34 cm
+front clearance IR distance: 614.81 cm
+front clearance IR distance: 708.04 cm
+front clearance IR distance: 385.11 cm
+front clearance IR distance: 381.42 cm
+front clearance IR distance: 269.39 cm
+front clearance IR distance: 300.94 cm
+front clearance IR distance: 551.11 cm
+front clearance IR distance: 676.19 cm
+front clearance IR distance: 738.73 cm
+front clearance IR distance: 401.24 cm
+front clearance IR distance: 389.48 cm
+front clearance IR distance: 241.95 cm
+front clearance IR distance: 269.31 cm
+front clearance IR distance: 535.29 cm
+front clearance IR distance: 668.28 cm
+front clearance IR distance: 881.81 cm
+front clearance IR distance: 471.25 cm
+front clearance IR distance: 383.96 cm
+front clearance IR distance: 266.22 cm
+front clearance IR distance: 266.92 cm
+front clearance IR distance: 681.13 cm
+front clearance IR distance: 741.20 cm
+front clearance IR distance: 771.23 cm
+front clearance IR distance: 425.48 cm
+front clearance IR distance: 401.60 cm
+front clearance IR distance: 334.61 cm
+front clearance IR distance: 385.57 cm
+front clearance IR distance: 593.42 cm
+front clearance IR distance: 611.13 cm
+front clearance IR distance: 706.20 cm
+front clearance IR distance: 392.96 cm
+front clearance IR distance: 385.34 cm
+front clearance IR distance: 358.92 cm
+front clearance IR distance: 345.71 cm
+front clearance IR distance: 573.49 cm
+front clearance IR distance: 687.38 cm
+front clearance IR distance: 744.32 cm
+front clearance IR distance: 406.63 cm
+front clearance IR distance: 369.56 cm
+front clearance IR distance: 373.64 cm
+front clearance IR distance: 444.80 cm
+front clearance IR distance: 770.07 cm
+front clearance IR distance: 699.45 cm
+front clearance IR distance: 384.20 cm
+front clearance IR distance: 226.57 cm
+front clearance IR distance: 225.00 cm
+front clearance IR distance: 301.36 cm
+front clearance IR distance: 408.66 cm
+front clearance IR distance: 752.00 cm
+front clearance IR distance: 776.63 cm
+front clearance IR distance: 448.80 cm
+front clearance IR distance: 284.88 cm
+front clearance IR distance: 360.71 cm
+front clearance IR distance: 302.16 cm
+front clearance IR distance: 254.21 cm
+front clearance IR distance: 441.53 cm
+front clearance IR distance: 621.40 cm
+front clearance IR distance: 361.65 cm
+front clearance IR distance: 233.87 cm
+front clearance IR distance: 305.80 cm
+front clearance IR distance: 198.44 cm
+front clearance IR distance: 233.03 cm
+front clearance IR distance: 664.18 cm
+front clearance IR distance: 732.72 cm
+front clearance IR distance: 767.00 cm
+front clearance IR distance: 931.16 cm
+front clearance IR distance: 683.85 cm
+front clearance IR distance: 376.39 cm
+front clearance IR distance: 322.01 cm
+front clearance IR distance: 561.64 cm
+front clearance IR distance: 447.07 cm
+front clearance IR distance: 481.51 cm
+front clearance IR distance: 459.02 cm
+front clearance IR distance: 260.60 cm
+front clearance IR distance: 152.63 cm
+front clearance IR distance: 97.17 cm
+front clearance IR distance: 83.05 cm
+front clearance IR distance: 53.14 cm
+front clearance IR distance: 36.09 cm
+front clearance IR distance: 27.56 cm
+front clearance IR distance: 21.56 cm
+front clearance IR distance: 17.78 cm
+front clearance IR distance: 15.72 cm
+front clearance IR distance: 16.42 cm
+front clearance IR distance: 14.79 cm
+front clearance IR distance: 13.98 cm
+front clearance IR distance: 12.51 cm
+front clearance IR distance: 12.52 cm
+front clearance IR distance: 12.50 cm
+front clearance IR distance: 12.39 cm
+front clearance IR distance: 13.76 cm
+front clearance IR distance: 13.02 cm
+front clearance IR distance: 12.65 cm
+front clearance IR distance: 11.79 cm
+front clearance IR distance: 11.93 cm
+front clearance IR distance: 11.90 cm
+front clearance IR distance: 11.87 cm
+front clearance IR distance: 12.77 cm
+front clearance IR distance: 12.23 cm
+front clearance IR distance: 11.96 cm
+front clearance IR distance: 10.95 cm
+front clearance IR distance: 11.35 cm
+front clearance IR distance: 11.45 cm
+front clearance IR distance: 11.57 cm
+front clearance IR distance: 12.75 cm
+front clearance IR distance: 12.27 cm
+front clearance IR distance: 12.05 cm
+front clearance IR distance: 11.13 cm
+front clearance IR distance: 11.50 cm
+front clearance IR distance: 11.62 cm
+front clearance IR distance: 11.75 cm
+front clearance IR distance: 12.95 cm
+front clearance IR distance: 12.39 cm
+front clearance IR distance: 12.13 cm
+front clearance IR distance: 10.83 cm
+front clearance IR distance: 9.94 cm
+front clearance IR distance: 8.40 cm
+front clearance IR distance: 8.04 cm
+front clearance IR distance: 7.34 cm
+front clearance IR distance: 6.99 cm
+front clearance IR distance: 6.68 cm
+front clearance IR distance: 6.21 cm
+front clearance IR distance: 6.20 cm
+front clearance IR distance: 5.83 cm
+front clearance IR distance: 5.87 cm
+front clearance IR distance: 5.73 cm
+front clearance IR distance: 5.66 cm
+front clearance IR distance: 5.59 cm
+front clearance IR distance: 5.41 cm
+front clearance IR distance: 5.50 cm
+front clearance IR distance: 5.44 cm
+front clearance IR distance: 5.34 cm
+front clearance IR distance: 5.29 cm
+front clearance IR distance: 5.27 cm
+front clearance IR distance: 5.25 cm
+front clearance IR distance: 5.27 cm
+front clearance IR distance: 5.21 cm
+front clearance IR distance: 5.32 cm
+front clearance IR distance: 5.27 cm
+front clearance IR distance: 5.25 cm
+front clearance IR distance: 5.24 cm
+front clearance IR distance: 5.22 cm
+front clearance IR distance: 5.35 cm
+front clearance IR distance: 5.27 cm
+front clearance IR distance: 5.35 cm
+front clearance IR distance: 5.29 cm
+front clearance IR distance: 5.26 cm
+front clearance IR distance: 5.25 cm
+front clearance IR distance: 5.21 cm
+front clearance IR distance: 5.34 cm
+front clearance IR distance: 5.27 cm
+front clearance IR distance: 5.37 cm
+front clearance IR distance: 5.35 cm
+front clearance IR distance: 5.34 cm
+front clearance IR distance: 5.36 cm
+front clearance IR distance: 5.30 cm
+front clearance IR distance: 5.57 cm
+front clearance IR distance: 5.48 cm
+front clearance IR distance: 5.80 cm
+front clearance IR distance: 5.88 cm
+front clearance IR distance: 5.92 cm
+front clearance IR distance: 6.06 cm
+front clearance IR distance: 6.02 cm
+front clearance IR distance: 6.58 cm
+front clearance IR distance: 6.49 cm
+front clearance IR distance: 7.06 cm
+front clearance IR distance: 7.23 cm
+front clearance IR distance: 7.32 cm
+front clearance IR distance: 7.61 cm
+front clearance IR distance: 7.80 cm
+front clearance IR distance: 10.28 cm
+front clearance IR distance: 14.40 cm
+front clearance IR distance: 70.63 cm
+front clearance IR distance: 183.65 cm
+front clearance IR distance: 130.48 cm
+front clearance IR distance: 105.10 cm
+front clearance IR distance: 92.41 cm
+front clearance IR distance: 93.42 cm
+front clearance IR distance: 110.14 cm
+front clearance IR distance: 455.71 cm
+front clearance IR distance: 628.49 cm
+front clearance IR distance: 417.38 cm
+front clearance IR distance: 320.41 cm
+front clearance IR distance: 308.54 cm
+front clearance IR distance: 232.95 cm
+front clearance IR distance: 179.91 cm
+front clearance IR distance: 637.62 cm
+front clearance IR distance: 866.47 cm
+front clearance IR distance: 833.87 cm
+front clearance IR distance: 817.57 cm
+front clearance IR distance: 809.42 cm
+front clearance IR distance: 516.43 cm
+front clearance IR distance: 572.64 cm
+front clearance IR distance: 833.98 cm
+front clearance IR distance: 731.41 cm
+front clearance IR distance: 913.37 cm
+front clearance IR distance: 1004.35 cm
+front clearance IR distance: 605.31 cm
+front clearance IR distance: 381.34 cm
+front clearance IR distance: 738.33 cm
+front clearance IR distance: 769.80 cm
+front clearance IR distance: 785.54 cm
+front clearance IR distance: 940.43 cm
+front clearance IR distance: 1017.88 cm
+front clearance IR distance: 575.62 cm
+front clearance IR distance: 835.47 cm
+front clearance IR distance: 566.07 cm
+front clearance IR distance: 683.67 cm
+front clearance IR distance: 656.26 cm
+front clearance IR distance: 728.76 cm
+front clearance IR distance: 912.05 cm
+front clearance IR distance: 509.07 cm
+front clearance IR distance: 1105.66 cm
+front clearance IR distance: 2362.28 cm
+front clearance IR distance: 1728.81 cm
+front clearance IR distance: 1030.65 cm
+front clearance IR distance: 1062.99 cm
+front clearance IR distance: 932.13 cm
+front clearance IR distance: 529.50 cm
+front clearance IR distance: 812.41 cm
+front clearance IR distance: 953.87 cm
+front clearance IR distance: 1024.60 cm
+front clearance IR distance: 1059.97 cm
+front clearance IR distance: 1077.65 cm
+front clearance IR distance: 1086.49 cm
+front clearance IR distance: 609.92 cm
+front clearance IR distance: 705.60 cm
+front clearance IR distance: 25.38 cm
+front clearance IR distance: 21.33 cm
+front clearance IR distance: 21.08 cm
+front clearance IR distance: 23.05 cm
+front clearance IR distance: 36.70 cm
+front clearance IR distance: 35.56 cm
+front clearance IR distance: 42.96 cm
+front clearance IR distance: 46.65 cm
+front clearance IR distance: 32.87 cm
+front clearance IR distance: 29.93 cm
+front clearance IR distance: 24.23 cm
+front clearance IR distance: 24.26 cm
+front clearance IR distance: 33.10 cm
+front clearance IR distance: 28.23 cm
+front clearance IR distance: 25.91 cm
+front clearance IR distance: 24.75 cm
+front clearance IR distance: 25.15 cm
+front clearance IR distance: 25.09 cm
+front clearance IR distance: 20.75 cm
+front clearance IR distance: 23.16 cm
+front clearance IR distance: 31.11 cm
+front clearance IR distance: 43.24 cm
+front clearance IR distance: 48.62 cm
+front clearance IR distance: 36.22 cm
+front clearance IR distance: 31.60 cm
+front clearance IR distance: 27.16 cm
+front clearance IR distance: 23.82 cm
+front clearance IR distance: 38.91 cm
+front clearance IR distance: 30.04 cm
+front clearance IR distance: 29.49 cm
+front clearance IR distance: 28.87 cm
+front clearance IR distance: 26.23 cm
+front clearance IR distance: 27.41 cm
+front clearance IR distance: 25.97 cm
+front clearance IR distance: 27.28 cm
+front clearance IR distance: 58.49 cm
+front clearance IR distance: 53.87 cm
+front clearance IR distance: 61.62 cm
+front clearance IR distance: 65.50 cm
+front clearance IR distance: 42.22 cm
+front clearance IR distance: 35.76 cm
+front clearance IR distance: 25.74 cm
+front clearance IR distance: 25.39 cm
+front clearance IR distance: 42.63 cm
+front clearance IR distance: 51.25 cm
+front clearance IR distance: 55.56 cm
+front clearance IR distance: 37.62 cm
+front clearance IR distance: 28.88 cm
+front clearance IR distance: 36.21 cm
+front clearance IR distance: 32.07 cm
+front clearance IR distance: 32.52 cm
+front clearance IR distance: 119.70 cm
+front clearance IR distance: 84.47 cm
+front clearance IR distance: 66.85 cm
+front clearance IR distance: 44.48 cm
+front clearance IR distance: 37.45 cm
+front clearance IR distance: 34.13 cm
+front clearance IR distance: 28.02 cm
+front clearance IR distance: 53.83 cm
+front clearance IR distance: 51.01 cm
+front clearance IR distance: 44.09 cm
+front clearance IR distance: 41.58 cm
+front clearance IR distance: 31.75 cm
+front clearance IR distance: 32.59 cm
+front clearance IR distance: 30.10 cm
+front clearance IR distance: 31.77 cm
+front clearance IR distance: 54.28 cm
+front clearance IR distance: 51.23 cm
+front clearance IR distance: 41.87 cm
+front clearance IR distance: 37.19 cm
+front clearance IR distance: 33.61 cm
+front clearance IR distance: 33.53 cm
+front clearance IR distance: 30.41 cm
+front clearance IR distance: 33.79 cm
+front clearance IR distance: 44.58 cm
+front clearance IR distance: 42.16 cm
+front clearance IR distance: 41.31 cm
+front clearance IR distance: 33.43 cm
+front clearance IR distance: 33.44 cm
+front clearance IR distance: 35.01 cm
+front clearance IR distance: 32.72 cm
+front clearance IR distance: 34.37 cm
+front clearance IR distance: 74.23 cm
+front clearance IR distance: 61.21 cm
+front clearance IR distance: 55.22 cm
+front clearance IR distance: 38.87 cm
+front clearance IR distance: 33.90 cm
+front clearance IR distance: 32.36 cm
+front clearance IR distance: 29.38 cm
+front clearance IR distance: 44.62 cm
+front clearance IR distance: 40.32 cm
+front clearance IR distance: 44.78 cm
+front clearance IR distance: 47.56 cm
+front clearance IR distance: 36.56 cm
+front clearance IR distance: 34.10 cm
+front clearance IR distance: 33.77 cm
+front clearance IR distance: 33.85 cm
+front clearance IR distance: 63.76 cm
+front clearance IR distance: 59.56 cm
+front clearance IR distance: 54.40 cm
+front clearance IR distance: 52.37 cm
+front clearance IR distance: 37.65 cm
+front clearance IR distance: 34.23 cm
+front clearance IR distance: 28.47 cm
+front clearance IR distance: 31.20 cm
+front clearance IR distance: 46.37 cm
+front clearance IR distance: 43.41 cm
+front clearance IR distance: 36.35 cm
+front clearance IR distance: 32.82 cm
+front clearance IR distance: 32.67 cm
+front clearance IR distance: 33.05 cm
+front clearance IR distance: 30.49 cm
+front clearance IR distance: 33.54 cm
+front clearance IR distance: 110.48 cm
+front clearance IR distance: 82.92 cm
+front clearance IR distance: 69.14 cm
+front clearance IR distance: 46.36 cm
+front clearance IR distance: 38.01 cm
+front clearance IR distance: 35.04 cm
+front clearance IR distance: 29.09 cm
+front clearance IR distance: 87.85 cm
+front clearance IR distance: 68.54 cm
+front clearance IR distance: 51.74 cm
+front clearance IR distance: 44.17 cm
+front clearance IR distance: 33.04 cm
+front clearance IR distance: 38.29 cm
+front clearance IR distance: 36.36 cm
+front clearance IR distance: 38.77 cm
+front clearance IR distance: 122.82 cm
+front clearance IR distance: 108.25 cm
+front clearance IR distance: 111.17 cm
+front clearance IR distance: 90.28 cm
+front clearance IR distance: 57.53 cm
+front clearance IR distance: 49.73 cm
+front clearance IR distance: 35.63 cm
+front clearance IR distance: 42.44 cm
+front clearance IR distance: 242.69 cm
+front clearance IR distance: 142.70 cm
+front clearance IR distance: 92.71 cm
+front clearance IR distance: 57.31 cm
+front clearance IR distance: 46.67 cm
+front clearance IR distance: 45.97 cm
+front clearance IR distance: 39.24 cm
+front clearance IR distance: 39.85 cm
+front clearance IR distance: 199.50 cm
+front clearance IR distance: 156.80 cm
+front clearance IR distance: 135.44 cm
+front clearance IR distance: 82.19 cm
+front clearance IR distance: 63.73 cm
+front clearance IR distance: 50.16 cm
+front clearance IR distance: 37.22 cm
+front clearance IR distance: 65.45 cm
+front clearance IR distance: 77.58 cm
+front clearance IR distance: 56.53 cm
+front clearance IR distance: 46.56 cm
+front clearance IR distance: 31.19 cm
+front clearance IR distance: 25.43 cm
+front clearance IR distance: 33.68 cm
+front clearance IR distance: 38.20 cm
+front clearance IR distance: 134.62 cm
+front clearance IR distance: 140.61 cm
+front clearance IR distance: 143.61 cm
+front clearance IR distance: 145.11 cm
+front clearance IR distance: 85.47 cm
+front clearance IR distance: 68.49 cm
+front clearance IR distance: 48.05 cm
+front clearance IR distance: 48.64 cm
+front clearance IR distance: 52.00 cm
+front clearance IR distance: 40.47 cm
+front clearance IR distance: 44.33 cm
+front clearance IR distance: 47.34 cm
+front clearance IR distance: 45.86 cm
+front clearance IR distance: 36.89 cm
+front clearance IR distance: 39.04 cm
+front clearance IR distance: 37.25 cm
+front clearance IR distance: 46.31 cm
+front clearance IR distance: 45.35 cm
+front clearance IR distance: 45.31 cm
+front clearance IR distance: 30.21 cm
+front clearance IR distance: 21.89 cm
+front clearance IR distance: 15.04 cm
+front clearance IR distance: 10.95 cm
+front clearance IR distance: 8.95 cm
+front clearance IR distance: 7.60 cm
+front clearance IR distance: 6.93 cm
+front clearance IR distance: 6.46 cm
+front clearance IR distance: 5.94 cm
+front clearance IR distance: 5.84 cm
+front clearance IR distance: 5.42 cm
+front clearance IR distance: 5.39 cm
+front clearance IR distance: 5.20 cm
+front clearance IR distance: 5.12 cm
+front clearance IR distance: 5.08 cm
+front clearance IR distance: 5.02 cm
+front clearance IR distance: 4.94 cm
+front clearance IR distance: 5.17 cm
+front clearance IR distance: 5.03 cm
+Setup....
+ENTERING INITIALISING STATE
+INITIALISING....
+Enabling Motors...
+Enabling Gyroscope...
+ENTERING SEARCHING STATE
+Searching...
+Detected fires:
+Fire: 0.00
+fire_angle: 316.77
+Rotating 316.77 degrees
+SETTLED. Stopping.
+ENTERING NAVIGATING STATE
+Settling sensors...
+left IR: 97.01 | front left IR: 190.40 | ultrasonic: 87.03 | front right IR: 30.05 | right IR: 24.33
+left IR: 83.59 | front left IR: 166.40 | ultrasonic: 86.97 | front right IR: 30.14 | right IR: 23.46
+left IR: 98.41 | front left IR: 173.63 | ultrasonic: 86.55 | front right IR: 29.60 | right IR: 23.27
+left IR: 102.59 | front left IR: 181.67 | ultrasonic: 86.55 | front right IR: 28.79 | right IR: 22.19
+left IR: 104.07 | front left IR: 184.80 | ultrasonic: 86.97 | front right IR: 29.26 | right IR: 23.11
+left IR: 100.36 | front left IR: 184.46 | ultrasonic: 86.97 | front right IR: 29.29 | right IR: 22.89
+left IR: 100.50 | front left IR: 139.03 | ultrasonic: 86.97 | front right IR: 28.64 | right IR: 23.28
+left IR: 101.36 | front left IR: 146.09 | ultrasonic: 86.97 | front right IR: 30.40 | right IR: 22.89
+left IR: 103.77 | front left IR: 177.14 | ultrasonic: 86.55 | front right IR: 27.31 | right IR: 21.20
+left IR: 103.91 | front left IR: 191.13 | ultrasonic: 86.97 | front right IR: 29.94 | right IR: 21.83
+Driving forward
+L_IR: 243.90 | Ultrasonic: 87.03 | R_IR: 29.62 cm
+L_IR: 225.09 | Ultrasonic: 86.14 | R_IR: 27.45 cm
+L_IR: 260.88 | Ultrasonic: 86.07 | R_IR: 29.13 cm
+L_IR: 264.25 | Ultrasonic: 86.83 | R_IR: 29.04 cm
+L_IR: 215.79 | Ultrasonic: 86.55 | R_IR: 26.66 cm
+L_IR: 171.33 | Ultrasonic: 85.86 | R_IR: 27.80 cm
+L_IR: 124.32 | Ultrasonic: 37.59 | R_IR: 30.16 cm
+L_IR: 113.11 | Ultrasonic: 35.66 | R_IR: 30.49 cm
+L_IR: 102.09 | Ultrasonic: 34.90 | R_IR: 30.07 cm
+L_IR: 89.70 | Ultrasonic: 33.59 | R_IR: 30.44 cm
+L_IR: 76.72 | Ultrasonic: 32.97 | R_IR: 29.02 cm
+L_IR: 68.71 | Ultrasonic: 32.76 | R_IR: 28.47 cm
+L_IR: 63.32 | Ultrasonic: 34.83 | R_IR: 28.36 cm
+L_IR: 57.65 | Ultrasonic: 34.90 | R_IR: 25.86 cm
+L_IR: 52.84 | Ultrasonic: 34.21 | R_IR: 26.73 cm
+L_IR: 50.44 | Ultrasonic: 26.48 | R_IR: 27.33 cm
+L_IR: 46.07 | Ultrasonic: 24.48 | R_IR: 28.31 cm
+L_IR: 40.70 | Ultrasonic: 75.38 | R_IR: 27.35 cm
+L_IR: 37.53 | Ultrasonic: 73.86 | R_IR: 28.15 cm
+L_IR: 33.39 | Ultrasonic: 19.24 | R_IR: 28.04 cm
+L_IR: 30.84 | Ultrasonic: 19.38 | R_IR: 27.36 cm
+L_IR: 27.69 | Ultrasonic: 16.55 | R_IR: 27.64 cm
+L_IR: 25.25 | Ultrasonic: 14.97 | R_IR: 27.31 cm
+2 | 60 | 59 | 3
+OBSTACLE DETECTED! STOPPING.
+ENTERING AVOID STATE
+Determined that it shuld strafe right by front sensors FL: 22.57   FR: 27.62
+strafing right. reading left front
+AVOIDANCE STRAFE STAGE
+front clearance IR distance: 18.98 cm
+front clearance IR distance: 17.27 cm
+front clearance IR distance: 16.24 cm
+front clearance IR distance: 17.64 cm
+front clearance IR distance: 16.19 cm
+front clearance IR distance: 19.60 cm
+front clearance IR distance: 18.35 cm
+front clearance IR distance: 17.73 cm
+front clearance IR distance: 17.47 cm
+front clearance IR distance: 15.23 cm
+front clearance IR distance: 15.53 cm
+front clearance IR distance: 14.14 cm
+front clearance IR distance: 16.87 cm
+front clearance IR distance: 15.84 cm
+front clearance IR distance: 15.17 cm
+front clearance IR distance: 14.88 cm
+front clearance IR distance: 13.22 cm
+front clearance IR distance: 13.61 cm
+front clearance IR distance: 12.65 cm
+front clearance IR distance: 15.10 cm
+front clearance IR distance: 14.48 cm
+front clearance IR distance: 14.07 cm
+front clearance IR distance: 13.87 cm
+front clearance IR distance: 12.63 cm
+front clearance IR distance: 13.05 cm
+front clearance IR distance: 12.46 cm
+front clearance IR distance: 14.14 cm
+front clearance IR distance: 13.91 cm
+front clearance IR distance: 13.79 cm
+front clearance IR distance: 13.73 cm
+front clearance IR distance: 12.87 cm
+front clearance IR distance: 13.40 cm
+front clearance IR distance: 12.64 cm
+front clearance IR distance: 15.45 cm
+front clearance IR distance: 14.98 cm
+front clearance IR distance: 14.90 cm
+front clearance IR distance: 14.85 cm
+front clearance IR distance: 13.59 cm
+front clearance IR distance: 14.05 cm
+front clearance IR distance: 13.16 cm
+front clearance IR distance: 16.10 cm
+front clearance IR distance: 15.58 cm
+front clearance IR distance: 15.19 cm
+front clearance IR distance: 15.00 cm
+front clearance IR distance: 13.05 cm
+front clearance IR distance: 12.66 cm
+front clearance IR distance: 10.95 cm
+front clearance IR distance: 11.25 cm
+front clearance IR distance: 10.45 cm
+front clearance IR distance: 9.93 cm
+front clearance IR distance: 9.70 cm
+front clearance IR distance: 8.94 cm
+front clearance IR distance: 9.64 cm
+front clearance IR distance: 8.93 cm
+front clearance IR distance: 9.47 cm
+front clearance IR distance: 9.12 cm
+front clearance IR distance: 8.93 cm
+front clearance IR distance: 8.80 cm
+front clearance IR distance: 8.39 cm
+front clearance IR distance: 8.33 cm
+front clearance IR distance: 8.25 cm
+front clearance IR distance: 8.59 cm
+front clearance IR distance: 8.28 cm
+front clearance IR distance: 8.12 cm
+front clearance IR distance: 7.78 cm
+front clearance IR distance: 7.82 cm
+front clearance IR distance: 7.87 cm
+front clearance IR distance: 7.88 cm
+front clearance IR distance: 7.89 cm
+front clearance IR distance: 7.89 cm
+front clearance IR distance: 7.89 cm
+front clearance IR distance: 7.50 cm
+front clearance IR distance: 7.98 cm
+front clearance IR distance: 7.48 cm
+front clearance IR distance: 7.90 cm
+front clearance IR distance: 7.77 cm
+front clearance IR distance: 7.70 cm
+front clearance IR distance: 7.71 cm
+front clearance IR distance: 7.42 cm
+front clearance IR distance: 7.96 cm
+front clearance IR distance: 7.60 cm
+front clearance IR distance: 8.23 cm
+front clearance IR distance: 8.13 cm
+front clearance IR distance: 8.09 cm
+front clearance IR distance: 8.13 cm
+front clearance IR distance: 7.93 cm
+front clearance IR distance: 8.02 cm
+front clearance IR distance: 8.10 cm
+front clearance IR distance: 8.57 cm
+front clearance IR distance: 8.49 cm
+front clearance IR distance: 8.46 cm
+front clearance IR distance: 8.19 cm
+front clearance IR distance: 8.48 cm
+front clearance IR distance: 8.80 cm
+front clearance IR distance: 9.07 cm
+front clearance IR distance: 10.23 cm
+front clearance IR distance: 10.32 cm
+front clearance IR distance: 10.36 cm
+front clearance IR distance: 10.08 cm
+front clearance IR distance: 12.04 cm
+front clearance IR distance: 24.45 cm
+front clearance IR distance: 50.88 cm
+front clearance IR distance: 426.07 cm
+front clearance IR distance: 613.67 cm
+front clearance IR distance: 707.47 cm
+front clearance IR distance: 389.16 cm
+front clearance IR distance: 452.56 cm
+front clearance IR distance: 292.96 cm
+front clearance IR distance: 404.46 cm
+front clearance IR distance: 749.89 cm
+front clearance IR distance: 775.58 cm
+front clearance IR distance: 702.21 cm
+front clearance IR distance: 414.54 cm
+front clearance IR distance: 465.25 cm
+front clearance IR distance: 780.29 cm
+front clearance IR distance: 937.81 cm
+front clearance IR distance: 1016.57 cm
+front clearance IR distance: 1055.95 cm
+front clearance IR distance: 1075.64 cm
+front clearance IR distance: 590.87 cm
+front clearance IR distance: 843.10 cm
+front clearance IR distance: 822.18 cm
+front clearance IR distance: 958.76 cm
+front clearance IR distance: 1027.04 cm
+front clearance IR distance: 1061.19 cm
+front clearance IR distance: 1078.26 cm
+front clearance IR distance: 622.80 cm
+front clearance IR distance: 859.06 cm
+front clearance IR distance: 830.17 cm
+front clearance IR distance: 962.75 cm
+front clearance IR distance: 882.01 cm
+front clearance IR distance: 755.43 cm
+front clearance IR distance: 778.35 cm
+front clearance IR distance: 444.49 cm
+front clearance IR distance: 769.91 cm
+front clearance IR distance: 932.62 cm
+front clearance IR distance: 1013.98 cm
+front clearance IR distance: 1054.65 cm
+front clearance IR distance: 1074.99 cm
+front clearance IR distance: 621.17 cm
+front clearance IR distance: 389.26 cm
+front clearance IR distance: 328.44 cm
+front clearance IR distance: 564.86 cm
+front clearance IR distance: 683.06 cm
+front clearance IR distance: 742.17 cm
+front clearance IR distance: 918.75 cm
+front clearance IR distance: 677.64 cm
+front clearance IR distance: 557.09 cm
+front clearance IR distance: 679.18 cm
+front clearance IR distance: 887.25 cm
+front clearance IR distance: 844.26 cm
+front clearance IR distance: 969.80 cm
+front clearance IR distance: 885.53 cm
+front clearance IR distance: 700.75 cm
+front clearance IR distance: 608.35 cm
+front clearance IR distance: 851.84 cm
+front clearance IR distance: 521.66 cm
+front clearance IR distance: 661.47 cm
+front clearance IR distance: 731.37 cm
+front clearance IR distance: 766.32 cm
+front clearance IR distance: 783.79 cm
+front clearance IR distance: 792.53 cm
+front clearance IR distance: 796.90 cm
+front clearance IR distance: 501.58 cm
+front clearance IR distance: 798.46 cm
+front clearance IR distance: 946.89 cm
+front clearance IR distance: 1021.11 cm
+front clearance IR distance: 1058.22 cm
+front clearance IR distance: 1076.78 cm
+front clearance IR distance: 796.37 cm
+front clearance IR distance: 798.82 cm
+front clearance IR distance: 800.04 cm
+front clearance IR distance: 800.66 cm
+front clearance IR distance: 947.99 cm
+front clearance IR distance: 1021.66 cm
+front clearance IR distance: 911.47 cm
+front clearance IR distance: 506.68 cm
+front clearance IR distance: 801.01 cm
+front clearance IR distance: 948.17 cm
+front clearance IR distance: 874.72 cm
+front clearance IR distance: 837.99 cm
+front clearance IR distance: 819.63 cm
+front clearance IR distance: 810.45 cm
+front clearance IR distance: 471.90 cm
+front clearance IR distance: 783.62 cm
+front clearance IR distance: 792.44 cm
+front clearance IR distance: 796.86 cm
+front clearance IR distance: 946.09 cm
+front clearance IR distance: 1020.71 cm
+front clearance IR distance: 910.99 cm
+front clearance IR distance: 603.83 cm
+front clearance IR distance: 849.58 cm
+front clearance IR distance: 972.46 cm
+front clearance IR distance: 1033.89 cm
+front clearance IR distance: 1064.61 cm
+front clearance IR distance: 932.94 cm
+front clearance IR distance: 1014.14 cm
+front clearance IR distance: 618.79 cm
+front clearance IR distance: 857.06 cm
+front clearance IR distance: 976.19 cm
+front clearance IR distance: 888.73 cm
+front clearance IR distance: 845.00 cm
+front clearance IR distance: 823.14 cm
+front clearance IR distance: 959.23 cm
+front clearance IR distance: 697.88 cm
+front clearance IR distance: 896.61 cm
+front clearance IR distance: 995.97 cm
+front clearance IR distance: 1045.65 cm
+front clearance IR distance: 1070.49 cm
+front clearance IR distance: 1082.91 cm
+front clearance IR distance: 942.09 cm
+front clearance IR distance: 604.85 cm
+front clearance IR distance: 850.09 cm
+front clearance IR distance: 825.68 cm
+front clearance IR distance: 727.26 cm
+front clearance IR distance: 764.27 cm
+front clearance IR distance: 782.77 cm
+front clearance IR distance: 792.02 cm
+front clearance IR distance: 529.82 cm
+front clearance IR distance: 812.57 cm
+front clearance IR distance: 953.95 cm
+front clearance IR distance: 1024.64 cm
+front clearance IR distance: 912.96 cm
+front clearance IR distance: 1004.14 cm
+front clearance IR distance: 816.49 cm
+front clearance IR distance: 722.67 cm
+front clearance IR distance: 761.97 cm
+front clearance IR distance: 928.65 cm
+front clearance IR distance: 1011.99 cm
+front clearance IR distance: 1053.66 cm
+front clearance IR distance: 1074.50 cm
+front clearance IR distance: 685.58 cm
+front clearance IR distance: 491.13 cm
+front clearance IR distance: 646.20 cm
+front clearance IR distance: 378.42 cm
+front clearance IR distance: 300.93 cm
+front clearance IR distance: 551.10 cm
+front clearance IR distance: 823.21 cm
+front clearance IR distance: 959.27 cm
+front clearance IR distance: 880.27 cm
+front clearance IR distance: 588.47 cm
+front clearance IR distance: 329.66 cm
+front clearance IR distance: 298.64 cm
+front clearance IR distance: 283.13 cm
+front clearance IR distance: 330.43 cm
+front clearance IR distance: 712.88 cm
+front clearance IR distance: 490.25 cm
+front clearance IR distance: 276.22 cm
+front clearance IR distance: 241.24 cm
+front clearance IR distance: 668.29 cm
+front clearance IR distance: 437.28 cm
+front clearance IR distance: 619.27 cm
+front clearance IR distance: 475.88 cm
+front clearance IR distance: 426.81 cm
+front clearance IR distance: 237.42 cm
+front clearance IR distance: 197.39 cm
+front clearance IR distance: 182.37 cm
+front clearance IR distance: 157.86 cm
+front clearance IR distance: 626.59 cm
+front clearance IR distance: 425.02 cm
+front clearance IR distance: 324.23 cm
+front clearance IR distance: 183.68 cm
+front clearance IR distance: 131.70 cm
+front clearance IR distance: 94.16 cm
+front clearance IR distance: 84.60 cm
+front clearance IR distance: 231.16 cm
+front clearance IR distance: 164.59 cm
+front clearance IR distance: 131.31 cm
+front clearance IR distance: 82.61 cm
+front clearance IR distance: 76.73 cm
+front clearance IR distance: 62.38 cm
+front clearance IR distance: 65.66 cm
+front clearance IR distance: 251.10 cm
+front clearance IR distance: 168.06 cm
+front clearance IR distance: 128.01 cm
+front clearance IR distance: 80.31 cm
+front clearance IR distance: 71.25 cm
+front clearance IR distance: 63.94 cm
+front clearance IR distance: 63.06 cm
+front clearance IR distance: 165.34 cm
+front clearance IR distance: 116.23 cm
+front clearance IR distance: 92.58 cm
+front clearance IR distance: 62.81 cm
+front clearance IR distance: 55.89 cm
+front clearance IR distance: 53.93 cm
+front clearance IR distance: 52.96 cm
+front clearance IR distance: 51.44 cm
+front clearance IR distance: 54.04 cm
+front clearance IR distance: 54.71 cm
+front clearance IR distance: 41.82 cm
+front clearance IR distance: 43.23 cm
+front clearance IR distance: 47.61 cm
+front clearance IR distance: 48.28 cm
+front clearance IR distance: 47.71 cm
+front clearance IR distance: 48.82 cm
+front clearance IR distance: 45.97 cm
+front clearance IR distance: 37.13 cm
+front clearance IR distance: 38.75 cm
+front clearance IR distance: 54.81 cm
+front clearance IR distance: 71.38 cm
+front clearance IR distance: 55.25 cm
+front clearance IR distance: 50.77 cm
+front clearance IR distance: 49.40 cm
+front clearance IR distance: 37.97 cm
+front clearance IR distance: 41.31 cm
+front clearance IR distance: 39.92 cm
+front clearance IR distance: 62.48 cm
+front clearance IR distance: 57.23 cm
+front clearance IR distance: 56.93 cm
+front clearance IR distance: 56.78 cm
+front clearance IR distance: 49.95 cm
+front clearance IR distance: 47.30 cm
+front clearance IR distance: 43.84 cm
+front clearance IR distance: 100.60 cm
+front clearance IR distance: 75.77 cm
+front clearance IR distance: 63.87 cm
+front clearance IR distance: 57.40 cm
+front clearance IR distance: 49.55 cm
+front clearance IR distance: 43.48 cm
+front clearance IR distance: 39.40 cm
+front clearance IR distance: 62.21 cm
+front clearance IR distance: 53.04 cm
+front clearance IR distance: 40.98 cm
+front clearance IR distance: 35.46 cm
+front clearance IR distance: 34.69 cm
+front clearance IR distance: 36.04 cm
+front clearance IR distance: 37.89 cm
+front clearance IR distance: 57.60 cm
+front clearance IR distance: 50.36 cm
+front clearance IR distance: 39.17 cm
+front clearance IR distance: 33.89 cm
+front clearance IR distance: 34.13 cm
+front clearance IR distance: 34.25 cm
+front clearance IR distance: 35.29 cm
+front clearance IR distance: 56.30 cm
+front clearance IR distance: 48.67 cm
+front clearance IR distance: 44.85 cm
+front clearance IR distance: 34.93 cm
+front clearance IR distance: 33.98 cm
+front clearance IR distance: 34.17 cm
+front clearance IR distance: 34.75 cm
+front clearance IR distance: 61.35 cm
+front clearance IR distance: 49.65 cm
+front clearance IR distance: 44.39 cm
+front clearance IR distance: 33.81 cm
+front clearance IR distance: 34.56 cm
+front clearance IR distance: 35.45 cm
+front clearance IR distance: 36.99 cm
+front clearance IR distance: 97.18 cm
+front clearance IR distance: 76.90 cm
+front clearance IR distance: 66.77 cm
+front clearance IR distance: 46.52 cm
+front clearance IR distance: 51.57 cm
+front clearance IR distance: 54.10 cm
+front clearance IR distance: 65.71 cm
+front clearance IR distance: 580.52 cm
+front clearance IR distance: 393.39 cm
+front clearance IR distance: 308.42 cm
+front clearance IR distance: 178.69 cm
+front clearance IR distance: 255.59 cm
+front clearance IR distance: 18.47 cm
+front clearance IR distance: 13.89 cm
+front clearance IR distance: 11.25 cm
+front clearance IR distance: 11.15 cm
+front clearance IR distance: 11.47 cm
+front clearance IR distance: 12.23 cm
+front clearance IR distance: 15.59 cm
+front clearance IR distance: 15.30 cm
+front clearance IR distance: 15.51 cm
+front clearance IR distance: 15.67 cm
+front clearance IR distance: 13.88 cm
+front clearance IR distance: 15.25 cm
+front clearance IR distance: 13.40 cm
+front clearance IR distance: 14.96 cm
+front clearance IR distance: 20.53 cm
+front clearance IR distance: 20.03 cm
+front clearance IR distance: 19.78 cm
+front clearance IR distance: 16.85 cm
+front clearance IR distance: 18.26 cm
+front clearance IR distance: 18.14 cm
+front clearance IR distance: 18.20 cm
+front clearance IR distance: 21.24 cm
+front clearance IR distance: 22.41 cm
+front clearance IR distance: 29.22 cm
+front clearance IR distance: 32.91 cm
+front clearance IR distance: 23.84 cm
+front clearance IR distance: 20.62 cm
+front clearance IR distance: 21.56 cm
+front clearance IR distance: 23.98 cm
+front clearance IR distance: 45.60 cm
+front clearance IR distance: 42.34 cm
+front clearance IR distance: 41.04 cm
+front clearance IR distance: 37.24 cm
+front clearance IR distance: 27.32 cm
+front clearance IR distance: 27.31 cm
+front clearance IR distance: 20.69 cm
+front clearance IR distance: 26.60 cm
+front clearance IR distance: 31.60 cm
+front clearance IR distance: 29.29 cm
+front clearance IR distance: 28.29 cm
+front clearance IR distance: 23.55 cm
+front clearance IR distance: 27.81 cm
+front clearance IR distance: 31.12 cm
+front clearance IR distance: 28.07 cm
+front clearance IR distance: 35.81 cm
+front clearance IR distance: 111.62 cm
+front clearance IR distance: 80.98 cm
+front clearance IR distance: 65.11 cm
+front clearance IR distance: 44.35 cm
+front clearance IR distance: 38.43 cm
+front clearance IR distance: 33.51 cm
+front clearance IR distance: 33.48 cm
+front clearance IR distance: 90.04 cm
+front clearance IR distance: 61.28 cm
+front clearance IR distance: 57.64 cm
+front clearance IR distance: 56.50 cm
+front clearance IR distance: 38.66 cm
+front clearance IR distance: 39.20 cm
+front clearance IR distance: 31.74 cm
+front clearance IR distance: 35.08 cm
+front clearance IR distance: 64.38 cm
+front clearance IR distance: 56.81 cm
+front clearance IR distance: 42.21 cm
+front clearance IR distance: 35.07 cm
+front clearance IR distance: 34.75 cm
+front clearance IR distance: 34.09 cm
+front clearance IR distance: 46.98 cm
+front clearance IR distance: 41.50 cm
+front clearance IR distance: 124.19 cm
+front clearance IR distance: 89.10 cm
+front clearance IR distance: 71.55 cm
+front clearance IR distance: 48.17 cm
+front clearance IR distance: 38.55 cm
+front clearance IR distance: 32.47 cm
+front clearance IR distance: 31.64 cm
+front clearance IR distance: 69.90 cm
+front clearance IR distance: 51.44 cm
+front clearance IR distance: 48.36 cm
+front clearance IR distance: 45.95 cm
+front clearance IR distance: 35.24 cm
+front clearance IR distance: 33.88 cm
+front clearance IR distance: 34.15 cm
+front clearance IR distance: 33.80 cm
+front clearance IR distance: 90.20 cm
+front clearance IR distance: 69.72 cm
+front clearance IR distance: 60.03 cm
+front clearance IR distance: 49.55 cm
+front clearance IR distance: 34.62 cm
+front clearance IR distance: 32.52 cm
+front clearance IR distance: 29.31 cm
+front clearance IR distance: 29.87 cm
+front clearance IR distance: 48.55 cm
+front clearance IR distance: 46.04 cm
+front clearance IR distance: 45.66 cm
+front clearance IR distance: 36.79 cm
+front clearance IR distance: 32.69 cm
+front clearance IR distance: 35.56 cm
+front clearance IR distance: 31.58 cm
+front clearance IR distance: 32.05 cm
+front clearance IR distance: 95.03 cm
+front clearance IR distance: 78.29 cm
+front clearance IR distance: 69.91 cm
+front clearance IR distance: 48.45 cm
+front clearance IR distance: 36.87 cm
+front clearance IR distance: 30.58 cm
+front clearance IR distance: 25.36 cm
+front clearance IR distance: 30.42 cm
+front clearance IR distance: 31.47 cm
+front clearance IR distance: 39.82 cm
+front clearance IR distance: 44.53 cm
+front clearance IR distance: 31.21 cm
+front clearance IR distance: 24.55 cm
+front clearance IR distance: 24.79 cm
+front clearance IR distance: 27.04 cm
+front clearance IR distance: 60.36 cm
+front clearance IR distance: 52.38 cm
+front clearance IR distance: 38.70 cm
+front clearance IR distance: 32.27 cm
+front clearance IR distance: 26.99 cm
+front clearance IR distance: 26.84 cm
+front clearance IR distance: 20.93 cm
+front clearance IR distance: 25.48 cm
+front clearance IR distance: 26.70 cm
+front clearance IR distance: 26.55 cm
+front clearance IR distance: 26.33 cm
+front clearance IR distance: 23.24 cm
+front clearance IR distance: 25.58 cm
+front clearance IR distance: 28.20 cm
+front clearance IR distance: 25.89 cm
+front clearance IR distance: 34.31 cm
+front clearance IR distance: 34.37 cm
+front clearance IR distance: 39.38 cm
+front clearance IR distance: 41.88 cm
+front clearance IR distance: 33.08 cm
+front clearance IR distance: 31.95 cm
+front clearance IR distance: 29.47 cm
+front clearance IR distance: 30.34 cm
+front clearance IR distance: 54.99 cm
+front clearance IR distance: 47.72 cm
+front clearance IR distance: 46.50 cm
+front clearance IR distance: 45.89 cm
+front clearance IR distance: 32.49 cm
+front clearance IR distance: 30.37 cm
+front clearance IR distance: 25.26 cm
+front clearance IR distance: 25.97 cm
+front clearance IR distance: 39.99 cm
+front clearance IR distance: 42.63 cm
+front clearance IR distance: 43.51 cm
+front clearance IR distance: 32.71 cm
+front clearance IR distance: 30.16 cm
+front clearance IR distance: 30.90 cm
+front clearance IR distance: 28.65 cm
+front clearance IR distance: 29.34 cm
+front clearance IR distance: 71.72 cm
+front clearance IR distance: 55.39 cm
+front clearance IR distance: 47.92 cm
+front clearance IR distance: 34.54 cm
+front clearance IR distance: 29.92 cm
+front clearance IR distance: 27.10 cm
+front clearance IR distance: 26.89 cm
+front clearance IR distance: 43.38 cm
+front clearance IR distance: 36.71 cm
+front clearance IR distance: 36.09 cm
+front clearance IR distance: 35.52 cm
+front clearance IR distance: 28.25 cm
+front clearance IR distance: 28.25 cm
+front clearance IR distance: 27.77 cm
+front clearance IR distance: 28.18 cm
+front clearance IR distance: 48.78 cm
+front clearance IR distance: 42.13 cm
+front clearance IR distance: 39.36 cm
+front clearance IR distance: 37.69 cm
+front clearance IR distance: 27.79 cm
+front clearance IR distance: 28.91 cm
+front clearance IR distance: 25.81 cm
+front clearance IR distance: 26.87 cm
+front clearance IR distance: 41.11 cm
+front clearance IR distance: 38.29 cm
+front clearance IR distance: 37.16 cm
+front clearance IR distance: 28.65 cm
+front clearance IR distance: 27.67 cm
+front clearance IR distance: 29.24 cm
+front clearance IR distance: 27.40 cm
+front clearance IR distance: 28.17 cm
+front clearance IR distance: 47.70 cm
+front clearance IR distance: 42.74 cm
+front clearance IR distance: 40.91 cm
+front clearance IR distance: 30.22 cm
+front clearance IR distance: 29.40 cm
+front clearance IR distance: 27.62 cm
+front clearance IR distance: 25.95 cm
+front clearance IR distance: 52.80 cm
+front clearance IR distance: 42.43 cm
+front clearance IR distance: 38.18 cm
+front clearance IR distance: 36.30 cm
+front clearance IR distance: 28.31 cm
+front clearance IR distance: 30.41 cm
+front clearance IR distance: 27.23 cm
+front clearance IR distance: 28.08 cm
+front clearance IR distance: 52.44 cm
+front clearance IR distance: 48.86 cm
+front clearance IR distance: 38.07 cm
+front clearance IR distance: 32.84 cm
+front clearance IR distance: 31.25 cm
+front clearance IR distance: 32.84 cm
+front clearance IR distance: 32.45 cm
+front clearance IR distance: 36.10 cm
+front clearance IR distance: 45.05 cm
+front clearance IR distance: 53.30 cm
+front clearance IR distance: 57.42 cm
+front clearance IR distance: 42.36 cm
+front clearance IR distance: 41.77 cm
+front clearance IR distance: 35.18 cm
+front clearance IR distance: 31.08 cm
+front clearance IR distance: 69.62 cm
+front clearance IR distance: 59.98 cm
+front clearance IR distance: 51.76 cm
+front clearance IR distance: 48.08 cm
+front clearance IR distance: 37.53 cm
+front clearance IR distance: 39.35 cm
+front clearance IR distance: 37.97 cm
+front clearance IR distance: 39.95 cm
+front clearance IR distance: 199.56 cm
+front clearance IR distance: 112.98 cm
+front clearance IR distance: 113.53 cm
+front clearance IR distance: 113.81 cm
+front clearance IR distance: 69.17 cm
+front clearance IR distance: 55.55 cm
+front clearance IR distance: 39.92 cm
+front clearance IR distance: 36.92 cm
+front clearance IR distance: 104.17 cm
+front clearance IR distance: 91.91 cm
+front clearance IR distance: 85.77 cm
+front clearance IR distance: 69.89 cm
+front clearance IR distance: 44.86 cm
+front clearance IR distance: 38.92 cm
+front clearance IR distance: 25.96 cm
+front clearance IR distance: 30.45 cm
+front clearance IR distance: 72.27 cm
+front clearance IR distance: 50.10 cm
+front clearance IR distance: 39.01 cm
+front clearance IR distance: 28.51 cm
+front clearance IR distance: 32.55 cm
+front clearance IR distance: 35.81 cm
+front clearance IR distance: 32.55 cm
+front clearance IR distance: 54.67 cm
+front clearance IR distance: 317.59 cm
+front clearance IR distance: 173.62 cm
+front clearance IR distance: 102.22 cm
+front clearance IR distance: 63.76 cm
+front clearance IR distance: 49.89 cm
+front clearance IR distance: 39.77 cm
+front clearance IR distance: 35.71 cm
+front clearance IR distance: 121.29 cm
+front clearance IR distance: 75.86 cm
+front clearance IR distance: 62.02 c
 
 
 
-Assuming fire and obstacle must have a gap
-986, 230, 286, 31
-348, 407, 254, 45
-292, 502, 442, 68
-63, 974, 480, 23
-60, 996, 968, 50
-13, 987, 984, 60
-104, 480, 985, 68
-74, 440, 587, 300
-13, 167, 276, 980
-20, 189, 270, 986
+
+Setup....
+ENTERING INITIALISING STATE
+INITIALISING....
+Enabling Motors...
+Enabling Gyroscope...
+ENTERING SEARCHING STATE
+Searching...
+Detected fires:
+Fire: -1.00
+fire_angle: 125.73
+Rotating 125.73 degrees
+SETTLED. Stopping.
+ENTERING NAVIGATING STATE
+Settling sensors...
+left IR: 109.12 | front left IR: 862.09 | ultrasonic: 32.28 | front right IR: 21.82 | right IR: 21.33
+left IR: 105.25 | front left IR: 892.18 | ultrasonic: 32.28 | front right IR: 21.70 | right IR: 20.99
+left IR: 103.83 | front left IR: 528.59 | ultrasonic: 32.21 | front right IR: 21.26 | right IR: 20.78
+left IR: 103.52 | front left IR: 837.02 | ultrasonic: 32.28 | front right IR: 19.98 | right IR: 21.56
+left IR: 95.92 | front left IR: 914.13 | ultrasonic: 32.28 | front right IR: 20.70 | right IR: 21.56
+left IR: 100.33 | front left IR: 933.41 | ultrasonic: 32.28 | front right IR: 21.10 | right IR: 21.56
+left IR: 103.05 | front left IR: 512.37 | ultrasonic: 32.28 | front right IR: 20.49 | right IR: 20.90
+left IR: 103.73 | front left IR: 832.97 | ultrasonic: 32.69 | front right IR: 21.14 | right IR: 20.47
+left IR: 86.18 | front left IR: 803.78 | ultrasonic: 32.28 | front right IR: 21.88 | right IR: 20.03
+left IR: 100.89 | front left IR: 1181.06 | ultrasonic: 32.55 | front right IR: 22.35 | right IR: 20.68
+Driving forward
+L_IR: 904.95 | Ultrasonic: 32.14 | R_IR: 29.47 cm
+L_IR: 1000.14 | Ultrasonic: 32.90 | R_IR: 26.09 cm
+L_IR: 1047.74 | Ultrasonic: 32.14 | R_IR: 24.84 cm
+L_IR: 1071.53 | Ultrasonic: 32.90 | R_IR: 24.10 cm
+L_IR: 936.40 | Ultrasonic: 32.34 | R_IR: 23.62 cm
+L_IR: 1015.87 | Ultrasonic: 32.00 | R_IR: 23.49 cm
+L_IR: 908.57 | Ultrasonic: 32.83 | R_IR: 23.65 cm
+L_IR: 1001.95 | Ultrasonic: 38.00 | R_IR: 23.40 cm
+L_IR: 901.61 | Ultrasonic: 80.34 | R_IR: 23.96 cm
+L_IR: 851.44 | Ultrasonic: 79.93 | R_IR: 23.66 cm
+L_IR: 973.38 | Ultrasonic: 79.72 | R_IR: 23.51 cm
+L_IR: 887.33 | Ultrasonic: 27.45 | R_IR: 23.55 cm
+L_IR: 844.30 | Ultrasonic: 25.79 | R_IR: 23.45 cm
+L_IR: 822.78 | Ultrasonic: 25.45 | R_IR: 23.30 cm
+L_IR: 959.06 | Ultrasonic: 75.66 | R_IR: 22.90 cm
+L_IR: 880.16 | Ultrasonic: 73.72 | R_IR: 22.81 cm
+L_IR: 840.72 | Ultrasonic: 20.69 | R_IR: 20.95 cm
+L_IR: 820.99 | Ultrasonic: 70.90 | R_IR: 20.47 cm
+L_IR: 811.13 | Ultrasonic: 17.24 | R_IR: 20.31 cm
+L_IR: 719.99 | Ultrasonic: 16.14 | R_IR: 19.10 cm
+L_IR: 617.97 | Ultrasonic: 13.72 | R_IR: 18.25 cm
+1 | 52 | 65 | 2
+OBSTACLE DETECTED! STOPPING.
+ENTERING AVOID STATE
+Should redetermine strafe direction via side sensors. within range to hit something   L:
+95.78   R: 26.32
+strafing left. reading right front
+AVOIDANCE STRAFE STAGE
+front clearance IR distance: 22.26 cm
+AVOIDANCE DRIVE FORWARD STAGE
+side clearance IR: 41.64
+TrackFlameOnSpot
+angle: 0.95
+angle: 1.09
+angle: -0.80
+Flame centred
+ENTERING NAVIGATING STATE
+Settling sensors...
+left IR: 86.52 | front left IR: 540.55 | ultrasonic: 9.79 | front right IR: 17.75 | right IR: 48.44
+left IR: 74.21 | front left IR: 440.68 | ultrasonic: 9.24 | front right IR: 11.12 | right IR: 47.44
+left IR: 76.93 | front left IR: 303.16 | ultrasonic: 9.31 | front right IR: 8.25 | right IR: 46.20
+left IR: 76.51 | front left IR: 229.34 | ultrasonic: 9.31 | front right IR: 6.95 | right IR: 41.19
+left IR: 82.87 | front left IR: 240.80 | ultrasonic: 10.97 | front right IR: 6.58 | right IR: 36.44
+left IR: 79.90 | front left IR: 250.37 | ultrasonic: 10.97 | front right IR: 6.48 | right IR: 34.27
+left IR: 80.41 | front left IR: 218.97 | ultrasonic: 10.97 | front right IR: 6.46 | right IR: 32.91
+left IR: 80.53 | front left IR: 166.76 | ultrasonic: 11.38 | front right IR: 6.46 | right IR: 35.61
+left IR: 81.14 | front left IR: 231.86 | ultrasonic: 11.38 | front right IR: 6.38 | right IR: 35.78
+left IR: 81.00 | front left IR: 248.14 | ultrasonic: 11.38 | front right IR: 6.43 | right IR: 36.27
+Driving forward
+L_IR: 272.40 | Ultrasonic: 11.45 | R_IR: 6.45 cm
+2 | 37 | 68 | 3
+OBSTACLE DETECTED! STOPPING.
+ENTERING AVOID STATE
+Should redetermine strafe direction via side sensors. within range to hit something   L:
+70.44   R: 33.90
+strafing left. reading right front
+AVOIDANCE STRAFE STAGE
+front clearance IR distance: 6.63 cm
+front clearance IR distance: 6.60 cm
+front clearance IR distance: 6.34 cm
+front clearance IR distance: 6.20 cm
+front clearance IR distance: 6.61 cm
+front clearance IR distance: 6.28 cm
+front clearance IR distance: 6.60 cm
+front clearance IR distance: 6.47 cm
+front clearance IR distance: 6.40 cm
+front clearance IR distance: 6.37 cm
+front clearance IR distance: 6.03 cm
+front clearance IR distance: 6.30 cm
+front clearance IR distance: 5.97 cm
+front clearance IR distance: 6.18 cm
+front clearance IR distance: 6.06 cm
+front clearance IR distance: 5.95 cm
+front clearance IR distance: 5.90 cm
+front clearance IR distance: 5.86 cm
+front clearance IR distance: 5.61 cm
+front clearance IR distance: 5.71 cm
+front clearance IR distance: 5.48 cm
+front clearance IR distance: 5.66 cm
+front clearance IR distance: 5.56 cm
+front clearance IR distance: 5.50 cm
+front clearance IR distance: 5.47 cm
+front clearance IR distance: 5.31 cm
+front clearance IR distance: 5.48 cm
+front clearance IR distance: 5.26 cm
+front clearance IR distance: 5.33 cm
+front clearance IR distance: 5.29 cm
+front clearance IR distance: 5.28 cm
+front clearance IR distance: 5.28 cm
+front clearance IR distance: 5.29 cm
+front clearance IR distance: 5.18 cm
+front clearance IR distance: 5.40 cm
+front clearance IR distance: 5.25 cm
+front clearance IR distance: 5.46 cm
+front clearance IR distance: 5.45 cm
+front clearance IR distance: 5.50 cm
+front clearance IR distance: 5.53 cm
+front clearance IR distance: 5.44 cm
+front clearance IR distance: 5.55 cm
+front clearance IR distance: 5.81 cm
+front clearance IR distance: 5.73 cm
+front clearance IR distance: 5.97 cm
+front clearance IR distance: 6.05 cm
+front clearance IR distance: 6.09 cm
+front clearance IR distance: 6.21 cm
+front clearance IR distance: 6.18 cm
+front clearance IR distance: 6.66 cm
+front clearance IR distance: 6.48 cm
+front clearance IR distance: 6.76 cm
+front clearance IR distance: 7.32 cm
+front clearance IR distance: 7.48 cm
+front clearance IR distance: 7.57 cm
+front clearance IR distance: 7.88 cm
+front clearance IR distance: 8.25 cm
+front clearance IR distance: 10.39 cm
+front clearance IR distance: 10.10 cm
+front clearance IR distance: 11.94 cm
+front clearance IR distance: 11.72 cm
+front clearance IR distance: 11.78 cm
+front clearance IR distance: 11.83 cm
+front clearance IR distance: 10.84 cm
+front clearance IR distance: 10.91 cm
+front clearance IR distance: 10.94 cm
+front clearance IR distance: 10.85 cm
+front clearance IR distance: 12.32 cm
+front clearance IR distance: 12.00 cm
+front clearance IR distance: 11.92 cm
+front clearance IR distance: 11.90 cm
+front clearance IR distance: 10.86 cm
+front clearance IR distance: 11.18 cm
+front clearance IR distance: 11.34 cm
+front clearance IR distance: 11.44 cm
+front clearance IR distance: 12.76 cm
+front clearance IR distance: 12.40 cm
+front clearance IR distance: 12.24 cm
+front clearance IR distance: 12.17 cm
+front clearance IR distance: 10.90 cm
+front clearance IR distance: 11.95 cm
+front clearance IR distance: 10.90 cm
+front clearance IR distance: 11.50 cm
+front clearance IR distance: 13.43 cm
+front clearance IR distance: 13.18 cm
+front clearance IR distance: 13.09 cm
+front clearance IR distance: 11.91 cm
+front clearance IR distance: 12.45 cm
+front clearance IR distance: 12.72 cm
+front clearance IR distance: 12.46 cm
+front clearance IR distance: 14.93 cm
+front clearance IR distance: 14.50 cm
+front clearance IR distance: 14.44 cm
+front clearance IR distance: 14.44 cm
+front clearance IR distance: 13.37 cm
+front clearance IR distance: 14.03 cm
+front clearance IR distance: 14.36 cm
+front clearance IR distance: 16.38 cm
+front clearance IR distance: 28.78 cm
+front clearance IR distance: 29.80 cm
+front clearance IR distance: 39.52 cm
+front clearance IR distance: 44.38 cm
+front clearance IR distance: 31.95 cm
+front clearance IR distance: 30.62 cm
+front clearance IR distance: 25.15 cm
+front clearance IR distance: 28.83 cm
+front clearance IR distance: 61.26 cm
+front clearance IR distance: 49.84 cm
+front clearance IR distance: 38.26 cm
+front clearance IR distance: 32.05 cm
+front clearance IR distance: 32.06 cm
+front clearance IR distance: 31.44 cm
+front clearance IR distance: 46.49 cm
+front clearance IR distance: 39.50 cm
+front clearance IR distance: 93.05 cm
+front clearance IR distance: 71.15 cm
+front clearance IR distance: 59.16 cm
+front clearance IR distance: 40.07 cm
+front clearance IR distance: 34.51 cm
+front clearance IR distance: 32.66 cm
+front clearance IR distance: 29.11 cm
+front clearance IR distance: 61.39 cm
+front clearance IR distance: 50.23 cm
+front clearance IR distance: 44.33 cm
+front clearance IR distance: 41.70 cm
+front clearance IR distance: 31.43 cm
+front clearance IR distance: 33.45 cm
+front clearance IR distance: 31.37 cm
+front clearance IR distance: 32.65 cm
+front clearance IR distance: 80.45 cm
+front clearance IR distance: 64.84 cm
+front clearance IR distance: 57.04 cm
+front clearance IR distance: 53.14 cm
+front clearance IR distance: 37.43 cm
+front clearance IR distance: 34.75 cm
+front clearance IR distance: 31.18 cm
+front clearance IR distance: 33.60 cm
+front clearance IR distance: 56.62 cm
+front clearance IR distance: 52.93 cm
+front clearance IR distance: 51.64 cm
+front clearance IR distance: 36.97 cm
+front clearance IR distance: 34.97 cm
+front clearance IR distance: 32.69 cm
+front clearance IR distance: 28.99 cm
+front clearance IR distance: 68.58 cm
+front clearance IR distance: 50.32 cm
+front clearance IR distance: 44.70 cm
+front clearance IR distance: 41.56 cm
+front clearance IR distance: 31.83 cm
+front clearance IR distance: 30.39 cm
+front clearance IR distance: 31.01 cm
+front clearance IR distance: 30.34 cm
+front clearance IR distance: 88.47 cm
+front clearance IR distance: 66.87 cm
+front clearance IR distance: 58.06 cm
+front clearance IR distance: 48.56 cm
+front clearance IR distance: 33.75 cm
+front clearance IR distance: 32.09 cm
+front clearance IR distance: 27.61 cm
+front clearance IR distance: 28.28 cm
+front clearance IR distance: 87.44 cm
+front clearance IR distance: 66.36 cm
+front clearance IR distance: 55.82 cm
+front clearance IR distance: 37.75 cm
+front clearance IR distance: 32.37 cm
+front clearance IR distance: 195.49 cm
+front clearance IR distance: 355.72 cm
+front clearance IR distance: 273.60 cm
+front clearance IR distance: 239.94 cm
+front clearance IR distance: 148.28 cm
+front clearance IR distance: 127.19 cm
+front clearance IR distance: 116.64 cm
+front clearance IR distance: 111.37 cm
+front clearance IR distance: 370.11 cm
+front clearance IR distance: 263.73 cm
+front clearance IR distance: 210.55 cm
+front clearance IR distance: 134.24 cm
+front clearance IR distance: 120.17 cm
+front clearance IR distance: 113.13 cm
+front clearance IR distance: 120.00 cm
+front clearance IR distance: 460.63 cm
+front clearance IR distance: 309.00 cm
+front clearance IR distance: 180.49 cm
+front clearance IR distance: 115.21 cm
+front clearance IR distance: 97.47 cm
+front clearance IR distance: 99.69 cm
+front clearance IR distance: 113.27 cm
+front clearance IR distance: 457.27 cm
+front clearance IR distance: 331.77 cm
+front clearance IR distance: 194.85 cm
+front clearance IR distance: 126.39 cm
+front clearance IR distance: 112.20 cm
+front clearance IR distance: 116.58 cm
+front clearance IR distance: 109.24 cm
+front clearance IR distance: 455.26 cm
+front clearance IR distance: 330.76 cm
+front clearance IR distance: 193.70 cm
+front clearance IR distance: 124.54 cm
+front clearance IR distance: 125.70 cm
+front clearance IR distance: 126.28 cm
+front clearance IR distance: 114.09 cm
+front clearance IR distance: 457.68 cm
+front clearance IR distance: 362.65 cm
+front clearance IR distance: 211.67 cm
+front clearance IR distance: 136.19 cm
+front clearance IR distance: 151.76 cm
+front clearance IR distance: 131.20 cm
+front clearance IR distance: 116.55 cm
+front clearance IR distance: 372.70 cm
+front clearance IR distance: 289.48 cm
+front clearance IR distance: 278.55 cm
+front clearance IR distance: 273.09 cm
+front clearance IR distance: 167.64 cm
+front clearance IR distance: 110.35 cm
+front clearance IR distance: 188.99 cm
+front clearance IR distance: 495.13 cm
+front clearance IR distance: 343.31 cm
+front clearance IR distance: 305.46 cm
+front clearance IR distance: 286.54 cm
+front clearance IR distance: 166.84 cm
+front clearance IR distance: 167.09 cm
+front clearance IR distance: 217.35 cm
+front clearance IR distance: 187.36 cm
+front clearance IR distance: 196.81 cm
+front clearance IR distance: 287.27 cm
+front clearance IR distance: 239.38 cm
+front clearance IR distance: 145.68 cm
+front clearance IR distance: 151.52 cm
+front clearance IR distance: 476.39 cm
+front clearance IR distance: 341.33 cm
+front clearance IR distance: 485.09 cm
+front clearance IR distance: 376.35 cm
+front clearance IR distance: 336.51 cm
+front clearance IR distance: 192.27 cm
+front clearance IR distance: 207.86 cm
+front clearance IR distance: 178.17 cm
+front clearance IR distance: 192.22 cm
+front clearance IR distance: 643.77 cm
+front clearance IR distance: 510.75 cm
+front clearance IR distance: 444.24 cm
+front clearance IR distance: 243.32 cm
+front clearance IR distance: 217.40 cm
+front clearance IR distance: 169.18 cm
+front clearance IR distance: 180.33 cm
+front clearance IR distance: 490.80 cm
+front clearance IR distance: 434.26 cm
+front clearance IR distance: 383.38 cm
+front clearance IR distance: 214.41 cm
+front clearance IR distance: 218.93 cm
+front clearance IR distance: 160.41 cm
+front clearance IR distance: 183.34 cm
+front clearance IR distance: 492.31 cm
+front clearance IR distance: 435.02 cm
+front clearance IR distance: 475.49 cm
+front clearance IR distance: 261.76 cm
+front clearance IR distance: 197.56 cm
+front clearance IR distance: 151.83 cm
+front clearance IR distance: 224.25 cm
+front clearance IR distance: 659.79 cm
+front clearance IR distance: 548.16 cm
+front clearance IR distance: 462.94 cm
+front clearance IR distance: 259.79 cm
+front clearance IR distance: 241.61 cm
+front clearance IR distance: 184.24 cm
+front clearance IR distance: 225.93 cm
+front clearance IR distance: 660.63 cm
+front clearance IR distance: 730.95 cm
+front clearance IR distance: 766.11 cm
+front clearance IR distance: 417.52 cm
+front clearance IR distance: 342.57 cm
+front clearance IR distance: 234.72 cm
+front clearance IR distance: 220.49 cm
+front clearance IR distance: 657.91 cm
+front clearance IR distance: 729.59 cm
+front clearance IR distance: 765.43 cm
+front clearance IR distance: 411.03 cm
+front clearance IR distance: 353.85 cm
+front clearance IR distance: 232.24 cm
+front clearance IR distance: 227.84 cm
+front clearance IR distance: 428.34 cm
+front clearance IR distance: 614.81 cm
+front clearance IR distance: 708.04 cm
+front clearance IR distance: 385.11 cm
+front clearance IR distance: 381.42 cm
+front clearance IR distance: 269.39 cm
+front clearance IR distance: 300.94 cm
+front clearance IR distance: 551.11 cm
+front clearance IR distance: 676.19 cm
+front clearance IR distance: 738.73 cm
+front clearance IR distance: 401.24 cm
+front clearance IR distance: 389.48 cm
+front clearance IR distance: 241.95 cm
+front clearance IR distance: 269.31 cm
+front clearance IR distance: 535.29 cm
+front clearance IR distance: 668.28 cm
+front clearance IR distance: 881.81 cm
+front clearance IR distance: 471.25 cm
+front clearance IR distance: 383.96 cm
+front clearance IR distance: 266.22 cm
+front clearance IR distance: 266.92 cm
+front clearance IR distance: 681.13 cm
+front clearance IR distance: 741.20 cm
+front clearance IR distance: 771.23 cm
+front clearance IR distance: 425.48 cm
+front clearance IR distance: 401.60 cm
+front clearance IR distance: 334.61 cm
+front clearance IR distance: 385.57 cm
+front clearance IR distance: 593.42 cm
+front clearance IR distance: 611.13 cm
+front clearance IR distance: 706.20 cm
+front clearance IR distance: 392.96 cm
+front clearance IR distance: 385.34 cm
+front clearance IR distance: 358.92 cm
+front clearance IR distance: 345.71 cm
+front clearance IR distance: 573.49 cm
+front clearance IR distance: 687.38 cm
+front clearance IR distance: 744.32 cm
+front clearance IR distance: 406.63 cm
+front clearance IR distance: 369.56 cm
+front clearance IR distance: 373.64 cm
+front clearance IR distance: 444.80 cm
+front clearance IR distance: 770.07 cm
+front clearance IR distance: 699.45 cm
+front clearance IR distance: 384.20 cm
+front clearance IR distance: 226.57 cm
+front clearance IR distance: 225.00 cm
+front clearance IR distance: 301.36 cm
+front clearance IR distance: 408.66 cm
+front clearance IR distance: 752.00 cm
+front clearance IR distance: 776.63 cm
+front clearance IR distance: 448.80 cm
+front clearance IR distance: 284.88 cm
+front clearance IR distance: 360.71 cm
+front clearance IR distance: 302.16 cm
+front clearance IR distance: 254.21 cm
+front clearance IR distance: 441.53 cm
+front clearance IR distance: 621.40 cm
+front clearance IR distance: 361.65 cm
+front clearance IR distance: 233.87 cm
+front clearance IR distance: 305.80 cm
+front clearance IR distance: 198.44 cm
+front clearance IR distance: 233.03 cm
+front clearance IR distance: 664.18 cm
+front clearance IR distance: 732.72 cm
+front clearance IR distance: 767.00 cm
+front clearance IR distance: 931.16 cm
+front clearance IR distance: 683.85 cm
+front clearance IR distance: 376.39 cm
+front clearance IR distance: 322.01 cm
+front clearance IR distance: 561.64 cm
+front clearance IR distance: 447.07 cm
+front clearance IR distance: 481.51 cm
+front clearance IR distance: 459.02 cm
+front clearance IR distance: 260.60 cm
+front clearance IR distance: 152.63 cm
+front clearance IR distance: 97.17 cm
+front clearance IR distance: 83.05 cm
+front clearance IR distance: 53.14 cm
+front clearance IR distance: 36.09 cm
+front clearance IR distance: 27.56 cm
+front clearance IR distance: 21.56 cm
+front clearance IR distance: 17.78 cm
+front clearance IR distance: 15.72 cm
+front clearance IR distance: 16.42 cm
+front clearance IR distance: 14.79 cm
+front clearance IR distance: 13.98 cm
+front clearance IR distance: 12.51 cm
+front clearance IR distance: 12.52 cm
+front clearance IR distance: 12.50 cm
+front clearance IR distance: 12.39 cm
+front clearance IR distance: 13.76 cm
+front clearance IR distance: 13.02 cm
+front clearance IR distance: 12.65 cm
+front clearance IR distance: 11.79 cm
+front clearance IR distance: 11.93 cm
+front clearance IR distance: 11.90 cm
+front clearance IR distance: 11.87 cm
+front clearance IR distance: 12.77 cm
+front clearance IR distance: 12.23 cm
+front clearance IR distance: 11.96 cm
+front clearance IR distance: 10.95 cm
+front clearance IR distance: 11.35 cm
+front clearance IR distance: 11.45 cm
+front clearance IR distance: 11.57 cm
+front clearance IR distance: 12.75 cm
+front clearance IR distance: 12.27 cm
+front clearance IR distance: 12.05 cm
+front clearance IR distance: 11.13 cm
+front clearance IR distance: 11.50 cm
+front clearance IR distance: 11.62 cm
+front clearance IR distance: 11.75 cm
+front clearance IR distance: 12.95 cm
+front clearance IR distance: 12.39 cm
+front clearance IR distance: 12.13 cm
+front clearance IR distance: 10.83 cm
+front clearance IR distance: 9.94 cm
+front clearance IR distance: 8.40 cm
+front clearance IR distance: 8.04 cm
+front clearance IR distance: 7.34 cm
+front clearance IR distance: 6.99 cm
+front clearance IR distance: 6.68 cm
+front clearance IR distance: 6.21 cm
+front clearance IR distance: 6.20 cm
+front clearance IR distance: 5.83 cm
+front clearance IR distance: 5.87 cm
+front clearance IR distance: 5.73 cm
+front clearance IR distance: 5.66 cm
+front clearance IR distance: 5.59 cm
+front clearance IR distance: 5.41 cm
+front clearance IR distance: 5.50 cm
+front clearance IR distance: 5.44 cm
+front clearance IR distance: 5.34 cm
+front clearance IR distance: 5.29 cm
+front clearance IR distance: 5.27 cm
+front clearance IR distance: 5.25 cm
+front clearance IR distance: 5.27 cm
+front clearance IR distance: 5.21 cm
+front clearance IR distance: 5.32 cm
+front clearance IR distance: 5.27 cm
+front clearance IR distance: 5.25 cm
+front clearance IR distance: 5.24 cm
+front clearance IR distance: 5.22 cm
+front clearance IR distance: 5.35 cm
+front clearance IR distance: 5.27 cm
+front clearance IR distance: 5.35 cm
+front clearance IR distance: 5.29 cm
+front clearance IR distance: 5.26 cm
+front clearance IR distance: 5.25 cm
+front clearance IR distance: 5.21 cm
+front clearance IR distance: 5.34 cm
+front clearance IR distance: 5.27 cm
+front clearance IR distance: 5.37 cm
+front clearance IR distance: 5.35 cm
+front clearance IR distance: 5.34 cm
+front clearance IR distance: 5.36 cm
+front clearance IR distance: 5.30 cm
+front clearance IR distance: 5.57 cm
+front clearance IR distance: 5.48 cm
+front clearance IR distance: 5.80 cm
+front clearance IR distance: 5.88 cm
+front clearance IR distance: 5.92 cm
+front clearance IR distance: 6.06 cm
+front clearance IR distance: 6.02 cm
+front clearance IR distance: 6.58 cm
+front clearance IR distance: 6.49 cm
+front clearance IR distance: 7.06 cm
+front clearance IR distance: 7.23 cm
+front clearance IR distance: 7.32 cm
+front clearance IR distance: 7.61 cm
+front clearance IR distance: 7.80 cm
+front clearance IR distance: 10.28 cm
+front clearance IR distance: 14.40 cm
+front clearance IR distance: 70.63 cm
+front clearance IR distance: 183.65 cm
+front clearance IR distance: 130.48 cm
+front clearance IR distance: 105.10 cm
+front clearance IR distance: 92.41 cm
+front clearance IR distance: 93.42 cm
+front clearance IR distance: 110.14 cm
+front clearance IR distance: 455.71 cm
+front clearance IR distance: 628.49 cm
+front clearance IR distance: 417.38 cm
+front clearance IR distance: 320.41 cm
+front clearance IR distance: 308.54 cm
+front clearance IR distance: 232.95 cm
+front clearance IR distance: 179.91 cm
+front clearance IR distance: 637.62 cm
+front clearance IR distance: 866.47 cm
+front clearance IR distance: 833.87 cm
+front clearance IR distance: 817.57 cm
+front clearance IR distance: 809.42 cm
+front clearance IR distance: 516.43 cm
+front clearance IR distance: 572.64 cm
+front clearance IR distance: 833.98 cm
+front clearance IR distance: 731.41 cm
+front clearance IR distance: 913.37 cm
+front clearance IR distance: 1004.35 cm
+front clearance IR distance: 605.31 cm
+front clearance IR distance: 381.34 cm
+front clearance IR distance: 738.33 cm
+front clearance IR distance: 769.80 cm
+front clearance IR distance: 785.54 cm
+front clearance IR distance: 940.43 cm
+front clearance IR distance: 1017.88 cm
+front clearance IR distance: 575.62 cm
+front clearance IR distance: 835.47 cm
+front clearance IR distance: 566.07 cm
+front clearance IR distance: 683.67 cm
+front clearance IR distance: 656.26 cm
+front clearance IR distance: 728.76 cm
+front clearance IR distance: 912.05 cm
+front clearance IR distance: 509.07 cm
+front clearance IR distance: 1105.66 cm
+front clearance IR distance: 2362.28 cm
+front clearance IR distance: 1728.81 cm
+front clearance IR distance: 1030.65 cm
+front clearance IR distance: 1062.99 cm
+front clearance IR distance: 932.13 cm
+front clearance IR distance: 529.50 cm
+front clearance IR distance: 812.41 cm
+front clearance IR distance: 953.87 cm
+front clearance IR distance: 1024.60 cm
+front clearance IR distance: 1059.97 cm
+front clearance IR distance: 1077.65 cm
+front clearance IR distance: 1086.49 cm
+front clearance IR distance: 609.92 cm
+front clearance IR distance: 705.60 cm
+front clearance IR distance: 25.38 cm
+front clearance IR distance: 21.33 cm
+front clearance IR distance: 21.08 cm
+front clearance IR distance: 23.05 cm
+front clearance IR distance: 36.70 cm
+front clearance IR distance: 35.56 cm
+front clearance IR distance: 42.96 cm
+front clearance IR distance: 46.65 cm
+front clearance IR distance: 32.87 cm
+front clearance IR distance: 29.93 cm
+front clearance IR distance: 24.23 cm
+front clearance IR distance: 24.26 cm
+front clearance IR distance: 33.10 cm
+front clearance IR distance: 28.23 cm
+front clearance IR distance: 25.91 cm
+front clearance IR distance: 24.75 cm
+front clearance IR distance: 25.15 cm
+front clearance IR distance: 25.09 cm
+front clearance IR distance: 20.75 cm
+front clearance IR distance: 23.16 cm
+front clearance IR distance: 31.11 cm
+front clearance IR distance: 43.24 cm
+front clearance IR distance: 48.62 cm
+front clearance IR distance: 36.22 cm
+front clearance IR distance: 31.60 cm
+front clearance IR distance: 27.16 cm
+front clearance IR distance: 23.82 cm
+front clearance IR distance: 38.91 cm
+front clearance IR distance: 30.04 cm
+front clearance IR distance: 29.49 cm
+front clearance IR distance: 28.87 cm
+front clearance IR distance: 26.23 cm
+front clearance IR distance: 27.41 cm
+front clearance IR distance: 25.97 cm
+front clearance IR distance: 27.28 cm
+front clearance IR distance: 58.49 cm
+front clearance IR distance: 53.87 cm
+front clearance IR distance: 61.62 cm
+front clearance IR distance: 65.50 cm
+front clearance IR distance: 42.22 cm
+front clearance IR distance: 35.76 cm
+front clearance IR distance: 25.74 cm
+front clearance IR distance: 25.39 cm
+front clearance IR distance: 42.63 cm
+front clearance IR distance: 51.25 cm
+front clearance IR distance: 55.56 cm
+front clearance IR distance: 37.62 cm
+front clearance IR distance: 28.88 cm
+front clearance IR distance: 36.21 cm
+front clearance IR distance: 32.07 cm
+front clearance IR distance: 32.52 cm
+front clearance IR distance: 119.70 cm
+front clearance IR distance: 84.47 cm
+front clearance IR distance: 66.85 cm
+front clearance IR distance: 44.48 cm
+front clearance IR distance: 37.45 cm
+front clearance IR distance: 34.13 cm
+front clearance IR distance: 28.02 cm
+front clearance IR distance: 53.83 cm
+front clearance IR distance: 51.01 cm
+front clearance IR distance: 44.09 cm
+front clearance IR distance: 41.58 cm
+front clearance IR distance: 31.75 cm
+front clearance IR distance: 32.59 cm
+front clearance IR distance: 30.10 cm
+front clearance IR distance: 31.77 cm
+front clearance IR distance: 54.28 cm
+front clearance IR distance: 51.23 cm
+front clearance IR distance: 41.87 cm
+front clearance IR distance: 37.19 cm
+front clearance IR distance: 33.61 cm
+front clearance IR distance: 33.53 cm
+front clearance IR distance: 30.41 cm
+front clearance IR distance: 33.79 cm
+front clearance IR distance: 44.58 cm
+front clearance IR distance: 42.16 cm
+front clearance IR distance: 41.31 cm
+front clearance IR distance: 33.43 cm
+front clearance IR distance: 33.44 cm
+front clearance IR distance: 35.01 cm
+front clearance IR distance: 32.72 cm
+front clearance IR distance: 34.37 cm
+front clearance IR distance: 74.23 cm
+front clearance IR distance: 61.21 cm
+front clearance IR distance: 55.22 cm
+front clearance IR distance: 38.87 cm
+front clearance IR distance: 33.90 cm
+front clearance IR distance: 32.36 cm
+front clearance IR distance: 29.38 cm
+front clearance IR distance: 44.62 cm
+front clearance IR distance: 40.32 cm
+front clearance IR distance: 44.78 cm
+front clearance IR distance: 47.56 cm
+front clearance IR distance: 36.56 cm
+front clearance IR distance: 34.10 cm
+front clearance IR distance: 33.77 cm
+front clearance IR distance: 33.85 cm
+front clearance IR distance: 63.76 cm
+front clearance IR distance: 59.56 cm
+front clearance IR distance: 54.40 cm
+front clearance IR distance: 52.37 cm
+front clearance IR distance: 37.65 cm
+front clearance IR distance: 34.23 cm
+front clearance IR distance: 28.47 cm
+front clearance IR distance: 31.20 cm
+front clearance IR distance: 46.37 cm
+front clearance IR distance: 43.41 cm
+front clearance IR distance: 36.35 cm
+front clearance IR distance: 32.82 cm
+front clearance IR distance: 32.67 cm
+front clearance IR distance: 33.05 cm
+front clearance IR distance: 30.49 cm
+front clearance IR distance: 33.54 cm
+front clearance IR distance: 110.48 cm
+front clearance IR distance: 82.92 cm
+front clearance IR distance: 69.14 cm
+front clearance IR distance: 46.36 cm
+front clearance IR distance: 38.01 cm
+front clearance IR distance: 35.04 cm
+front clearance IR distance: 29.09 cm
+front clearance IR distance: 87.85 cm
+front clearance IR distance: 68.54 cm
+front clearance IR distance: 51.74 cm
+front clearance IR distance: 44.17 cm
+front clearance IR distance: 33.04 cm
+front clearance IR distance: 38.29 cm
+front clearance IR distance: 36.36 cm
+front clearance IR distance: 38.77 cm
+front clearance IR distance: 122.82 cm
+front clearance IR distance: 108.25 cm
+front clearance IR distance: 111.17 cm
+front clearance IR distance: 90.28 cm
+front clearance IR distance: 57.53 cm
+front clearance IR distance: 49.73 cm
+front clearance IR distance: 35.63 cm
+front clearance IR distance: 42.44 cm
+front clearance IR distance: 242.69 cm
+front clearance IR distance: 142.70 cm
+front clearance IR distance: 92.71 cm
+front clearance IR distance: 57.31 cm
+front clearance IR distance: 46.67 cm
+front clearance IR distance: 45.97 cm
+front clearance IR distance: 39.24 cm
+front clearance IR distance: 39.85 cm
+front clearance IR distance: 199.50 cm
+front clearance IR distance: 156.80 cm
+front clearance IR distance: 135.44 cm
+front clearance IR distance: 82.19 cm
+front clearance IR distance: 63.73 cm
+front clearance IR distance: 50.16 cm
+front clearance IR distance: 37.22 cm
+front clearance IR distance: 65.45 cm
+front clearance IR distance: 77.58 cm
+front clearance IR distance: 56.53 cm
+front clearance IR distance: 46.56 cm
+front clearance IR distance: 31.19 cm
+front clearance IR distance: 25.43 cm
+front clearance IR distance: 33.68 cm
+front clearance IR distance: 38.20 cm
+front clearance IR distance: 134.62 cm
+front clearance IR distance: 140.61 cm
+front clearance IR distance: 143.61 cm
+front clearance IR distance: 145.11 cm
+front clearance IR distance: 85.47 cm
+front clearance IR distance: 68.49 cm
+front clearance IR distance: 48.05 cm
+front clearance IR distance: 48.64 cm
+front clearance IR distance: 52.00 cm
+front clearance IR distance: 40.47 cm
+front clearance IR distance: 44.33 cm
+front clearance IR distance: 47.34 cm
+front clearance IR distance: 45.86 cm
+front clearance IR distance: 36.89 cm
+front clearance IR distance: 39.04 cm
+front clearance IR distance: 37.25 cm
+front clearance IR distance: 46.31 cm
+front clearance IR distance: 45.35 cm
+front clearance IR distance: 45.31 cm
+front clearance IR distance: 30.21 cm
+front clearance IR distance: 21.89 cm
+front clearance IR distance: 15.04 cm
+front clearance IR distance: 10.95 cm
+front clearance IR distance: 8.95 cm
+front clearance IR distance: 7.60 cm
+front clearance IR distance: 6.93 cm
+front clearance IR distance: 6.46 cm
+front clearance IR distance: 5.94 cm
+front clearance IR distance: 5.84 cm
+front clearance IR distance: 5.42 cm
+front clearance IR distance: 5.39 cm
+front clearance IR distance: 5.20 cm
+front clearance IR distance: 5.12 cm
+front clearance IR distance: 5.08 cm
+front clearance IR distance: 5.02 cm
+front clearance IR distance: 4.94 cm
+front clearance IR distance: 5.17 cm
+front clearance IR distance: 5.03 cm
+Setup....
+ENTERING INITIALISING STATE
+INITIALISING....
+Enabling Motors...
+Enabling Gyroscope...
+ENTERING SEARCHING STATE
+Searching...
+Detected fires:
+Fire: 0.00
+fire_angle: 316.77
+Rotating 316.77 degrees
+SETTLED. Stopping.
+ENTERING NAVIGATING STATE
+Settling sensors...
+left IR: 97.01 | front left IR: 190.40 | ultrasonic: 87.03 | front right IR: 30.05 | right IR: 24.33
+left IR: 83.59 | front left IR: 166.40 | ultrasonic: 86.97 | front right IR: 30.14 | right IR: 23.46
+left IR: 98.41 | front left IR: 173.63 | ultrasonic: 86.55 | front right IR: 29.60 | right IR: 23.27
+left IR: 102.59 | front left IR: 181.67 | ultrasonic: 86.55 | front right IR: 28.79 | right IR: 22.19
+left IR: 104.07 | front left IR: 184.80 | ultrasonic: 86.97 | front right IR: 29.26 | right IR: 23.11
+left IR: 100.36 | front left IR: 184.46 | ultrasonic: 86.97 | front right IR: 29.29 | right IR: 22.89
+left IR: 100.50 | front left IR: 139.03 | ultrasonic: 86.97 | front right IR: 28.64 | right IR: 23.28
+left IR: 101.36 | front left IR: 146.09 | ultrasonic: 86.97 | front right IR: 30.40 | right IR: 22.89
+left IR: 103.77 | front left IR: 177.14 | ultrasonic: 86.55 | front right IR: 27.31 | right IR: 21.20
+left IR: 103.91 | front left IR: 191.13 | ultrasonic: 86.97 | front right IR: 29.94 | right IR: 21.83
+Driving forward
+L_IR: 243.90 | Ultrasonic: 87.03 | R_IR: 29.62 cm
+L_IR: 225.09 | Ultrasonic: 86.14 | R_IR: 27.45 cm
+L_IR: 260.88 | Ultrasonic: 86.07 | R_IR: 29.13 cm
+L_IR: 264.25 | Ultrasonic: 86.83 | R_IR: 29.04 cm
+L_IR: 215.79 | Ultrasonic: 86.55 | R_IR: 26.66 cm
+L_IR: 171.33 | Ultrasonic: 85.86 | R_IR: 27.80 cm
+L_IR: 124.32 | Ultrasonic: 37.59 | R_IR: 30.16 cm
+L_IR: 113.11 | Ultrasonic: 35.66 | R_IR: 30.49 cm
+L_IR: 102.09 | Ultrasonic: 34.90 | R_IR: 30.07 cm
+L_IR: 89.70 | Ultrasonic: 33.59 | R_IR: 30.44 cm
+L_IR: 76.72 | Ultrasonic: 32.97 | R_IR: 29.02 cm
+L_IR: 68.71 | Ultrasonic: 32.76 | R_IR: 28.47 cm
+L_IR: 63.32 | Ultrasonic: 34.83 | R_IR: 28.36 cm
+L_IR: 57.65 | Ultrasonic: 34.90 | R_IR: 25.86 cm
+L_IR: 52.84 | Ultrasonic: 34.21 | R_IR: 26.73 cm
+L_IR: 50.44 | Ultrasonic: 26.48 | R_IR: 27.33 cm
+L_IR: 46.07 | Ultrasonic: 24.48 | R_IR: 28.31 cm
+L_IR: 40.70 | Ultrasonic: 75.38 | R_IR: 27.35 cm
+L_IR: 37.53 | Ultrasonic: 73.86 | R_IR: 28.15 cm
+L_IR: 33.39 | Ultrasonic: 19.24 | R_IR: 28.04 cm
+L_IR: 30.84 | Ultrasonic: 19.38 | R_IR: 27.36 cm
+L_IR: 27.69 | Ultrasonic: 16.55 | R_IR: 27.64 cm
+L_IR: 25.25 | Ultrasonic: 14.97 | R_IR: 27.31 cm
+2 | 60 | 59 | 3
+OBSTACLE DETECTED! STOPPING.
+ENTERING AVOID STATE
+Determined that it shuld strafe right by front sensors FL: 22.57   FR: 27.62
+strafing right. reading left front
+AVOIDANCE STRAFE STAGE
+front clearance IR distance: 18.98 cm
+front clearance IR distance: 17.27 cm
+front clearance IR distance: 16.24 cm
+front clearance IR distance: 17.64 cm
+front clearance IR distance: 16.19 cm
+front clearance IR distance: 19.60 cm
+front clearance IR distance: 18.35 cm
+front clearance IR distance: 17.73 cm
+front clearance IR distance: 17.47 cm
+front clearance IR distance: 15.23 cm
+front clearance IR distance: 15.53 cm
+front clearance IR distance: 14.14 cm
+front clearance IR distance: 16.87 cm
+front clearance IR distance: 15.84 cm
+front clearance IR distance: 15.17 cm
+front clearance IR distance: 14.88 cm
+front clearance IR distance: 13.22 cm
+front clearance IR distance: 13.61 cm
+front clearance IR distance: 12.65 cm
+front clearance IR distance: 15.10 cm
+front clearance IR distance: 14.48 cm
+front clearance IR distance: 14.07 cm
+front clearance IR distance: 13.87 cm
+front clearance IR distance: 12.63 cm
+front clearance IR distance: 13.05 cm
+front clearance IR distance: 12.46 cm
+front clearance IR distance: 14.14 cm
+front clearance IR distance: 13.91 cm
+front clearance IR distance: 13.79 cm
+front clearance IR distance: 13.73 cm
+front clearance IR distance: 12.87 cm
+front clearance IR distance: 13.40 cm
+front clearance IR distance: 12.64 cm
+front clearance IR distance: 15.45 cm
+front clearance IR distance: 14.98 cm
+front clearance IR distance: 14.90 cm
+front clearance IR distance: 14.85 cm
+front clearance IR distance: 13.59 cm
+front clearance IR distance: 14.05 cm
+front clearance IR distance: 13.16 cm
+front clearance IR distance: 16.10 cm
+front clearance IR distance: 15.58 cm
+front clearance IR distance: 15.19 cm
+front clearance IR distance: 15.00 cm
+front clearance IR distance: 13.05 cm
+front clearance IR distance: 12.66 cm
+front clearance IR distance: 10.95 cm
+front clearance IR distance: 11.25 cm
+front clearance IR distance: 10.45 cm
+front clearance IR distance: 9.93 cm
+front clearance IR distance: 9.70 cm
+front clearance IR distance: 8.94 cm
+front clearance IR distance: 9.64 cm
+front clearance IR distance: 8.93 cm
+front clearance IR distance: 9.47 cm
+front clearance IR distance: 9.12 cm
+front clearance IR distance: 8.93 cm
+front clearance IR distance: 8.80 cm
+front clearance IR distance: 8.39 cm
+front clearance IR distance: 8.33 cm
+front clearance IR distance: 8.25 cm
+front clearance IR distance: 8.59 cm
+front clearance IR distance: 8.28 cm
+front clearance IR distance: 8.12 cm
+front clearance IR distance: 7.78 cm
+front clearance IR distance: 7.82 cm
+front clearance IR distance: 7.87 cm
+front clearance IR distance: 7.88 cm
+front clearance IR distance: 7.89 cm
+front clearance IR distance: 7.89 cm
+front clearance IR distance: 7.89 cm
+front clearance IR distance: 7.50 cm
+front clearance IR distance: 7.98 cm
+front clearance IR distance: 7.48 cm
+front clearance IR distance: 7.90 cm
+front clearance IR distance: 7.77 cm
+front clearance IR distance: 7.70 cm
+front clearance IR distance: 7.71 cm
+front clearance IR distance: 7.42 cm
+front clearance IR distance: 7.96 cm
+front clearance IR distance: 7.60 cm
+front clearance IR distance: 8.23 cm
+front clearance IR distance: 8.13 cm
+front clearance IR distance: 8.09 cm
+front clearance IR distance: 8.13 cm
+front clearance IR distance: 7.93 cm
+front clearance IR distance: 8.02 cm
+front clearance IR distance: 8.10 cm
+front clearance IR distance: 8.57 cm
+front clearance IR distance: 8.49 cm
+front clearance IR distance: 8.46 cm
+front clearance IR distance: 8.19 cm
+front clearance IR distance: 8.48 cm
+front clearance IR distance: 8.80 cm
+front clearance IR distance: 9.07 cm
+front clearance IR distance: 10.23 cm
+front clearance IR distance: 10.32 cm
+front clearance IR distance: 10.36 cm
+front clearance IR distance: 10.08 cm
+front clearance IR distance: 12.04 cm
+front clearance IR distance: 24.45 cm
+front clearance IR distance: 50.88 cm
+front clearance IR distance: 426.07 cm
+front clearance IR distance: 613.67 cm
+front clearance IR distance: 707.47 cm
+front clearance IR distance: 389.16 cm
+front clearance IR distance: 452.56 cm
+front clearance IR distance: 292.96 cm
+front clearance IR distance: 404.46 cm
+front clearance IR distance: 749.89 cm
+front clearance IR distance: 775.58 cm
+front clearance IR distance: 702.21 cm
+front clearance IR distance: 414.54 cm
+front clearance IR distance: 465.25 cm
+front clearance IR distance: 780.29 cm
+front clearance IR distance: 937.81 cm
+front clearance IR distance: 1016.57 cm
+front clearance IR distance: 1055.95 cm
+front clearance IR distance: 1075.64 cm
+front clearance IR distance: 590.87 cm
+front clearance IR distance: 843.10 cm
+front clearance IR distance: 822.18 cm
+front clearance IR distance: 958.76 cm
+front clearance IR distance: 1027.04 cm
+front clearance IR distance: 1061.19 cm
+front clearance IR distance: 1078.26 cm
+front clearance IR distance: 622.80 cm
+front clearance IR distance: 859.06 cm
+front clearance IR distance: 830.17 cm
+front clearance IR distance: 962.75 cm
+front clearance IR distance: 882.01 cm
+front clearance IR distance: 755.43 cm
+front clearance IR distance: 778.35 cm
+front clearance IR distance: 444.49 cm
+front clearance IR distance: 769.91 cm
+front clearance IR distance: 932.62 cm
+front clearance IR distance: 1013.98 cm
+front clearance IR distance: 1054.65 cm
+front clearance IR distance: 1074.99 cm
+front clearance IR distance: 621.17 cm
+front clearance IR distance: 389.26 cm
+front clearance IR distance: 328.44 cm
+front clearance IR distance: 564.86 cm
+front clearance IR distance: 683.06 cm
+front clearance IR distance: 742.17 cm
+front clearance IR distance: 918.75 cm
+front clearance IR distance: 677.64 cm
+front clearance IR distance: 557.09 cm
+front clearance IR distance: 679.18 cm
+front clearance IR distance: 887.25 cm
+front clearance IR distance: 844.26 cm
+front clearance IR distance: 969.80 cm
+front clearance IR distance: 885.53 cm
+front clearance IR distance: 700.75 cm
+front clearance IR distance: 608.35 cm
+front clearance IR distance: 851.84 cm
+front clearance IR distance: 521.66 cm
+front clearance IR distance: 661.47 cm
+front clearance IR distance: 731.37 cm
+front clearance IR distance: 766.32 cm
+front clearance IR distance: 783.79 cm
+front clearance IR distance: 792.53 cm
+front clearance IR distance: 796.90 cm
+front clearance IR distance: 501.58 cm
+front clearance IR distance: 798.46 cm
+front clearance IR distance: 946.89 cm
+front clearance IR distance: 1021.11 cm
+front clearance IR distance: 1058.22 cm
+front clearance IR distance: 1076.78 cm
+front clearance IR distance: 796.37 cm
+front clearance IR distance: 798.82 cm
+front clearance IR distance: 800.04 cm
+front clearance IR distance: 800.66 cm
+front clearance IR distance: 947.99 cm
+front clearance IR distance: 1021.66 cm
+front clearance IR distance: 911.47 cm
+front clearance IR distance: 506.68 cm
+front clearance IR distance: 801.01 cm
+front clearance IR distance: 948.17 cm
+front clearance IR distance: 874.72 cm
+front clearance IR distance: 837.99 cm
+front clearance IR distance: 819.63 cm
+front clearance IR distance: 810.45 cm
+front clearance IR distance: 471.90 cm
+front clearance IR distance: 783.62 cm
+front clearance IR distance: 792.44 cm
+front clearance IR distance: 796.86 cm
+front clearance IR distance: 946.09 cm
+front clearance IR distance: 1020.71 cm
+front clearance IR distance: 910.99 cm
+front clearance IR distance: 603.83 cm
+front clearance IR distance: 849.58 cm
+front clearance IR distance: 972.46 cm
+front clearance IR distance: 1033.89 cm
+front clearance IR distance: 1064.61 cm
+front clearance IR distance: 932.94 cm
+front clearance IR distance: 1014.14 cm
+front clearance IR distance: 618.79 cm
+front clearance IR distance: 857.06 cm
+front clearance IR distance: 976.19 cm
+front clearance IR distance: 888.73 cm
+front clearance IR distance: 845.00 cm
+front clearance IR distance: 823.14 cm
+front clearance IR distance: 959.23 cm
+front clearance IR distance: 697.88 cm
+front clearance IR distance: 896.61 cm
+front clearance IR distance: 995.97 cm
+front clearance IR distance: 1045.65 cm
+front clearance IR distance: 1070.49 cm
+front clearance IR distance: 1082.91 cm
+front clearance IR distance: 942.09 cm
+front clearance IR distance: 604.85 cm
+front clearance IR distance: 850.09 cm
+front clearance IR distance: 825.68 cm
+front clearance IR distance: 727.26 cm
+front clearance IR distance: 764.27 cm
+front clearance IR distance: 782.77 cm
+front clearance IR distance: 792.02 cm
+front clearance IR distance: 529.82 cm
+front clearance IR distance: 812.57 cm
+front clearance IR distance: 953.95 cm
+front clearance IR distance: 1024.64 cm
+front clearance IR distance: 912.96 cm
+front clearance IR distance: 1004.14 cm
+front clearance IR distance: 816.49 cm
+front clearance IR distance: 722.67 cm
+front clearance IR distance: 761.97 cm
+front clearance IR distance: 928.65 cm
+front clearance IR distance: 1011.99 cm
+front clearance IR distance: 1053.66 cm
+front clearance IR distance: 1074.50 cm
+front clearance IR distance: 685.58 cm
+front clearance IR distance: 491.13 cm
+front clearance IR distance: 646.20 cm
+front clearance IR distance: 378.42 cm
+front clearance IR distance: 300.93 cm
+front clearance IR distance: 551.10 cm
+front clearance IR distance: 823.21 cm
+front clearance IR distance: 959.27 cm
+front clearance IR distance: 880.27 cm
+front clearance IR distance: 588.47 cm
+front clearance IR distance: 329.66 cm
+front clearance IR distance: 298.64 cm
+front clearance IR distance: 283.13 cm
+front clearance IR distance: 330.43 cm
+front clearance IR distance: 712.88 cm
+front clearance IR distance: 490.25 cm
+front clearance IR distance: 276.22 cm
+front clearance IR distance: 241.24 cm
+front clearance IR distance: 668.29 cm
+front clearance IR distance: 437.28 cm
+front clearance IR distance: 619.27 cm
+front clearance IR distance: 475.88 cm
+front clearance IR distance: 426.81 cm
+front clearance IR distance: 237.42 cm
+front clearance IR distance: 197.39 cm
+front clearance IR distance: 182.37 cm
+front clearance IR distance: 157.86 cm
+front clearance IR distance: 626.59 cm
+front clearance IR distance: 425.02 cm
+front clearance IR distance: 324.23 cm
+front clearance IR distance: 183.68 cm
+front clearance IR distance: 131.70 cm
+front clearance IR distance: 94.16 cm
+front clearance IR distance: 84.60 cm
+front clearance IR distance: 231.16 cm
+front clearance IR distance: 164.59 cm
+front clearance IR distance: 131.31 cm
+front clearance IR distance: 82.61 cm
+front clearance IR distance: 76.73 cm
+front clearance IR distance: 62.38 cm
+front clearance IR distance: 65.66 cm
+front clearance IR distance: 251.10 cm
+front clearance IR distance: 168.06 cm
+front clearance IR distance: 128.01 cm
+front clearance IR distance: 80.31 cm
+front clearance IR distance: 71.25 cm
+front clearance IR distance: 63.94 cm
+front clearance IR distance: 63.06 cm
+front clearance IR distance: 165.34 cm
+front clearance IR distance: 116.23 cm
+front clearance IR distance: 92.58 cm
+front clearance IR distance: 62.81 cm
+front clearance IR distance: 55.89 cm
+front clearance IR distance: 53.93 cm
+front clearance IR distance: 52.96 cm
+front clearance IR distance: 51.44 cm
+front clearance IR distance: 54.04 cm
+front clearance IR distance: 54.71 cm
+front clearance IR distance: 41.82 cm
+front clearance IR distance: 43.23 cm
+front clearance IR distance: 47.61 cm
+front clearance IR distance: 48.28 cm
+front clearance IR distance: 47.71 cm
+front clearance IR distance: 48.82 cm
+front clearance IR distance: 45.97 cm
+front clearance IR distance: 37.13 cm
+front clearance IR distance: 38.75 cm
+front clearance IR distance: 54.81 cm
+front clearance IR distance: 71.38 cm
+front clearance IR distance: 55.25 cm
+front clearance IR distance: 50.77 cm
+front clearance IR distance: 49.40 cm
+front clearance IR distance: 37.97 cm
+front clearance IR distance: 41.31 cm
+front clearance IR distance: 39.92 cm
+front clearance IR distance: 62.48 cm
+front clearance IR distance: 57.23 cm
+front clearance IR distance: 56.93 cm
+front clearance IR distance: 56.78 cm
+front clearance IR distance: 49.95 cm
+front clearance IR distance: 47.30 cm
+front clearance IR distance: 43.84 cm
+front clearance IR distance: 100.60 cm
+front clearance IR distance: 75.77 cm
+front clearance IR distance: 63.87 cm
+front clearance IR distance: 57.40 cm
+front clearance IR distance: 49.55 cm
+front clearance IR distance: 43.48 cm
+front clearance IR distance: 39.40 cm
+front clearance IR distance: 62.21 cm
+front clearance IR distance: 53.04 cm
+front clearance IR distance: 40.98 cm
+front clearance IR distance: 35.46 cm
+front clearance IR distance: 34.69 cm
+front clearance IR distance: 36.04 cm
+front clearance IR distance: 37.89 cm
+front clearance IR distance: 57.60 cm
+front clearance IR distance: 50.36 cm
+front clearance IR distance: 39.17 cm
+front clearance IR distance: 33.89 cm
+front clearance IR distance: 34.13 cm
+front clearance IR distance: 34.25 cm
+front clearance IR distance: 35.29 cm
+front clearance IR distance: 56.30 cm
+front clearance IR distance: 48.67 cm
+front clearance IR distance: 44.85 cm
+front clearance IR distance: 34.93 cm
+front clearance IR distance: 33.98 cm
+front clearance IR distance: 34.17 cm
+front clearance IR distance: 34.75 cm
+front clearance IR distance: 61.35 cm
+front clearance IR distance: 49.65 cm
+front clearance IR distance: 44.39 cm
+front clearance IR distance: 33.81 cm
+front clearance IR distance: 34.56 cm
+front clearance IR distance: 35.45 cm
+front clearance IR distance: 36.99 cm
+front clearance IR distance: 97.18 cm
+front clearance IR distance: 76.90 cm
+front clearance IR distance: 66.77 cm
+front clearance IR distance: 46.52 cm
+front clearance IR distance: 51.57 cm
+front clearance IR distance: 54.10 cm
+front clearance IR distance: 65.71 cm
+front clearance IR distance: 580.52 cm
+front clearance IR distance: 393.39 cm
+front clearance IR distance: 308.42 cm
+front clearance IR distance: 178.69 cm
+front clearance IR distance: 255.59 cm
+front clearance IR distance: 18.47 cm
+front clearance IR distance: 13.89 cm
+front clearance IR distance: 11.25 cm
+front clearance IR distance: 11.15 cm
+front clearance IR distance: 11.47 cm
+front clearance IR distance: 12.23 cm
+front clearance IR distance: 15.59 cm
+front clearance IR distance: 15.30 cm
+front clearance IR distance: 15.51 cm
+front clearance IR distance: 15.67 cm
+front clearance IR distance: 13.88 cm
+front clearance IR distance: 15.25 cm
+front clearance IR distance: 13.40 cm
+front clearance IR distance: 14.96 cm
+front clearance IR distance: 20.53 cm
+front clearance IR distance: 20.03 cm
+front clearance IR distance: 19.78 cm
+front clearance IR distance: 16.85 cm
+front clearance IR distance: 18.26 cm
+front clearance IR distance: 18.14 cm
+front clearance IR distance: 18.20 cm
+front clearance IR distance: 21.24 cm
+front clearance IR distance: 22.41 cm
+front clearance IR distance: 29.22 cm
+front clearance IR distance: 32.91 cm
+front clearance IR distance: 23.84 cm
+front clearance IR distance: 20.62 cm
+front clearance IR distance: 21.56 cm
+front clearance IR distance: 23.98 cm
+front clearance IR distance: 45.60 cm
+front clearance IR distance: 42.34 cm
+front clearance IR distance: 41.04 cm
+front clearance IR distance: 37.24 cm
+front clearance IR distance: 27.32 cm
+front clearance IR distance: 27.31 cm
+front clearance IR distance: 20.69 cm
+front clearance IR distance: 26.60 cm
+front clearance IR distance: 31.60 cm
+front clearance IR distance: 29.29 cm
+front clearance IR distance: 28.29 cm
+front clearance IR distance: 23.55 cm
+front clearance IR distance: 27.81 cm
+front clearance IR distance: 31.12 cm
+front clearance IR distance: 28.07 cm
+front clearance IR distance: 35.81 cm
+front clearance IR distance: 111.62 cm
+front clearance IR distance: 80.98 cm
+front clearance IR distance: 65.11 cm
+front clearance IR distance: 44.35 cm
+front clearance IR distance: 38.43 cm
+front clearance IR distance: 33.51 cm
+front clearance IR distance: 33.48 cm
+front clearance IR distance: 90.04 cm
+front clearance IR distance: 61.28 cm
+front clearance IR distance: 57.64 cm
+front clearance IR distance: 56.50 cm
+front clearance IR distance: 38.66 cm
+front clearance IR distance: 39.20 cm
+front clearance IR distance: 31.74 cm
+front clearance IR distance: 35.08 cm
+front clearance IR distance: 64.38 cm
+front clearance IR distance: 56.81 cm
+front clearance IR distance: 42.21 cm
+front clearance IR distance: 35.07 cm
+front clearance IR distance: 34.75 cm
+front clearance IR distance: 34.09 cm
+front clearance IR distance: 46.98 cm
+front clearance IR distance: 41.50 cm
+front clearance IR distance: 124.19 cm
+front clearance IR distance: 89.10 cm
+front clearance IR distance: 71.55 cm
+front clearance IR distance: 48.17 cm
+front clearance IR distance: 38.55 cm
+front clearance IR distance: 32.47 cm
+front clearance IR distance: 31.64 cm
+front clearance IR distance: 69.90 cm
+front clearance IR distance: 51.44 cm
+front clearance IR distance: 48.36 cm
+front clearance IR distance: 45.95 cm
+front clearance IR distance: 35.24 cm
+front clearance IR distance: 33.88 cm
+front clearance IR distance: 34.15 cm
+front clearance IR distance: 33.80 cm
+front clearance IR distance: 90.20 cm
+front clearance IR distance: 69.72 cm
+front clearance IR distance: 60.03 cm
+front clearance IR distance: 49.55 cm
+front clearance IR distance: 34.62 cm
+front clearance IR distance: 32.52 cm
+front clearance IR distance: 29.31 cm
+front clearance IR distance: 29.87 cm
+front clearance IR distance: 48.55 cm
+front clearance IR distance: 46.04 cm
+front clearance IR distance: 45.66 cm
+front clearance IR distance: 36.79 cm
+front clearance IR distance: 32.69 cm
+front clearance IR distance: 35.56 cm
+front clearance IR distance: 31.58 cm
+front clearance IR distance: 32.05 cm
+front clearance IR distance: 95.03 cm
+front clearance IR distance: 78.29 cm
+front clearance IR distance: 69.91 cm
+front clearance IR distance: 48.45 cm
+front clearance IR distance: 36.87 cm
+front clearance IR distance: 30.58 cm
+front clearance IR distance: 25.36 cm
+front clearance IR distance: 30.42 cm
+front clearance IR distance: 31.47 cm
+front clearance IR distance: 39.82 cm
+front clearance IR distance: 44.53 cm
+front clearance IR distance: 31.21 cm
+front clearance IR distance: 24.55 cm
+front clearance IR distance: 24.79 cm
+front clearance IR distance: 27.04 cm
+front clearance IR distance: 60.36 cm
+front clearance IR distance: 52.38 cm
+front clearance IR distance: 38.70 cm
+front clearance IR distance: 32.27 cm
+front clearance IR distance: 26.99 cm
+front clearance IR distance: 26.84 cm
+front clearance IR distance: 20.93 cm
+front clearance IR distance: 25.48 cm
+front clearance IR distance: 26.70 cm
+front clearance IR distance: 26.55 cm
+front clearance IR distance: 26.33 cm
+front clearance IR distance: 23.24 cm
+front clearance IR distance: 25.58 cm
+front clearance IR distance: 28.20 cm
+front clearance IR distance: 25.89 cm
+front clearance IR distance: 34.31 cm
+front clearance IR distance: 34.37 cm
+front clearance IR distance: 39.38 cm
+front clearance IR distance: 41.88 cm
+front clearance IR distance: 33.08 cm
+front clearance IR distance: 31.95 cm
+front clearance IR distance: 29.47 cm
+front clearance IR distance: 30.34 cm
+front clearance IR distance: 54.99 cm
+front clearance IR distance: 47.72 cm
+front clearance IR distance: 46.50 cm
+front clearance IR distance: 45.89 cm
+front clearance IR distance: 32.49 cm
+front clearance IR distance: 30.37 cm
+front clearance IR distance: 25.26 cm
+front clearance IR distance: 25.97 cm
+front clearance IR distance: 39.99 cm
+front clearance IR distance: 42.63 cm
+front clearance IR distance: 43.51 cm
+front clearance IR distance: 32.71 cm
+front clearance IR distance: 30.16 cm
+front clearance IR distance: 30.90 cm
+front clearance IR distance: 28.65 cm
+front clearance IR distance: 29.34 cm
+front clearance IR distance: 71.72 cm
+front clearance IR distance: 55.39 cm
+front clearance IR distance: 47.92 cm
+front clearance IR distance: 34.54 cm
+front clearance IR distance: 29.92 cm
+front clearance IR distance: 27.10 cm
+front clearance IR distance: 26.89 cm
+front clearance IR distance: 43.38 cm
+front clearance IR distance: 36.71 cm
+front clearance IR distance: 36.09 cm
+front clearance IR distance: 35.52 cm
+front clearance IR distance: 28.25 cm
+front clearance IR distance: 28.25 cm
+front clearance IR distance: 27.77 cm
+front clearance IR distance: 28.18 cm
+front clearance IR distance: 48.78 cm
+front clearance IR distance: 42.13 cm
+front clearance IR distance: 39.36 cm
+front clearance IR distance: 37.69 cm
+front clearance IR distance: 27.79 cm
+front clearance IR distance: 28.91 cm
+front clearance IR distance: 25.81 cm
+front clearance IR distance: 26.87 cm
+front clearance IR distance: 41.11 cm
+front clearance IR distance: 38.29 cm
+front clearance IR distance: 37.16 cm
+front clearance IR distance: 28.65 cm
+front clearance IR distance: 27.67 cm
+front clearance IR distance: 29.24 cm
+front clearance IR distance: 27.40 cm
+front clearance IR distance: 28.17 cm
+front clearance IR distance: 47.70 cm
+front clearance IR distance: 42.74 cm
+front clearance IR distance: 40.91 cm
+front clearance IR distance: 30.22 cm
+front clearance IR distance: 29.40 cm
+front clearance IR distance: 27.62 cm
+front clearance IR distance: 25.95 cm
+front clearance IR distance: 52.80 cm
+front clearance IR distance: 42.43 cm
+front clearance IR distance: 38.18 cm
+front clearance IR distance: 36.30 cm
+front clearance IR distance: 28.31 cm
+front clearance IR distance: 30.41 cm
+front clearance IR distance: 27.23 cm
+front clearance IR distance: 28.08 cm
+front clearance IR distance: 52.44 cm
+front clearance IR distance: 48.86 cm
+front clearance IR distance: 38.07 cm
+front clearance IR distance: 32.84 cm
+front clearance IR distance: 31.25 cm
+front clearance IR distance: 32.84 cm
+front clearance IR distance: 32.45 cm
+front clearance IR distance: 36.10 cm
+front clearance IR distance: 45.05 cm
+front clearance IR distance: 53.30 cm
+front clearance IR distance: 57.42 cm
+front clearance IR distance: 42.36 cm
+front clearance IR distance: 41.77 cm
+front clearance IR distance: 35.18 cm
+front clearance IR distance: 31.08 cm
+front clearance IR distance: 69.62 cm
+front clearance IR distance: 59.98 cm
+front clearance IR distance: 51.76 cm
+front clearance IR distance: 48.08 cm
+front clearance IR distance: 37.53 cm
+front clearance IR distance: 39.35 cm
+front clearance IR distance: 37.97 cm
+front clearance IR distance: 39.95 cm
+front clearance IR distance: 199.56 cm
+front clearance IR distance: 112.98 cm
+front clearance IR distance: 113.53 cm
+front clearance IR distance: 113.81 cm
+front clearance IR distance: 69.17 cm
+front clearance IR distance: 55.55 cm
+front clearance IR distance: 39.92 cm
+front clearance IR distance: 36.92 cm
+front clearance IR distance: 104.17 cm
+front clearance IR distance: 91.91 cm
+front clearance IR distance: 85.77 cm
+front clearance IR distance: 69.89 cm
+front clearance IR distance: 44.86 cm
+front clearance IR distance: 38.92 cm
+front clearance IR distance: 25.96 cm
+front clearance IR distance: 30.45 cm
+front clearance IR distance: 72.27 cm
+front clearance IR distance: 50.10 cm
+front clearance IR distance: 39.01 cm
+front clearance IR distance: 28.51 cm
+front clearance IR distance: 32.55 cm
+front clearance IR distance: 35.81 cm
+front clearance IR distance: 32.55 cm
+front clearance IR distance: 54.67 cm
+front clearance IR distance: 317.59 cm
+front clearance IR distance: 173.62 cm
+front clearance IR distance: 102.22 cm
+front clearance IR distance: 63.76 cm
+front clearance IR distance: 49.89 cm
+front clearance IR distance: 39.77 cm
+front clearance IR distance: 35.71 cm
+front clearance IR distance: 121.29 cm
+front clearance IR distance: 75.86 cm
+front clearance IR distance: 62.02 cSetup....
+ENTERING INITIALISING STATE
+INITIALISING....
+Enabling Motors...
+Enabling Gyroscope...
+ENTERING SEARCHING STATE
+Searching...
+Setup....
+ENTERING INITIALISING STATE
+INITIALISING....
+Enabling Motors...
+Enabling Gyroscope...
+ENTERING SEARCHING STATE
+Searching...
+Detected fires:
+Fire: 0.00
+fire_angle: 17.25
+Rotating 17.25 degrees
+SETTLED. Stopping.
+ENTERING NAVIGATING STATE
+Settling sensors...
+left IR: 11.22 | front left IR: 1095.33 | ultrasonic: 27.79 | front right IR: 24.91 | right IR: 18.38
+left IR: 11.22 | front left IR: 1021.82 | ultrasonic: 27.72 | front right IR: 23.92 | right IR: 20.84
+left IR: 11.10 | front left IR: 1003.44 | ultrasonic: 28.21 | front right IR: 22.82 | right IR: 21.14
+left IR: 11.29 | front left IR: 584.99 | ultrasonic: 28.62 | front right IR: 24.10 | right IR: 21.24
+left IR: 11.34 | front left IR: 1197.69 | ultrasonic: 28.21 | front right IR: 22.57 | right IR: 21.28
+left IR: 11.34 | front left IR: 1350.87 | ultrasonic: 28.21 | front right IR: 25.28 | right IR: 21.22
+left IR: 11.20 | front left IR: 941.24 | ultrasonic: 28.62 | front right IR: 23.58 | right IR: 21.23
+left IR: 11.31 | front left IR: 940.19 | ultrasonic: 28.21 | front right IR: 23.32 | right IR: 20.66
+left IR: 11.43 | front left IR: 983.03 | ultrasonic: 28.55 | front right IR: 23.52 | right IR: 21.33
+left IR: 11.44 | front left IR: 993.74 | ultrasonic: 28.62 | front right IR: 22.47 | right IR: 21.60
+Driving forward
+L_IR: 897.50 | Ultrasonic: 28.21 | R_IR: 104.95 cm
+L_IR: 996.42 | Ultrasonic: 28.21 | R_IR: 63.34 cm
+L_IR: 1045.87 | Ultrasonic: 27.31 | R_IR: 42.92 cm
+L_IR: 837.36 | Ultrasonic: 27.24 | R_IR: 34.52 cm
+L_IR: 552.49 | Ultrasonic: 27.03 | R_IR: 27.33 cm
+L_IR: 676.88 | Ultrasonic: 26.21 | R_IR: 26.06 cm
+L_IR: 739.07 | Ultrasonic: 25.72 | R_IR: 24.28 cm
+L_IR: 770.17 | Ultrasonic: 25.17 | R_IR: 22.30 cm
+L_IR: 785.72 | Ultrasonic: 24.34 | R_IR: 25.11 cm
+L_IR: 940.53 | Ultrasonic: 24.34 | R_IR: 24.58 cm
+L_IR: 870.90 | Ultrasonic: 24.34 | R_IR: 22.87 cm
+L_IR: 983.11 | Ultrasonic: 24.34 | R_IR: 23.23 cm
+L_IR: 892.19 | Ultrasonic: 18.34 | R_IR: 23.88 cm
+L_IR: 846.73 | Ultrasonic: 18.34 | R_IR: 22.01 cm
+L_IR: 824.00 | Ultrasonic: 18.34 | R_IR: 21.96 cm
+L_IR: 959.67 | Ultrasonic: 15.17 | R_IR: 21.39 cm
+L_IR: 1027.50 | Ultrasonic: 15.17 | R_IR: 20.77 cm
+L_IR: 914.38 | Ultrasonic: 15.17 | R_IR: 22.18 cm
+L_IR: 857.83 | Ultrasonic: 15.17 | R_IR: 20.85 cm
+L_IR: 829.55 | Ultrasonic: 15.17 | R_IR: 20.50 cm
+L_IR: 962.44 | Ultrasonic: 15.17 | R_IR: 19.79 cm
+L_IR: 1028.88 | Ultrasonic: 15.17 | R_IR: 18.54 cm
+L_IR: 1062.11 | Ultrasonic: 15.17 | R_IR: 16.30 cm
+L_IR: 1078.72 | Ultrasonic: 15.17 | R_IR: 17.10 cm
+L_IR: 1087.02 | Ultrasonic: 15.17 | R_IR: 25.76 cm
+L_IR: 944.15 | Ultrasonic: 15.17 | R_IR: 73.25 cm
+L_IR: 1019.74 | Ultrasonic: 15.17 | R_IR: 258.10 cm
+L_IR: 1057.53 | Ultrasonic: 15.17 | R_IR: 350.52 cm
+L_IR: 545.28 | Ultrasonic: 15.17 | R_IR: 396.73 cm
+L_IR: 285.02 | Ultrasonic: 15.17 | R_IR: 419.84 cm
+L_IR: 150.47 | Ultrasonic: 15.17 | R_IR: 431.39 cm
+L_IR: 83.95 | Ultrasonic: 15.17 | R_IR: 437.17 cm
+L_IR: 70.29 | Ultrasonic: 15.17 | R_IR: 440.06 cm
+L_IR: 56.71 | Ultrasonic: 15.17 | R_IR: 441.50 cm
+L_IR: 428.99 | Ultrasonic: 15.17 | R_IR: 442.22 cm
+L_IR: 615.13 | Ultrasonic: 15.17 | R_IR: 246.28 cm
+L_IR: 441.37 | Ultrasonic: 15.17 | R_IR: 129.77 cm
+L_IR: 299.37 | Ultrasonic: 15.17 | R_IR: 72.27 cm
+L_IR: 152.33 | Ultrasonic: 15.17 | R_IR: 43.86 cm
+L_IR: 80.09 | Ultrasonic: 15.17 | R_IR: 40.23 cm
+L_IR: 44.92 | Ultrasonic: 15.17 | R_IR: 241.58 cm
+L_IR: 27.69 | Ultrasonic: 15.17 | R_IR: 342.26 cm
+L_IR: 19.16 | Ultrasonic: 15.17 | R_IR: 392.60 cm
+L_IR: 14.58 | Ultrasonic: 15.17 | R_IR: 486.56 cm
+41 | 91 | 59 | 33
+FIRE DETECTED! STOPPING.
+TrackFlameOnSpot
+angle: 0.39
+angle: 3.44
+angle: 5.56
+angle: 7.31
+angle: 8.74
+angle: 9.51
+angle: 9.81
+angle: 9.73
+angle: 9.56
+angle: 9.64
+angle: 9.66
+angle: 9.52
+angle: 9.23
+angle: 8.68
+angle: 8.25
+angle: 7.72
+angle: 7.02
+angle: 6.64
+angle: 6.17
+angle: 5.63
+angle: 5.00
+angle: 4.51
+angle: 3.84
+angle: 3.45
+angle: 3.05
+angle: 2.54
+angle: 2.27
+angle: 1.91
+angle: 1.56
+angle: 1.25
+angle: 1.06
+angle: 0.67
+Flame centred
+ENTERING EXTINGUISH STATE
+EXTINGUISH fire 1
 
 
-
-
-Assuming fire and obstacle can have no gap
-986, 505, 511, 112
-871, 973, 486, 118
-850, 979, 512, 120
-248, 989, 512, 120
-220, 986, 984, 91
-405, 977, 995, 93
-128, 276, 979, 831
-131, 260, 945, 976
-110, 265, 478, 991
-106, 213, 657, 983
-
-
-
-Fire in front of the robot (V2, in the dark)
-989, 989
-991, 991
-986, 986
-992, 370
-992, 982
-988, 988
-976, 1000
-
-
-
-
-PT readings for 0.2A in regular light conditions 08/05/26
-911,1000,136,9
-274,997,150,13
-972,992,190,13
-765,991,179,17
-190,992,280,20
-895,990,652,22
-124,988,981,25
-51,297,988,205
-51,159,996,777
-567,986,981,393
-142,988,691,21
-572,987,956,89
-546,985,982,431
-364,979,997,503
-115,999,132,16
-115,987,916,128
-442,984,987,447
-129,973,1000,434
-37,125,1001,74
-
-
-
-967,312,58,8
-62,999,400,36
-54,990,847,225
-62,826,990,55
-235,701,997,34
-37,92,981,123
-37,81,926,790
-37,92,973,966
-
-
-
-
-
-
-
-FIRE
-59,149,987,501
-54,117,995,694
-97,1002,97,43
-77,998,697,51
-73,998,609,204
-55,52,999,93
-50,46,983,90
-81,995,187,42
-66,790,986,249
-65,992,941,222
-64,96,996,66
-75,732,976,343
-54,167,984,59
-55,334,279,57
-72,983,206,51
-61,469,310,52
-
-
-OBSTACLE
-65,603,992,69
-69,993,677,177
-77,995,355,110
-101,975,78,37
-101,966,118,38
-82,990,274,102
-63,988,972,156
-47,45,354,767
-69,992,513,146
-76,992,322,141
-60,261,993,55
-90,987,165,35
-101,985,195,96
-86,990,244,112

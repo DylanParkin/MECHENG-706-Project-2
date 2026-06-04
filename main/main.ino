@@ -27,7 +27,7 @@ void setup(void) {
   digitalWrite(TRIG_PIN, LOW);
 
   // pins for the IR sensors
-  pinMode(A4, INPUT);  // left sensor
+  pinMode(A4, INPUT);  // left sensor 
   pinMode(A5, INPUT);  // right sensor
   pinMode(A6, INPUT);  // back
   pinMode(A7, INPUT);  // front
