@@ -105,7 +105,9 @@ float getFlameAngle() {
 object_state object_detected() {
   float left_ir = get_front_left_IR();
   float right_ir = get_front_right_IR();
-  float ultrasonic = MedianUltrasonic();  // median out of 5 samples
+  float ultrasonic = TriggerUltrasonic();
+
+  // float ultrasonic = MedianUltrasonic();  // median out of 5 samples
 
   float distance_in_front = min(left_ir, min(ultrasonic, right_ir));
   SerialCom->println("L_IR: " + String(left_ir) + " | Ultrasonic: " + String(ultrasonic) + " | R_IR: " + String(right_ir) + " cm");
@@ -156,8 +158,8 @@ object_state drive(bool forward) {
 
   int dir = forward ? 1 : -1;
 
-  // // Let sensors settle before starting movement to avoid reacting to spurious/old readings
-  // SettleSensors(30);
+  // Let sensors settle before starting movement to avoid reacting to spurious/old readings
+  SettleSensors(10);
 
   SerialCom->print("Driving ");
   SerialCom->println(forward ? "forward" : "reverse");
