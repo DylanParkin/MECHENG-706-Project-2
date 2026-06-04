@@ -10,14 +10,20 @@ STATE navigating();
 enum object_state {
   NO_OBJECT,
   OBSTACLE,
-  WALL,
   FIRE
 };
 
+constexpr float NO_FLAME = 999.0f;
+
+extern bool global_heading_ref_set;
+extern float global_heading_ref;
+extern bool fire_close;
+extern float ambient[4];
+extern float obstacle_threshold;
+
 float getFlameAngle();
-object_state drive(bool);
+STATE drive(bool forward);
 object_state object_detected();
 void RotateOnSpot(float desiredAngle);
-void Avoid();
 void TrackFlameOnSpot();
 #endif  // NAVIGATE_H
