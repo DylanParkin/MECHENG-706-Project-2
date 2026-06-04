@@ -1,19 +1,46 @@
 #include "avoid.h"
 
 #include "navigate.h"
-// THIS IS THE CURRENT AVOID.CPP
 
 STATE avoiding() {
   return Avoid();
 }
 
 STATE Avoid() {
+  // distance at which clearance sensor considers obstacle "in view" — sets the low edge of the rising-edge exit
   constexpr float low_clearance_threshold = 15.0f;
+
+  // distance at which clearance sensor considers obstacle "cleared" — sets the high edge of the rising-edge exit
+  // increase to require more clearance before exiting strafe, decrease to exit sooner
   constexpr float high_clearance_threshold = 30.0f;
+
+  // approach IR distance below which reverse blend activates — lower = robot gets closer before reversing
   constexpr float diagonal_approach_threshold = 10.0f;
-  constexpr int reverse_speed = 150;  // 100
+
+  // side IR distance below which direction determination switches to side-sensor priority
+  // also used to detect both_sides_close to suppress reverse — roughly one robot width
+  constexpr float side_safety_threshold = 25.0f;
+
+  // minimum difference between front left and right IR to use asymmetry for direction
+  // lower = more sensitive (acts on small differences), higher = only acts on clear asymmetry
+  // set to 0 to always use front IR asymmetry when sides are clear
+  constexpr float front_ir_delta = 2.0f;
+
+  // reverse component speed blended into strafe when diagonal obstacle detected
+  // keep lower than strafe_speed so net lateral movement is still positive
+  constexpr int reverse_speed = 150;
+
+  // Signal 1: max consecutive iterations with reverse active before stuck declared
+  // at 10ms per iteration: 300 = 3 seconds
   constexpr int stuck_reverse_threshold = 300;
+
+  // Signal 2: max strafe iterations without clearance flag ever being set before stuck declared
+  // at 10ms per iteration: 300 = 3 seconds
   constexpr int stuck_no_clearance_threshold = 300;
+
+  // max direction flips before stuck declared and robot reorients to flame
+  constexpr int stuck_flip_threshold = 6;
+
   const float kp_fire = 0.0f;
   const float corrClamp = 350.0f;
   const float readDelayMs = 10.0f;
@@ -39,27 +66,29 @@ STATE Avoid() {
     float IR_front_left = get_front_left_IR();
 
     SerialCom->println("----- Direction Determination -----");
-    // SerialCom->print("  Front L: ");
-    // SerialCom->print(IR_front_left);
-    // SerialCom->print(" cm  |  Front R: ");
-    // SerialCom->print(IR_front_right);
-    // SerialCom->println(" cm");
-    // SerialCom->print("  Side  L: ");
-    // SerialCom->print(IR_left);
-    // SerialCom->print(" cm  |  Side  R: ");
-    // SerialCom->print(IR_right);
-    // SerialCom->println(" cm");
+    SerialCom->print("  Front L: ");
+    SerialCom->print(IR_front_left);
+    SerialCom->print(" cm  |  Front R: ");
+    SerialCom->print(IR_front_right);
+    SerialCom->println(" cm");
+    SerialCom->print("  Side  L: ");
+    SerialCom->print(IR_left);
+    SerialCom->print(" cm  |  Side  R: ");
+    SerialCom->print(IR_right);
+    SerialCom->println(" cm");
 
-    if (IR_front_left < IR_front_right) {
-      strafe_right = true;
-      SerialCom->println("  >> STRAFE RIGHT (front sensors: right front sensor clear)");
-    } else if (IR_right < 50.0f || IR_left < 50.0f) {
+    if (IR_right < side_safety_threshold || IR_left < side_safety_threshold) {
       strafe_right = (IR_right > IR_left);
       SerialCom->print("  >> STRAFE ");
       SerialCom->print(strafe_right ? "RIGHT" : "LEFT");
-      SerialCom->println(" (side sensors: strafing towards more open side)");
+      SerialCom->println(" (side safety override — strafing away from close side)");
+    } else if (fabsf(IR_front_left - IR_front_right) > front_ir_delta) {
+      strafe_right = (IR_front_left < IR_front_right);
+      SerialCom->print("  >> STRAFE ");
+      SerialCom->print(strafe_right ? "RIGHT" : "LEFT");
+      SerialCom->println(" (front IR asymmetry)");
     } else {
-      strafe_right = (getFlameAngle() > 0);
+      strafe_right = (getFlameAngle() < 0);
       SerialCom->print("  >> STRAFE ");
       SerialCom->print(strafe_right ? "RIGHT" : "LEFT");
       SerialCom->println(" (head-on: flame heading decides)");
@@ -70,6 +99,7 @@ STATE Avoid() {
     bool prev_reverse_active = false;
     int consecutive_reverse_count = 0;
     int no_clearance_count = 0;
+    int direction_flip_count = 0;
 
     SerialCom->println("========== STRAFE STAGE ==========");
 
@@ -94,11 +124,21 @@ STATE Avoid() {
 
       float side_IR = strafe_right ? IR_right : IR_left;
 
-      if (side_IR < 10.0f) {
-        SerialCom->print("  !! SIDE IR TOO CLOSE (");
+      if (side_IR < 15.0f) {
+        direction_flip_count++;
+
+        SerialCom->print("  !! SIDE TOO CLOSE (");
         SerialCom->print(strafe_right ? "R: " : "L: ");
         SerialCom->print(side_IR);
-        SerialCom->println(" cm) — flipping strafe direction");
+        SerialCom->print(" cm) — flip #");
+        SerialCom->println(direction_flip_count);
+
+        if (direction_flip_count >= stuck_flip_threshold) {
+          SerialCom->println("  !! STUCK — too many flips, reorienting to flame");
+          stop();
+          TrackFlameOnSpot();
+          return NAVIGATING;
+        }
 
         strafe_right = !strafe_right;
 
@@ -121,9 +161,9 @@ STATE Avoid() {
       float front_clearance_IR = strafe_right ? get_front_left_IR() : get_front_right_IR();
       float approach_IR = strafe_right ? get_front_right_IR() : get_front_left_IR();
 
-      // reverse only when asymmetric — approach side close, clearance side open
-      bool reverse_active = (approach_IR < diagonal_approach_threshold);
-
+      // suppress reverse if wedged on both sides
+      bool both_sides_close = (IR_right < side_safety_threshold && IR_left < side_safety_threshold);
+      bool reverse_active = (approach_IR < diagonal_approach_threshold) && !both_sides_close;
       int reverse_component = reverse_active ? reverse_speed : 0;
 
       // Signal 1: consecutive reverse iterations
@@ -139,8 +179,9 @@ STATE Avoid() {
         SerialCom->print("     Reverse count: ");
         SerialCom->print(consecutive_reverse_count);
         SerialCom->print("  |  No-clearance count: ");
-        SerialCom->println(no_clearance_count);
-        SerialCom->println("  >> Flame in FOV — TrackFlameOnSpot");
+        SerialCom->print(no_clearance_count);
+        SerialCom->print("  |  Flip count: ");
+        SerialCom->println(direction_flip_count);
         stop();
         TrackFlameOnSpot();
         return NAVIGATING;
@@ -150,7 +191,7 @@ STATE Avoid() {
       SerialCom->print(strafe_right ? "FL" : "FR");
       SerialCom->print("): ");
       SerialCom->print(front_clearance_IR);
-      SerialCom->print(" cm  |  Front Approach (");
+      SerialCom->print(" cm  |  Approach (");
       SerialCom->print(strafe_right ? "FR" : "FL");
       SerialCom->print("): ");
       SerialCom->print(approach_IR);
@@ -161,7 +202,9 @@ STATE Avoid() {
       SerialCom->print(" cm  |  RevCount: ");
       SerialCom->print(consecutive_reverse_count);
       SerialCom->print("  NoClearCount: ");
-      SerialCom->println(no_clearance_count);
+      SerialCom->print(no_clearance_count);
+      SerialCom->print("  FlipCount: ");
+      SerialCom->println(direction_flip_count);
 
       if (reverse_active != prev_reverse_active) {
         SerialCom->print("  >> REVERSE BLEND ");
