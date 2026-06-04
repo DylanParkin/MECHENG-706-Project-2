@@ -16,6 +16,7 @@ enum object_state {
 
 float getFlameAngle();
 object_state drive(bool);
+object_state object_detected();
 void RotateOnSpot(float desiredAngle);
 void Avoid();
 void TrackFlameOnSpot();

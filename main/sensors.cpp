@@ -1,4 +1,5 @@
 #include "sensors.h"
+
 #include <math.h>
 
 constexpr float kIrFilterAlpha = 0.5f;
@@ -110,4 +111,21 @@ void SettleSensors(int iterations) {
     TriggerUltrasonic();
     SerialCom->println("left IR: " + String(get_left_IR()) + " | front left IR: " + String(get_front_left_IR()) + " | ultrasonic: " + String(TriggerUltrasonic()) + " | front right IR: " + String(get_front_right_IR()) + " | right IR: " + String(get_right_IR()));
   }
+}
+
+float MedianUltrasonic() {  // meadian sort over 5 readings
+  float window[5];
+  for (int i = 0; i < 5; i++) {
+    window[i] = TriggerUltrasonic();
+  }
+
+  for (int i = 0; i < 4; i++)
+    for (int j = 0; j < 4 - i; j++)
+      if (window[j] > window[j + 1]) {
+        float tmp = window[j];
+        window[j] = window[j + 1];
+        window[j + 1] = tmp;
+      }
+
+  return window[2];
 }

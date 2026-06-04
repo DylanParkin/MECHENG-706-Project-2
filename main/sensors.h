@@ -34,6 +34,7 @@ float get_front_right_IR();
 
 // ─── Ultrasonic ───────────────────────────────────────────────────────────────
 float TriggerUltrasonic();
+float MedianUltrasonic();
 
 // ─── ISR ──────────────────────────────────────────────────────────────────────
 void UltrasonicReturn();

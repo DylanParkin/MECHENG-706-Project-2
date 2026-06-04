@@ -9,13 +9,14 @@ constexpr uint8_t PT_PINS[4] = {A12, A13, A14, A15};
 bool fire_close = false;
 
 STATE navigating() {
-  while (1) {
-    TrackFlameOnSpot();
-    delay(5000);
-  }
+  // while (1) {
+  //   TrackFlameOnSpot();
+  //   delay(5000);
+  // }
   while (1) {
     object_state object = drive(true);
     if (object == FIRE) {
+      TrackFlameOnSpot();
       return EXTINGUISH;
     } else if (object == OBSTACLE) {
       return AVOID;
@@ -40,8 +41,6 @@ constexpr float NO_FLAME = 999.0f;
 // Positive = flame is to the left, negative = flame is to the right
 // Returns NO_FLAME (999.0f) if no flame detected
 // ============================================================
-
-constexpr float K = 25.6f;  // calibration constant
 
 // float getFlameAngle() {
 //   uint16_t readings[4];
@@ -74,9 +73,10 @@ constexpr float K = 25.6f;  // calibration constant
 // }
 
 float getFlameAngle() {
+  constexpr float K = 25.6f;  // calibration constant
   static float filtered = 0.0f;
-  const float alpha = 0.5f;
-  const int N = 3;
+  const float alpha = 0.5f;  // 0-1 higher is more responsive
+  const int N = 3;           // samples
 
   uint32_t sums[4] = {0, 0, 0, 0};
   for (int s = 0; s < N; s++) {
@@ -104,8 +104,9 @@ float getFlameAngle() {
 
 object_state object_detected() {
   float left_ir = get_front_left_IR();
-  float ultrasonic = TriggerUltrasonic();
   float right_ir = get_front_right_IR();
+  float ultrasonic = MedianUltrasonic();  // median out of 5 samples
+
   float distance_in_front = min(left_ir, min(ultrasonic, right_ir));
   SerialCom->println("L_IR: " + String(left_ir) + " | Ultrasonic: " + String(ultrasonic) + " | R_IR: " + String(right_ir) + " cm");
   float obstacle_threshold = 15.0f;
@@ -142,12 +143,12 @@ object_state object_detected() {
 
 // drive forward with fire tracking
 object_state drive(bool forward) {
-  const float kp_fire = 30.0f;
+  const float kp_fire = 30.0f;  // 30.0f
   const float ki_fire = 0.0f;
   const float kd_fire = 0.0f;
 
   const float integralClamp = 200.0f;
-  const float corrClamp = 350.0f;
+  const float corrClamp = 350.0f;  // 350
   const float readDelayMs = 10.0f;
 
   float integralError = 0.0f;
@@ -155,8 +156,8 @@ object_state drive(bool forward) {
 
   int dir = forward ? 1 : -1;
 
-  // Let sensors settle before starting movement to avoid reacting to spurious/old readings
-  SettleSensors(30);
+  // // Let sensors settle before starting movement to avoid reacting to spurious/old readings
+  // SettleSensors(30);
 
   SerialCom->print("Driving ");
   SerialCom->println(forward ? "forward" : "reverse");
@@ -192,28 +193,30 @@ object_state drive(bool forward) {
 
     unsigned long elapsed = now - drive_start;
 
+    float error = fire_heading;
+
+    integralError += error * dt;
+    integralError = constrain(integralError,
+                              -integralClamp / max(ki_fire, 0.001f),
+                              integralClamp / max(ki_fire, 0.001f));
+    float deriv = (error - prevError) / dt;
+    prevError = error;
+
+    float correction = kp_fire * error + ki_fire * integralError + kd_fire * deriv;
+    correction = constrain(correction, -corrClamp, corrClamp);
+
     if (elapsed < ramp_duration_ms) {
       // --- RAMP PHASE: straight, no correction, speed 0.2 -> 1.0 over 1 second ---
       float ramp_frac = 0.2f + 0.8f * ((float)elapsed / (float)ramp_duration_ms);
-      int ramp_speed_val = (float)speed_val * ramp_frac;
+      int ramp_speed_val = (int)((float)speed_val * ramp_frac);
+      int ramp_correction = 0;  //(int)(correction * ramp_frac);  // grows with speed
 
-      left_front_motor.writeMicroseconds(1500 + dir * ramp_speed_val);
-      left_rear_motor.writeMicroseconds(1500 + dir * ramp_speed_val);
-      right_rear_motor.writeMicroseconds(1500 - dir * ramp_speed_val);
-      right_front_motor.writeMicroseconds(1500 - dir * ramp_speed_val);
+      left_front_motor.writeMicroseconds(1500 + dir * ramp_speed_val - ramp_correction);
+      left_rear_motor.writeMicroseconds(1500 + dir * ramp_speed_val - ramp_correction);
+      right_rear_motor.writeMicroseconds(1500 - dir * ramp_speed_val - ramp_correction);
+      right_front_motor.writeMicroseconds(1500 - dir * ramp_speed_val - ramp_correction);
     } else {
       // --- NORMAL PHASE: full speed with fire-tracking correction ---
-      float error = fire_heading;
-
-      integralError += error * dt;
-      integralError = constrain(integralError,
-                                -integralClamp / max(ki_fire, 0.001f),
-                                integralClamp / max(ki_fire, 0.001f));
-      float deriv = (error - prevError) / dt;
-      prevError = error;
-
-      float correction = kp_fire * error + ki_fire * integralError + kd_fire * deriv;
-      correction = constrain(correction, -corrClamp, corrClamp);
 
       left_front_motor.writeMicroseconds(1500 + dir * (int)speed_val - (int)correction);
       left_rear_motor.writeMicroseconds(1500 + dir * (int)speed_val - (int)correction);
@@ -287,7 +290,7 @@ object_state drive(bool forward) {
 // }
 
 void TrackFlameOnSpot() {
-  // SerialCom->println("TrackFlameOnSpot");
+  SerialCom->println("TrackFlameOnSpot");
 
   const float kp = 8.0f;
   const float corrClamp = 350.0f;

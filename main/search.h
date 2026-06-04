@@ -1,10 +1,9 @@
 #ifndef SEARCH_H
 #define SEARCH_H
-#include "states.h"
 #include "base_code.h"
+#include "states.h"
 
 STATE searching();
-
 
 // ---- Hardware ----
 extern Servo ultraServo;
@@ -27,9 +26,8 @@ const int photo_R2_pin = A15;
 const int photo_L1_pin = A13;
 const int photo_L2_pin = A12;
 
-
 //----variables----
 // bool fire_behind = false;
 extern float fire_angle;
 
-#endif // SEARCH_H
+#endif  // SEARCH_H

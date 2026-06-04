@@ -88,8 +88,8 @@ Servo right_front_motor;  // create servo object to control Vex Motor Controller
 Servo turret_motor;
 
 // MAX VAL TO SEND TO WHEELS = 700!
-int speed_val = 330;     // 350;
-int strafe_speed = 150;  // 200;
+int speed_val = 330;  // 330;
+int strafe_speed = 150;
 int speed_change;
 
 // Serial Pointer
