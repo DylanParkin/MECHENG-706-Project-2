@@ -124,7 +124,7 @@ STATE Avoid() {
 
       float side_IR = strafe_right ? IR_right : IR_left;
 
-      if (side_IR < 15.0f) {
+      if (side_IR < 12.0f) {
         direction_flip_count++;
 
         SerialCom->print("  !! SIDE TOO CLOSE (");
